@@ -9,10 +9,7 @@ namespace Negocio
         private SqlCommand comando;
         private SqlDataReader lector = null;
 
-        public SqlDataReader Lector
-        {
-            get { return lector; }
-        }
+        public SqlDataReader Lector => lector;
         public void Conectar()
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TPCLibreriaUTN; integrated security=true"); //\\SQLEXPRESS

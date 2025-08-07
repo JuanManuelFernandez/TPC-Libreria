@@ -41,8 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoCarritos.cs" />
     <Compile Include="AccesoClientes.cs" />
+    <Compile Include="AccesoCompras.cs" />
     <Compile Include="AccesoDatos.cs" />
+    <Compile Include="AccesoDeseados.cs" />
+    <Compile Include="AccesoDevoluciones.cs" />
+    <Compile Include="AccesoEmpleados.cs" />
     <Compile Include="AccesoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

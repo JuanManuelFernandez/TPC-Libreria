@@ -1,5 +1,8 @@
 CREATE DATABASE TPCLibreriaUTN
 
+SELECT CO.IDCompra, CO.IDCliente, CO.IDLibro, CO.IDSucursal, CL.Nombre, CL.Apellido FROM Compras CO
+INNER JOIN Clientes CL ON CO.IDCliente = CL.IDCliente
+
 GO
 USE TPCLibreriaUTN
 GO

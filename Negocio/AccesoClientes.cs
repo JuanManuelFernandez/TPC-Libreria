@@ -144,11 +144,11 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        //REVISAR ESTA FUNCION
         public Cliente BuscarClientePorDni(string dni)
         {
             datos = new AccesoDatos();
             Cliente aux = null;
+
             try
             {
                 datos.Conectar();
@@ -185,7 +185,6 @@ namespace Negocio
             }
             return aux;
         }
-
         public void ModificarCliente(Cliente mod)
         {
             datos = new AccesoDatos();
@@ -233,13 +232,13 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificaReactivar(Cliente aux)
+        public bool VerificarTelefono(string telefono)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
+                datos.Consultar("SELECT 1 FROM Clientes WHERE Telefono = '" + telefono + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
@@ -252,13 +251,13 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificarTelefono(string telefono)
+        public bool VerificaReactivar(Cliente aux)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes WHERE Telefono = '" + telefono + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
