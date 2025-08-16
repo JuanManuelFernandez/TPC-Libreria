@@ -25,6 +25,7 @@ namespace Negocio
                     var aux = new Compra
                     {
                         IdCompra = datos.Lector["IDCompra"] != DBNull.Value ? (int)datos.Lector["IDCompra"] : 0,
+                        FechaCompra = datos.Lector["FechaCompra"] != DBNull.Value ? (DateTime)datos.Lector["FechaCompra"] : DateTime.MaxValue,
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
                         IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0
