@@ -22,7 +22,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center">
+                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnInicio_click">
                                 <img src="assets/home.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                             </asp:LinkButton>
                             <li class="nav-item dropdown">
@@ -42,7 +42,7 @@
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <asp:LinkButton ID="btnAccount" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center">
+                        <asp:LinkButton ID="btnAccount" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick ="btnAccount_click">
                             <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
                         <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center">

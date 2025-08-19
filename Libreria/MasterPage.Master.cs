@@ -13,5 +13,14 @@ namespace Libreria
         {
 
         }
+
+        protected void btnAccount_click (object sender, EventArgs e)
+        {
+            Response.Redirect("Cuenta.aspx");
+        }
+        protected void btnInicio_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
 }
