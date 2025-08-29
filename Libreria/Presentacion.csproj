@@ -117,7 +117,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Dominio.csproj">
       <Project>{11a13754-dfba-4d49-ac62-1b422f62aed0}</Project>
