@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -13,14 +8,25 @@ namespace Libreria
         {
 
         }
-
+        protected void btnInicio_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
         protected void btnAccount_click (object sender, EventArgs e)
         {
             Response.Redirect("Cuenta.aspx");
         }
-        protected void btnInicio_click(object sender, EventArgs e)
+        protected void btnDeseados_click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx");
+            Response.Redirect("Deseados.aspx");
+        }
+        protected void btnCarrito_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Carrito.aspx");
+        }
+        protected void btnCuenta_click(object sender, EventArgs e) 
+        {
+            Response.Redirect("Contacto.aspx");
         }
     }
 }
