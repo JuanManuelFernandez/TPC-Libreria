@@ -16,7 +16,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios");
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Mail, Clave, Eliminado FROM Usuarios");
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
@@ -24,7 +24,7 @@ namespace Negocio
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
-                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                         Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                     };
@@ -49,7 +49,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario !=" + (int)TipoUsuario.Admin);
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Mail, Clave, Eliminado FROM Usuarios WHERE TipoUsuario !=" + (int)TipoUsuario.Admin);
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
@@ -57,7 +57,7 @@ namespace Negocio
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
-                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                         Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                     };
@@ -83,7 +83,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario = " + 2);
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Mail, Clave, Eliminado FROM Usuarios WHERE TipoUsuario = " + 2);
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
@@ -91,7 +91,7 @@ namespace Negocio
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
-                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                         Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                     };
@@ -116,9 +116,9 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES (@TipoUsuario, @Email, @Clave)");
+                datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Mail, Clave) VALUES (@TipoUsuario, @Mail, @Clave)");
                 datos.SetearParametro("@TipoUsuario", nuevo.TipoUsuario);
-                datos.SetearParametro("@Email", nuevo.Email);
+                datos.SetearParametro("@Mail", nuevo.Mail);
                 datos.SetearParametro("@Clave", nuevo.Clave);
                 datos.EjecutarNonQuery();
             }
@@ -137,8 +137,8 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IdUsuario, TipoUsuario, Email, Clave FROM Usuarios WHERE Email = @Email AND Clave = @Clave");
-                datos.SetearParametro("@Email", usuario.Email);
+                datos.Consultar("SELECT IdUsuario, TipoUsuario, Mail, Clave FROM Usuarios WHERE Mail = @Email AND Clave = @Clave");
+                datos.SetearParametro("@Mail", usuario.Mail);
                 datos.SetearParametro("@Clave", usuario.Clave);
 
                 datos.Leer();
@@ -166,14 +166,14 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE IDUsuario =" + id);
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Mail, Clave, Eliminado FROM Usuarios WHERE IDUsuario =" + id);
                 datos.Leer();
                 datos.Lector.Read();
                 aux = new Usuario
                 {
                     IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                     TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
-                    Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                    Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                     Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                     Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                 };
@@ -231,8 +231,8 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE Email = @email");
-                datos.SetearParametro("@email", email);
+                datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE Mail = @email");
+                datos.SetearParametro("@mail", email);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -250,9 +250,9 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("UPDATE Usuarios SET TipoUsuario = @TipoUsuario, Email = @Email, Clave = @Clave, Eliminado = @Eliminado WHERE IDUsuario = @IDUsuario");
+                datos.Consultar("UPDATE Usuarios SET TipoUsuario = @TipoUsuario, Mail = @Mail, Clave = @Clave, Eliminado = @Eliminado WHERE IDUsuario = @IDUsuario");
                 datos.SetearParametro("@TipoUsuario", mod.TipoUsuario);
-                datos.SetearParametro("@Email", mod.Email);
+                datos.SetearParametro("@Mail", mod.Mail);
                 datos.SetearParametro("@Clave", mod.Clave);
                 datos.SetearParametro("@Eliminado", mod.Eliminado);
                 datos.SetearParametro("@IDUsuario", mod.IdUsuario);
@@ -273,7 +273,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Email = '" + email + "'");
+                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Mail = '" + email + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

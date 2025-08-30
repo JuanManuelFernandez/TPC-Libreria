@@ -16,7 +16,7 @@ namespace Negocio
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -30,7 +30,7 @@ namespace Negocio
                         {
                             IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                             TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
-                            Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                            Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                             Eliminado = datos.Lector["Eliminado"] == DBNull.Value || (bool)datos.Lector["Eliminado"]
                         },
@@ -60,15 +60,15 @@ namespace Negocio
 
             try
             {
-                // Insertar en Usuarios
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave, Eliminado) VALUES (@TipoUsuario, @Email, @Clave, @Eliminado)");
-                datos.SetearParametro("@TipoUsuario", nuevo.Usuario.TipoUsuario);
-                datos.SetearParametro("@Clave", nuevo.Usuario.Clave);
-                datos.SetearParametro("@Email", nuevo.Usuario.Email);
-                datos.SetearParametro("@Eliminado", 0);
-                datos.EjecutarNonQuery();
-                datos.Cerrar();
+                //// Insertar en Usuarios
+                //datos.Conectar();
+                //datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave, Eliminado) VALUES (@TipoUsuario, @Email, @Clave, @Eliminado)");
+                //datos.SetearParametro("@TipoUsuario", nuevo.Usuario.TipoUsuario);
+                //datos.SetearParametro("@Clave", nuevo.Usuario.Clave);
+                //datos.SetearParametro("@Email", nuevo.Usuario.Email);
+                //datos.SetearParametro("@Eliminado", 0);
+                //datos.EjecutarNonQuery();
+                //datos.Cerrar();
 
                 // Insertar en Clientes usando el IDUsuario recién generado
                 datos.Conectar();
@@ -97,7 +97,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
+                datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
                 datos.Leer();
                 datos.Lector.Read();
                 aux = new Cliente
@@ -107,7 +107,7 @@ namespace Negocio
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
-                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
                     },
                     Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
@@ -133,11 +133,11 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT Email, Eliminado FROM Usuarios WHERE Email =" + email);
+                datos.Consultar("SELECT Mail, Eliminado FROM Usuarios WHERE Mail =" + email);
                 datos.Leer();
                 datos.Lector.Read();
 
-                return datos.Lector["Email"] != DBNull.Value;
+                return datos.Lector["Mail"] != DBNull.Value;
             }
             finally
             {
@@ -152,7 +152,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente, IDCategoria, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Email, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
+                datos.Consultar("SELECT C.IDCliente, IDCategoria, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Mail, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
                 datos.SetearParametro("@Dni", dni);
                 datos.Leer();
 
@@ -165,7 +165,7 @@ namespace Negocio
                         {
                             IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                             TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
-                            Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                            Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
                         },
                         Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
@@ -257,7 +257,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Mail + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

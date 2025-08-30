@@ -48,6 +48,7 @@
     <Compile Include="Deseado.cs" />
     <Compile Include="Devolucion.cs" />
     <Compile Include="Editorial.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Genero.cs" />
     <Compile Include="Libro.cs" />

@@ -13,7 +13,7 @@ namespace Libreria
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             var user = (Usuario)Session["usuario"];
-            //var emailService = new EmailService();
+            var emailService = new EmailService();
 
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
@@ -22,7 +22,7 @@ namespace Libreria
                 return;
             }
 
-            //emailService.ArmarCorreo(txtEmail.Text, "Consulta #" + idConsulta, txtDescripcion.Text);
+            //emailService.ArmarCorreo(txtMail.Text, "Consulta #" + idConsulta, txtDescripcion.Text);
         }
     }
 }

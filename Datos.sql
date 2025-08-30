@@ -85,3 +85,6 @@ INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolu
 (1, 1, 1, 'Libro en mal estado', '2023-10-05'),
 (2, 2, 2, 'No era lo que esperaba', '2023-10-06'),
 (3, 3, 3, 'Cambio de opinión', '2023-10-07');
+
+SELECT * FROM Usuarios
+SELECT * FROM Clientes

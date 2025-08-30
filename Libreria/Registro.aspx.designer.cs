@@ -11,8 +11,35 @@ namespace Libreria
 {
 
 
-    public partial class Cuenta
+    public partial class Registro
     {
+
+        /// <summary>
+        /// Control NombreTxt.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NombreTxt;
+
+        /// <summary>
+        /// Control ApellidoTxt.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ApellidoTxt;
+
+        /// <summary>
+        /// Control DNITxt.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DNITxt;
 
         /// <summary>
         /// Control MailTxt.
@@ -24,6 +51,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox MailTxt;
 
         /// <summary>
+        /// Control TelefonoTxt.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TelefonoTxt;
+
+        /// <summary>
         /// Control ClaveTxt.
         /// </summary>
         /// <remarks>
@@ -33,21 +69,12 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox ClaveTxt;
 
         /// <summary>
-        /// Control LinkRecuperar.
+        /// Control BtnRegistro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LinkRecuperar;
-
-        /// <summary>
-        /// Control LinkRegistro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LinkRegistro;
+        protected global::System.Web.UI.WebControls.Button BtnRegistro;
     }
 }

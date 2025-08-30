@@ -55,7 +55,6 @@
     <Compile Include="AccesoStocks.cs" />
     <Compile Include="AccesoSucursales.cs" />
     <Compile Include="AccesoUsuarios.cs" />
-    <Compile Include="EmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
