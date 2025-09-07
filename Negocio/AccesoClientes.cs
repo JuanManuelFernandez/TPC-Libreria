@@ -60,19 +60,8 @@ namespace Negocio
 
             try
             {
-                //// Insertar en Usuarios
-                //datos.Conectar();
-                //datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave, Eliminado) VALUES (@TipoUsuario, @Email, @Clave, @Eliminado)");
-                //datos.SetearParametro("@TipoUsuario", nuevo.Usuario.TipoUsuario);
-                //datos.SetearParametro("@Clave", nuevo.Usuario.Clave);
-                //datos.SetearParametro("@Email", nuevo.Usuario.Email);
-                //datos.SetearParametro("@Eliminado", 0);
-                //datos.EjecutarNonQuery();
-                //datos.Cerrar();
-
-                // Insertar en Clientes usando el IDUsuario recién generado
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono, IDCategoria) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono, @IDCategoria)");
+                datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono)");
                 datos.SetearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count) - 1].IdUsuario);
                 datos.SetearParametro("@DNI", nuevo.Dni);
                 datos.SetearParametro("@Nombre", nuevo.Nombre);

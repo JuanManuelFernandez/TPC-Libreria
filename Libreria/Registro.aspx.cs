@@ -19,7 +19,7 @@ namespace Libreria
             if (Session["usuario"] == null)
             {
                 CargarUsuario();
-                //CargarCliente();
+                CargarCliente();
             }
         }
         public void CargarCliente()
@@ -31,6 +31,11 @@ namespace Libreria
                 nuevoCliente.Nombre = NombreTxt.Text;
                 nuevoCliente.Apellido = ApellidoTxt.Text;
                 nuevoCliente.Telefono = TelefonoTxt.Text;
+
+                DNITxt.Text = " ";
+                NombreTxt.Text = " ";
+                ApellidoTxt.Text = " ";
+                TelefonoTxt.Text = " ";
             }
             dataCliente.AgregarCliente(nuevoCliente);
         }
@@ -41,6 +46,9 @@ namespace Libreria
             {
                 nuevoUsuario.Mail = MailTxt.Text;
                 nuevoUsuario.Clave = ClaveTxt.Text;
+
+                MailTxt.Text = " ";
+                ClaveTxt.Text = " ";
             }
             dataUser.AgregarUsuario(nuevoUsuario);
         }
