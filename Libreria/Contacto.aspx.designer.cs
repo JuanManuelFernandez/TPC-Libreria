@@ -33,13 +33,13 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox txtMail;
 
         /// <summary>
-        /// lblDescripcion control.
+        /// txtTema control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtTema;
 
         /// <summary>
         /// txtDescripcion control.
@@ -60,12 +60,21 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.Button btnEnviar;
 
         /// <summary>
-        /// lblError control.
+        /// lblErrorTema control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Label lblErrorTema;
+
+        /// <summary>
+        /// lblErrorDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorDescripcion;
     }
 }

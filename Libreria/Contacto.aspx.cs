@@ -15,14 +15,33 @@ namespace Libreria
             var user = (Usuario)Session["usuario"];
             var emailService = new EmailService();
 
+            if (string.IsNullOrEmpty(txtTema.Text))
+            {
+                lblErrorTema.Text = "El tema no puede estar vacio.";
+                lblErrorTema.Visible = true;
+                return;
+            }
             if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
-                lblError.Text = "La descripcion no puede estar vacia.";
-                lblError.Visible = true;
+                lblErrorDescripcion.Text = "La descripcion no puede estar vacia.";
+                lblErrorDescripcion.Visible = true;
                 return;
             }
 
-            //emailService.ArmarCorreo(txtMail.Text, "Consulta #" + idConsulta, txtDescripcion.Text);
+            emailService.ArmarCorreo(txtMail.Text, "Consulta: " + txtTema.Text, txtDescripcion.Text);
+            try
+            {
+                emailService.EnviarEmail();
+
+                bool mailExitoso = true; // 
+                Session.Add("mailExitoso", mailExitoso);
+            }
+            catch (Exception ex)
+            {
+                //Session.Add("error", ex);
+                //Response.Redirect("error.aspx");
+            }
+            Response.Redirect("Default.aspx");
         }
     }
 }

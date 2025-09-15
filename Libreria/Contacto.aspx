@@ -4,24 +4,29 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="col-md-3">
-        <asp:Label ID="lblMail" runat="server" Text="Ingresa tu email:" CssClass="form-label fw-bold"></asp:Label>
-        <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required" AutoPostBack="true" TextMode="Email" MaxLength="100"></asp:TextBox>
-    </div>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center mb-4"">
 
-    <div class="mb-3">
-        <asp:Label ID="lblDescripcion" runat="server" Text="Ingrese su consulta a continuacion:" CssClass="form-label fw-bold text-center"> </asp:Label>
-        <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" MaxLength="500"></asp:TextBox>
-    </div>
+        <%--[ Mail ]--%>
+        <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Email</label>
+        <asp:Label ID="lblMail" runat="server" Text="" CssClass="form-label fw-bold"></asp:Label>
+        <asp:TextBox ID="txtMail" runat="server" Placeholder="pepito@gmail.com" TextMode="Email" CssClass="form-control w-100" required="required" AutoPostBack="true" MaxLength="100"></asp:TextBox>
 
-    <div class="row justify-content-center mt-3">
-        <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
-            <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnEnviar_Click" />
-        </section>
-    </div>
+        <%--[ Tema ]--%>
+        <label class="form-label fs-5 fw-bold mb-3" for="ConsultaTxt">¿Cual es el motivo de su consulta?</label>
+        <asp:TextBox ID="txtTema" runat="server" Placeholder="Ej: No puedo logeuarme, no llega mi pedido..." TextMode="SingleLine" CssClass="form-control w-100" required="required" MaxLength="100"></asp:TextBox>
 
-    <div class="text-center mt-1">
-        <asp:Label ID="lblError" runat="server" Text="" Visible="false" ForeColor="Red" />
+        <%--[ Descripcion ]--%>
+        <label class="form-label fs-5 fw-bold mb-3" for="ConsultaTxt">Explique detalladamente su consulta</label>
+        <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-100 mx-auto mb-2" Style="resize: none; height: 135px" MaxLength="500"></asp:TextBox>
+
+        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnEnviar_Click" />
+
+        <%--[ Error Label ]--%>
+        <asp:Label ID="lblErrorTema" runat="server" Text="" Visible="false" ForeColor="Red" />
+        <asp:Label ID="lblErrorDescripcion" runat="server" Text="" Visible="false" ForeColor="Red" />
+
+        </div>
     </div>
 
 </asp:Content>

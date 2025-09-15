@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
@@ -17,7 +13,7 @@ namespace Dominio
         {
             server = new SmtpClient
             {
-                Credentials = new NetworkCredential("libreriautn@gmail.com", "???"), // Clave de AppLibreria
+                Credentials = new NetworkCredential("libreriautnfrgp@gmail.com", "bruy hpoy nbrb dwla"), // Clave de Google App Libreria UTN FRGP
                 EnableSsl = true,
                 Port = 587,
                 Host = "smtp.gmail.com"
@@ -27,7 +23,7 @@ namespace Dominio
         {
             email = new MailMessage
             {
-                From = new MailAddress("libreriautn@gmail.com", "CallCenter UTN") // Cambiar
+                From = new MailAddress("libreriautnfrgp@gmail.com", "Libreria UTN FRGP")
             };
             email.To.Add(emailDestino);
             email.Subject = asunto;
