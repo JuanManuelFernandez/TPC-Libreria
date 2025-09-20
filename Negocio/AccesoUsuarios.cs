@@ -137,7 +137,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IdUsuario, TipoUsuario, Mail, Clave FROM Usuarios WHERE Mail = @Email AND Clave = @Clave");
+                datos.Consultar("SELECT IdUsuario, TipoUsuario, Mail, Clave FROM Usuarios WHERE Mail = @Mail AND Clave = @Clave");
                 datos.SetearParametro("@Mail", usuario.Mail);
                 datos.SetearParametro("@Clave", usuario.Clave);
 

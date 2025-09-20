@@ -5,19 +5,22 @@
 
     <div class="d-flex align-items-center justify-content-center">
         <div class="text-center mb-4"">
-            <%--<asp:Label ID="LblMaIL" runat="server" Text="Correo electronico" ForeColor="Blue"></asp:Label>--%>
-            <label class="form-label text-primary fs-5 fw-bold mb-3" for="MailTxt">Email</label>
+            <asp:Label ID="LblMaIL" runat="server" Text="Correo electronico" ForeColor="Blue" Visible="true"></asp:Label>
+            
             <div class="form-group mb-3">
-                <asp:TextBox ID="MailTxt" runat="server" CssClass="form-control form-control-lg"></asp:TextBox>
+                <asp:TextBox ID="MailTxt" runat="server" Visible="true" CssClass="form-control form-control-lg"></asp:TextBox>
             </div>
 
-            <%--<asp:Label ID="LblClave" runat="server" Text="Contraseña" ForeColor="Blue" CssClass="form-label"></asp:Label>--%>
-            <label class="form-label text-primary fs-5 fw-bold mb-3" for="ClaveTxt">Contraseña</label>
+            <asp:Label ID="LblClave" runat="server" Text="Contraseña" ForeColor="Blue" CssClass="form-label" Visible="true"></asp:Label>
             <div class="form-group mb-3">
-                <asp:TextBox ID="ClaveTxt" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="ClaveTxt" runat="server" Visible="true" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+
                 <div class="row justify-content-center mt-3">
-                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary btn-lg mx-3" OnClick ="btnIngresar_Click" />
+                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" Visible="true" CssClass="btn btn-primary btn-lg mx-3" OnClick ="btnIngresar_Click" />
+
                     <asp:Label ID="lblError" runat="server" Text="Email o Clave incorrecto..." Visible="false" ForeColor="Red"></asp:Label>
+
+                    <asp:Button ID="btnCerrar" runat="server" Text="Cerrar sesión" CssClass="btn btn-danger btn-lg mx-3" Visible="false" OnClick ="btnCerrar_Click" />
                 </div>
             </div>
             <div>

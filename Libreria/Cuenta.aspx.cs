@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 
 namespace Libreria
@@ -7,7 +8,15 @@ namespace Libreria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["usuario"]!=null)
+            {
+                LblMaIL.Visible = false;
+                LblClave.Visible = false;
+                MailTxt.Visible = false;
+                ClaveTxt.Visible = false;
+                btnIngresar.Visible = false;
+                btnCerrar.Visible = true;
+            }
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -15,7 +24,11 @@ namespace Libreria
             try
             {
                 var usuario = accesousuario.Listar().Find(x =>
-                x.Mail == MailTxt.Text && x.Clave == ClaveTxt.Text);
+                x.Mail == MailTxt.Text && x.Clave == ClaveTxt.Text) != null ?
+                accesousuario.Listar().Find(x =>
+                        x.Mail == MailTxt.Text &&
+                        x.Clave == ClaveTxt.Text) : new Usuario();
+                ;
                 
                 if(accesousuario.Loguear(usuario))
                 {
@@ -31,6 +44,11 @@ namespace Libreria
             {
                 throw ex;
             }
+        }
+        protected void btnCerrar_Click(Object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Cuenta.aspx");
         }
     }
 }

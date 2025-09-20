@@ -10,7 +10,10 @@ namespace Libreria
             {
 
             }
-
+            if (Session["usuario"]!=null)
+            {
+                Label1.Visible = true;
+            }
         }
     }
 }

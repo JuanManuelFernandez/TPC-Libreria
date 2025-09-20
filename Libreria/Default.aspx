@@ -21,5 +21,6 @@
     <%}%>
 
     <h1>Bienvenido a la libreria UTN</h1>
+    <asp:Label ID="Label1" runat="server" Text="iniciado" Visible="false"></asp:Label>
 
 </asp:Content>
