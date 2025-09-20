@@ -15,10 +15,17 @@
             <label class="form-label text-primary fs-5 fw-bold mb-3" for="ClaveTxt">Contraseña</label>
             <div class="form-group mb-3">
                 <asp:TextBox ID="ClaveTxt" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                <div class="row justify-content-center mt-3">
+                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary btn-lg mx-3" OnClick ="btnIngresar_Click" />
+                    <asp:Label ID="lblError" runat="server" Text="Email o Clave incorrecto..." Visible="false" ForeColor="Red"></asp:Label>
+                </div>
+            </div>
+            <div>
                 <asp:HyperLink ID="LinkRecuperar" runat="server" NavigateUrl="~/Recuperar.aspx" CssClass="text-primary" Text="Olvide mi contraseña"></asp:HyperLink>
             </div>
-
-            <asp:HyperLink ID="LinkRegistro" runat="server" NavigateUrl="~/Registro.aspx" CssClass="text-primary" Text="¿No tienes cuenta? regístrate"></asp:HyperLink>
+            <div>
+                <asp:HyperLink ID="LinkRegistro" runat="server" NavigateUrl="~/Registro.aspx" CssClass="text-primary" Text="¿No tienes cuenta? regístrate"></asp:HyperLink>
+            </div>
          </div>
     </div>
 </asp:Content>
