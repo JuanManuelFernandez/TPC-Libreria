@@ -1,4 +1,8 @@
-﻿-- Autores
+﻿GO
+USE TPCLibreriaUTN
+GO
+
+-- Autores
 INSERT INTO Autores (Nombre, Apellido) VALUES
 ('Gabriel', 'Garcia Marquez'),
 ('J.K.', 'Rowling'),
@@ -65,9 +69,9 @@ INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
 
 -- Clientes
 INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES
-(1, 12345678, 'Juan', 'P�rez', 123456789),
-(2, 87654321, 'Ana', 'G�mez', 987654321),
-(3, 11223344, 'Luis', 'Mart�nez', 456789123),
+(1, 12345678, 'Juan', 'Perez', 123456789),
+(2, 87654321, 'Ana', 'Gomez', 987654321),
+(3, 11223344, 'Luis', 'Martinez', 456789123),
 (4, 22334455, 'Marcos', 'Gutiérrez', 111222333),
 (5, 33445566, 'Lucía', 'Fernández', 222333444),
 (6, 44556677, 'Sofía', 'Ruiz', 333444555),
@@ -91,9 +95,9 @@ INSERT INTO Empleados (IDUsuario, Nombre, Apellido) VALUES
 
 -- Libros
 INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock) VALUES
-(1, 1, 1, 1, 'Cien a�os de soledad', 'Una novela sobre la familia Buend�a.', '1967-06-05', 29.99, 400, 10),
+(1, 1, 1, 1, 'Cien anios de soledad', 'Una novela sobre la familia Buendia.', '1967-06-05', 29.99, 400, 10),
 (2, 2, 2, 2, 'Harry Potter y la piedra filosofal', 'La historia de un joven mago.', '1997-06-26', 19.99, 223, 15),
-(3, 3, 3, 3, '1984', 'Una novela dist�pica sobre un futuro totalitario.', '1949-06-08', 14.99, 328, 5),
+(3, 3, 3, 3, '1984', 'Una novela distopica sobre un futuro totalitario.', '1949-06-08', 14.99, 328, 5),
 (4, 4, 4, 4, 'La casa de los espíritus', 'Novela familiar con elementos sobrenaturales.', '1982-01-01', 24.99, 448, 12),
 (5, 2, 5, 5, 'Don Quijote de la Mancha', 'Clásico de la literatura española.', '1605-01-16', 39.99, 992, 7),
 (6, 3, 6, 6, 'Crimen y castigo', 'Relato sobre culpa y redención.', '1866-01-01', 21.50, 671, 9),

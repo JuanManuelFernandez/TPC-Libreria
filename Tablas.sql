@@ -68,7 +68,7 @@ CREATE TABLE Libros (
 	IDSucursal INT NOT NULL FOREIGN KEY REFERENCES Sucursales(IDSucursal),
 	Titulo NVARCHAR(50) NOT NULL,
 	Descripcion NVARCHAR(500) NOT NULL,
-	FechaPublicacion DATETIME NOT NULL,
+	FechaPublicacion DATE NOT NULL,
 	Precio MONEY NOT NULL,
 	Paginas INT NOT NULL,
 	Stock INT NOT NULL DEFAULT 0
