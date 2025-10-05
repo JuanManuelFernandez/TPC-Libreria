@@ -27,13 +27,18 @@
                              class="card-img-top" 
                              alt='<%# Eval("Titulo") %>' 
                              style="width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;"
-                             onerror="this.src='assets/libros/default.png';" />
+                             onerror="src='assets/libros/default.png';" />
                         <div class="card-body d-flex flex-column"> 
                             <h5 class="card-title"><%# Eval("Titulo") %></h5>
                             <p class="card-text"><%# Eval("Descripcion") %></p>
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
                             <div class="mt-auto">
                                 <asp:LinkButton ID="btnAgregarCarrito" runat="server" CssClass="btn btn-primary w-100" CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_AgregarCarrito" Text='<i class="bi bi-cart-plus me-2"></i>AGREGAR'/>
+                                <asp:Label ID="lblError" runat="server" 
+                                       Text="Debes iniciar sesión." 
+                                       Visible="false" 
+                                       ForeColor="Red" 
+                                       CssClass="text-center w-100 mt-2 small" />
                             </div>
                         </div>
                     </div>

@@ -95,16 +95,16 @@ INSERT INTO Empleados (IDUsuario, Nombre, Apellido) VALUES
 
 -- Libros
 INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock) VALUES
-(1, 1, 1, 1, 'Cien anios de soledad', 'Una novela sobre la familia Buendia.', CAST('1967-06-05' AS DATE), 29.99, 400, 10),
-(2, 2, 2, 2, 'Harry Potter y la piedra filosofal', 'La historia de un joven mago.', CAST('1997-06-26' AS DATE), 19.99, 223, 15),
-(3, 3, 3, 3, '1984', 'Una novela distopica sobre un futuro totalitario.', CAST('1949-06-08' AS DATE), 14.99, 328, 5),
-(4, 4, 4, 4, 'La casa de los espíritus', 'Novela familiar con elementos sobrenaturales.', CAST('1982-01-01' AS DATE), 24.99, 448, 12),
-(5, 2, 5, 5, 'Don Quijote de la Mancha', 'Clásico de la literatura española.', CAST('1605-01-16' AS DATE), 39.99, 992, 7),
-(6, 3, 6, 6, 'Crimen y castigo', 'Relato sobre culpa y redención.', CAST('1866-01-01' AS DATE), 21.50, 671, 9),
-(7, 7, 7, 1, 'Kafka en la orilla', 'Novela contemporánea con realismo mágico.', CAST('2002-09-12' AS DATE), 22.00, 505, 6),
-(1, 1, 1, 2, 'Orgullo y prejuicio', 'Novela romántica clásica.', CAST('1813-01-28' AS DATE), 17.75, 279, 14),
-(2, 5, 2, 3, 'Las aventuras de Tom Sawyer', 'Novela de aventuras y formación.', CAST('1876-01-01' AS DATE), 12.00, 274, 11),
-(8, 6, 3, 4, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18.00, 220, 8);
+(1, 1, 1, 1, 'Cien anios de soledad', 'Una novela sobre la familia Buendia.', CAST('1967-06-05' AS DATE), 20000, 400, 10),
+(2, 2, 2, 2, 'Harry Potter y la piedra filosofal', 'La historia de un joven mago.', CAST('1997-06-26' AS DATE), 15000, 223, 15),
+(3, 3, 3, 3, '1984', 'Una novela distopica sobre un futuro totalitario.', CAST('1949-06-08' AS DATE), 14000, 328, 5),
+(4, 4, 4, 4, 'La casa de los espíritus', 'Novela familiar con elementos sobrenaturales.', CAST('1982-01-01' AS DATE), 24000, 448, 12),
+(5, 2, 5, 5, 'Don Quijote de la Mancha', 'Clásico de la literatura española.', CAST('1605-01-16' AS DATE), 20000, 992, 7),
+(6, 3, 6, 6, 'Crimen y castigo', 'Relato sobre culpa y redención.', CAST('1866-01-01' AS DATE), 22000, 671, 9),
+(7, 7, 7, 1, 'Kafka en la orilla', 'Novela contemporánea con realismo mágico.', CAST('2002-09-12' AS DATE), 22000, 505, 6),
+(1, 1, 1, 2, 'Orgullo y prejuicio', 'Novela romántica clásica.', CAST('1813-01-28' AS DATE), 25000, 279, 14),
+(2, 5, 2, 3, 'Las aventuras de Tom Sawyer', 'Novela de aventuras y formación.', CAST('1876-01-01' AS DATE), 15000, 274, 11),
+(8, 6, 3, 4, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18000, 220, 8);
 
 -- Portadas
 INSERT INTO Portadas (IDLibro, Imagen) VALUES
@@ -187,3 +187,4 @@ INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolu
 -- Consultas finales
 SELECT * FROM Usuarios;
 SELECT * FROM Clientes;
+SELECT * FROM Carrito;
