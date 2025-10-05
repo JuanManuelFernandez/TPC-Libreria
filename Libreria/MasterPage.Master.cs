@@ -18,7 +18,7 @@ namespace Libreria
         }
         protected void btnDeseados_click(object sender, EventArgs e)
         {
-            Response.Redirect("Deseados.aspx");
+            Response.Redirect("Wishlist.aspx");
         }
         protected void btnCarrito_click(object sender, EventArgs e)
         {

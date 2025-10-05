@@ -121,3 +121,5 @@ CREATE TABLE Devoluciones (
 	FechaDevolucion DATETIME NOT NULL
 )
 GO
+
+SELECT * FROM Libros;
