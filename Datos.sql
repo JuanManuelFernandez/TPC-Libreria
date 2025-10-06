@@ -188,3 +188,4 @@ INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolu
 SELECT * FROM Usuarios;
 SELECT * FROM Clientes;
 SELECT * FROM Carrito;
+SELECT * FROM Deseados;

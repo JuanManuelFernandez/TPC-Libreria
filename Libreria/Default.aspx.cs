@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Threading;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
@@ -28,10 +29,10 @@ namespace Libreria
         {
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
 
-            string connectionString = connSettings.ConnectionString;
+            string connString = connSettings.ConnectionString;
             DataTable dtLibros = new DataTable();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connString))
             using (SqlCommand cmd = new SqlCommand("SELECT * FROM Libros ORDER BY IDLibro", conn)) 
             {
                 try
@@ -113,6 +114,52 @@ namespace Libreria
                    AgregarAlCarrito(idCliente, idLibro);
                 }
                 catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+        protected void AgregarLista(int idCliente, int idLibro)
+        {
+            datos = new AccesoDatos();
+            var auxiliar = new AccesoUsuario();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Deseados (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.SetearParametro("@IDLibro", idLibro);
+
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        protected void Btn_AgregarLista (object sender, CommandEventArgs e)
+        {
+            if (Session["usuario"] == null)
+            {
+                MostrarErrorSinLogin();
+            }
+            if (Session["usuario"] != null)
+            {
+                dynamic usuario = Session["usuario"];
+                int idCliente = usuario.IdUsuario;
+
+                int idLibro = Convert.ToInt32(e.CommandArgument);
+
+                try
+                {
+                    AgregarLista(idCliente, idLibro);
+                }
+                catch(Exception ex)
                 {
                     throw ex;
                 }

@@ -8,9 +8,7 @@
 
     <%--Imagen de presentación--%>
     <div class="container-fluid">
-        <img src="assets/Header.png" 
-             class="img-fluid w-100" 
-             style="height: 900px; object-fit: cover;"/>
+        <img src="assets/Header.png" class="img-fluid w-100" style="height: 900px; object-fit: cover;"/>
     </div>
 
     <!-- Sección dinámica de libros desde la BD -->
@@ -34,12 +32,11 @@
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
                             <div class="mt-auto">
                                 <asp:LinkButton ID="btnAgregarCarrito" runat="server" CssClass="btn btn-primary w-100" CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_AgregarCarrito" Text='<i class="bi bi-cart-plus me-2"></i>AGREGAR'/>
-                                <asp:Label ID="lblError" runat="server" 
-                                       Text="Debes iniciar sesión." 
-                                       Visible="false" 
-                                       ForeColor="Red" 
-                                       CssClass="text-center w-100 mt-2 small" />
                             </div>
+                            <div class="mt-2">
+                                <asp:LinkButton ID="btnAgregarLista" runat="server" CssClass="btn btn-primary w-100" CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_AgregarLista" Text='<i class="bi bi-heart-plus me-2"></i>LISTA DE DESEADOS'/>
+                            </div>
+                            <asp:Label ID="lblError" runat="server" Text="Debes iniciar sesión." Visible="false" ForeColor="Red" CssClass="text-center w-100 mt-2 small"/>
                         </div>
                     </div>
                 </div>
