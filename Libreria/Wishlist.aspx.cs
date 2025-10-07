@@ -106,14 +106,37 @@ namespace Libreria
                 }
             }
         }
-        protected void Btn_Eliminar(object sender, CommandEventArgs e)
+        private void AgregarAlCarrito(int idCliente, int idLibro)
         {
             datos = new AccesoDatos();
             var auxiliar = new AccesoUsuario();
-            dynamic usuario = Session["usuario"];
-            int idCliente = usuario.IdUsuario;
 
-            int idLibro = Convert.ToInt32(e.CommandArgument);
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Carrito (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.SetearParametro("@IDLibro", idLibro);
+
+                datos.EjecutarNonQuery();
+
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            CargarLibros(idCliente);
+
+        }
+       private void BorrarDeDeseados(int idCliente, int idLibro)
+       {
+            datos = new AccesoDatos();
+            var auxiliar = new AccesoUsuario();
+            dynamic usuario = Session["usuario"];
 
             try
             {
@@ -124,7 +147,6 @@ namespace Libreria
 
                 datos.EjecutarNonQuery();
 
-                CargarLibros(idCliente);
             }
             catch (Exception ex)
             {
@@ -133,6 +155,47 @@ namespace Libreria
             finally
             {
                 datos.Cerrar();
+            }
+        }
+        protected void Btn_AgregarCarrito(object sender, CommandEventArgs e)
+        {
+            if (Session["usuario"] != null)
+            {
+                dynamic usuario = Session["usuario"];
+                int idCliente = usuario.IdUsuario;
+
+                int idLibro = Convert.ToInt32(e.CommandArgument);
+
+                try
+                {
+                    AgregarAlCarrito(idCliente, idLibro);
+                    BorrarDeDeseados(idCliente, idLibro);
+                    CargarLibros(idCliente);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+        protected void Btn_Eliminar(object sender, CommandEventArgs e)
+        {
+            if (Session["usuario"] != null)
+            {
+                dynamic usuario = Session["usuario"];
+                int idCliente = usuario.IdUsuario;
+
+                int idLibro = Convert.ToInt32(e.CommandArgument);
+
+                try
+                {
+                    BorrarDeDeseados(idCliente, idLibro);
+                    CargarLibros(idCliente);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }

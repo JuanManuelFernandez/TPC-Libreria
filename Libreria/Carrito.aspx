@@ -35,9 +35,12 @@
             </div>
         </FooterTemplate>
     </asp:Repeater>
+    <div class="mt-2 text-center">
+        <asp:LinkButton ID="btnIrApagar" runat="server" CssClass="btn btn-primary" OnCommand="Btn_IrApagar" Visible="true" Text='Ir a pagar'/>
+    </div>
     <!-- Mensaje si no hay libros -->
     <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">
         <p>Todavía no has agregado libros a tu carrito.</p>
     </asp:Panel>
-</div>
+    </div>
 </asp:Content>

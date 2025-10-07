@@ -64,6 +64,7 @@ namespace Libreria
             {
                 rptLibros.Visible = false;
                 pnlNoLibros.Visible = true;
+                btnIrApagar.Visible = false;
                 return;
             }
 
@@ -90,12 +91,10 @@ namespace Libreria
                     if (dtLibros.Rows.Count == 0)
                     {
                         rptLibros.Visible = false;
-                        pnlNoLibros.Visible = true;
                     }
                     else
                     {
                         rptLibros.Visible = true;
-                        pnlNoLibros.Visible = false;
                     }
                 }
                 catch (Exception ex)
@@ -132,6 +131,10 @@ namespace Libreria
             {
                 datos.Cerrar();
             }
+        }
+        protected void Btn_IrApagar(object sender, CommandEventArgs e)
+        {
+            Response.Redirect("Pago.aspx");
         }
     }
 }
