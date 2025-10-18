@@ -1,11 +1,6 @@
 ﻿using Dominio;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -20,6 +15,7 @@ namespace Libreria
             {
                 CargarUsuario();
                 CargarCliente();
+                Response.Redirect("Default.aspx");
             }
         }
         public void CargarCliente()

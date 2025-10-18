@@ -12,7 +12,7 @@ namespace Negocio
         public SqlDataReader Lector => lector;
         public void Conectar()
         {
-            conexion = new SqlConnection("server=. \\SQLEXPRESS; database=TPCLibreriaUTN; integrated security=true"); //\\SQLEXPRESS
+            conexion = new SqlConnection("server=.; database=TPCLibreriaUTN; integrated security=true"); //\\SQLEXPRESS
             comando = new SqlCommand();
         }
         public void Consultar(string consulta)

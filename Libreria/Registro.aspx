@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="d-flex align-items-center justify-content-center">
+<div class="d-flex align-items-center justify-content-center">
     <div class="text-center mb-4"">
         <%--Nombre--%>
         <label class="form-label text-primary fs-5 fw-bold mb-3" for="NombreTxt">Nombre</label>
