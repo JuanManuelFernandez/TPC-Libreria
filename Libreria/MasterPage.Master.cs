@@ -28,5 +28,10 @@ namespace Libreria
         {
             Response.Redirect("Contacto.aspx");
         }
+        protected void btnLogout_click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Default.aspx");
+        }
     }
 }

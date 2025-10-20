@@ -42,6 +42,16 @@
                         <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCuenta_click">
                             <img src="assets/mail.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
+
+                        <% var usuario = Session["usuario"] as Dominio.Usuario;
+                            if (usuario != null)
+                            {
+                        %>
+                        <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnLogout_click">
+                            <img src="assets/logout.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                        </asp:LinkButton>
+                        <%  } %>
+
                     </div>
                 </div>
             </nav>

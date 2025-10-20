@@ -45,10 +45,10 @@ namespace Libreria
                 throw ex;
             }
         }
-        protected void btnCerrar_Click(Object sender, EventArgs e)
+        protected void btnCerrar_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("Cuenta.aspx");
+            Response.Redirect("Default.aspx");
         }
     }
 }
