@@ -3,8 +3,7 @@
     public enum TipoUsuario
     {
         Admin = 1,
-        Empleado = 2,
-        Cliente = 3,
+        Cliente = 2
     }
     public class Usuario
     {
@@ -17,7 +16,7 @@
 
         public Usuario(int tipo, string email, string clave)
         {
-            TipoUsuario = tipo == 1 ? TipoUsuario.Admin : tipo == 2 ? TipoUsuario.Empleado : TipoUsuario.Cliente;
+            TipoUsuario = tipo == 1 ? TipoUsuario.Admin : TipoUsuario.Cliente;
             Mail = email;
             Clave = clave;
         }

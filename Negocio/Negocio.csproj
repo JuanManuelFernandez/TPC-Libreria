@@ -49,7 +49,6 @@
     <Compile Include="AccesoDeseados.cs" />
     <Compile Include="AccesoDevoluciones.cs" />
     <Compile Include="AccesoEditoriales.cs" />
-    <Compile Include="AccesoEmpleados.cs" />
     <Compile Include="AccesoGeneros.cs" />
     <Compile Include="AccesoLibros.cs" />
     <Compile Include="AccesoStocks.cs" />
