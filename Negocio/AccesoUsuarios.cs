@@ -225,7 +225,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public void ActivarUsuarioConEmail(string email)
+        public void ActivarUsuarioConMail(string email)
         {
             datos = new AccesoDatos();
             try
@@ -267,7 +267,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificarEmail(string email)
+        public bool VerificarMail(string email)
         {
             datos = new AccesoDatos();
             try

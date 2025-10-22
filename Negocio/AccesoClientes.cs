@@ -115,7 +115,7 @@ namespace Negocio
             }
             return aux;
         }
-        public bool BuscarClientePorEmail(string email)
+        public bool BuscarClientePorMail(string email)
         {
             datos = new AccesoDatos();
 
@@ -246,7 +246,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Mail + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Mail = '" + aux.Usuario.Mail + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

@@ -13,7 +13,7 @@ namespace Libreria
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             var user = (Usuario)Session["usuario"];
-            var emailService = new EmailService();
+            var emailService = new MailService();
 
             if (string.IsNullOrEmpty(txtTema.Text))
             {
@@ -31,7 +31,7 @@ namespace Libreria
             emailService.ArmarCorreo(txtMail.Text, "Consulta: " + txtTema.Text, txtDescripcion.Text);
             try
             {
-                emailService.EnviarEmail();
+                emailService.EnviarMail();
 
                 bool mailExitoso = true; // 
                 Session.Add("mailExitoso", mailExitoso);

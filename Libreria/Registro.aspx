@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="Libreria.Registro" %>
+﻿<%@ Page Title="Registro" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="Libreria.Registro" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -34,11 +34,11 @@
             <div class="invalid-tooltip">Por favor, ingrese un DNI válido de 8 dígitos.</div>
         </div>
 
-        <%-- Email --%>
+        <%-- Mail --%>
         <div class="mb-3 position-relative">
             <asp:TextBox ID="MailTxt" runat="server" CssClass="form-control form-control-lg"
-                placeholder="Email"
-                TextMode="Email"
+                placeholder="Mail"
+                TextMode="Mail"
                 required="required"
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
             <div class="invalid-tooltip">Por favor, ingrese un correo electrónico válido.</div>
