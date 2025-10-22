@@ -15,7 +15,7 @@ namespace Libreria
                 MailTxt.Visible = false;
                 ClaveTxt.Visible = false;
                 btnIngresar.Visible = false;
-                btnCerrar.Visible = true;
+                btnCerrarSesion.Visible = true;
             }
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
@@ -24,13 +24,10 @@ namespace Libreria
             try
             {
                 var usuario = accesousuario.Listar().Find(x =>
-                x.Mail == MailTxt.Text && x.Clave == ClaveTxt.Text) != null ?
-                accesousuario.Listar().Find(x =>
-                        x.Mail == MailTxt.Text &&
-                        x.Clave == ClaveTxt.Text) : new Usuario();
-                ;
-                
-                if(accesousuario.Loguear(usuario))
+                x.Mail == MailTxt.Text &&
+                x.Clave == ClaveTxt.Text) ?? new Usuario();
+
+                if (accesousuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
                     Response.Redirect("Default.aspx");
@@ -45,7 +42,7 @@ namespace Libreria
                 throw ex;
             }
         }
-        protected void btnCerrar_Click(object sender, EventArgs e)
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("Default.aspx");

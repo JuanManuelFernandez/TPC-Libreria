@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Negocio;
 using System;
+using System.Data.SqlClient;
 
 namespace Libreria
 {
@@ -13,9 +14,32 @@ namespace Libreria
         {
             if (Session["usuario"] == null)
             {
-                CargarUsuario();
                 CargarCliente();
-                Response.Redirect("Default.aspx");
+                CargarUsuario();
+
+                var accesousuario = new AccesoUsuario();
+                try
+                {
+                    var usuario = accesousuario.Listar().Find(x =>
+                    x.Mail == MailTxt.Text &&
+                    x.Clave == ClaveTxt.Text) ?? new Usuario();
+
+                    if (accesousuario.Loguear(usuario))
+                    {
+                        Session.Add("usuario", usuario);
+                        Response.Redirect("Default.aspx");
+                    }
+                    else
+                    {
+                        lblError.Visible = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                //Response.Redirect("Default.aspx");
             }
         }
         public void CargarCliente()

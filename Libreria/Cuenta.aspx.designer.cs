@@ -15,6 +15,15 @@ namespace Libreria
     {
 
         /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
         /// LblMaIL control.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,13 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// btnCerrar control.
+        /// btnCerrarSesion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrar;
+        protected global::System.Web.UI.WebControls.Button btnCerrarSesion;
 
         /// <summary>
         /// LinkRecuperar control.
