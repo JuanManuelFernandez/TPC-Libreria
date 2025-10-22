@@ -32,7 +32,12 @@ namespace Libreria
         }
         protected void btnCuenta_click (object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
             Response.Redirect("Cuenta.aspx");
+
         }
         protected void btnDeseados_click(object sender, EventArgs e)
         {

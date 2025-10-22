@@ -33,11 +33,26 @@
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
 
-                        <p><%= UserName %></p>
-
                         <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCuenta_click">
                             <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
+
+                        <% 
+                            var usuario = Session["usuario"] as Dominio.Usuario;
+                            if (usuario != null)
+                            {
+                        %>
+                        <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 me-2">¡Hola, <%= UserName %>!</p>
+                            <!-- Agregado margen derecho (me-2) para separar del botón -->
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-outline-danger btn-sm" OnClick="btnLogout_click">
+                            Cerrar sesión
+                            </asp:LinkButton>
+                        </div>
+                        <%  
+                            }
+                        %>
+
                         <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnDeseados_click">
                             <img src="assets/heart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
@@ -48,7 +63,7 @@
                             <img src="assets/mail.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
 
-                        <% var usuario = Session["usuario"] as Dominio.Usuario;
+                        <%
                             if (usuario != null)
                             {
                         %>
@@ -69,12 +84,9 @@
                 <img src="assets/logo.png" style="width: 100px; height: 100px; margin-left: 100px; margin-top: 20px" href="https://utn.edu.ar/es/" />
                 <div class="col-6 col-lg-2 offset-lg-2 mt-2">
                     <ul>
-                        <li>
-                            <img src="assets/instagram.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.instagram.com/utnba.ok/" /></li>
-                        <li>
-                            <img src="assets/facebook.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
-                        <li>
-                            <img src="assets/linkedin.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
+                        <li><img src="assets/instagram.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.instagram.com/utnba.ok/" /></li>
+                        <li><img src="assets/facebook.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
+                        <li><img src="assets/linkedin.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
                     </ul>
                 </div>
 

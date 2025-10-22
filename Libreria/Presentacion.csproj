@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Carrito.aspx" />
     <Content Include="Cuenta.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Pago.aspx" />
@@ -76,6 +77,9 @@
     <Content Include="Registro.aspx" />
     <Content Include="Web.config" />
     <Content Include="Contacto.aspx" />
+    <Content Include="Datos.aspx">
+      <BrowseToURL>~/Cuenta/Datos.aspx</BrowseToURL>
+    </Content>
     <Content Include="Wishlist.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +96,13 @@
     </Compile>
     <Compile Include="Cuenta.aspx.designer.cs">
       <DependentUpon>Cuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -138,6 +149,13 @@
     </Compile>
     <Compile Include="Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos.aspx.cs">
+      <DependentUpon>Datos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Datos.aspx.designer.cs">
+      <DependentUpon>Datos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Wishlist.aspx.cs">
       <DependentUpon>Wishlist.aspx</DependentUpon>
