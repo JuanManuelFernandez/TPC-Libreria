@@ -1,7 +1,12 @@
 ﻿using Dominio;
 using Negocio;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -14,8 +19,8 @@ namespace Libreria
         {
             if (Session["usuario"] == null)
             {
-                CargarCliente();
                 CargarUsuario();
+                CargarCliente();
 
                 var accesousuario = new AccesoUsuario();
                 try
@@ -29,17 +34,21 @@ namespace Libreria
                         Session.Add("usuario", usuario);
                         Response.Redirect("Default.aspx");
                     }
-                    else
-                    {
-                        lblError.Visible = true;
-                    }
+                    //else
+                    //{
+                    //    lblError.Visible = true;
+                    //}
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
-
-                //Response.Redirect("Default.aspx");
+                DNITxt.Text = " ";
+                NombreTxt.Text = " ";
+                ApellidoTxt.Text = " ";
+                TelefonoTxt.Text = " ";
+                MailTxt.Text = " ";
+                ClaveTxt.Text = " ";
             }
         }
         public void CargarCliente()
@@ -51,11 +60,6 @@ namespace Libreria
                 nuevoCliente.Nombre = NombreTxt.Text;
                 nuevoCliente.Apellido = ApellidoTxt.Text;
                 nuevoCliente.Telefono = TelefonoTxt.Text;
-
-                DNITxt.Text = " ";
-                NombreTxt.Text = " ";
-                ApellidoTxt.Text = " ";
-                TelefonoTxt.Text = " ";
             }
             dataCliente.AgregarCliente(nuevoCliente);
         }
@@ -66,9 +70,6 @@ namespace Libreria
             {
                 nuevoUsuario.Mail = MailTxt.Text;
                 nuevoUsuario.Clave = ClaveTxt.Text;
-
-                MailTxt.Text = " ";
-                ClaveTxt.Text = " ";
             }
             dataUser.AgregarUsuario(nuevoUsuario);
         }

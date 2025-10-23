@@ -145,7 +145,7 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     usuario.IdUsuario = (int)datos.Lector["IdUsuario"];
-                    usuario.TipoUsuario = (int)datos.Lector["TipoUsuario"] == 1 ? TipoUsuario.Admin : TipoUsuario.Cliente;
+                    usuario.TipoUsuario = (int)datos.Lector["TipoUsuario"] == 1 ? TipoUsuario.Admin : (int)datos.Lector["TipoUsuario"] == 2 ? TipoUsuario.Empleado : TipoUsuario.Cliente;
                     return true;
                 }
             }
@@ -225,7 +225,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public void ActivarUsuarioConMail(string email)
+        public void ActivarUsuarioConEmail(string email)
         {
             datos = new AccesoDatos();
             try
@@ -267,7 +267,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificarMail(string email)
+        public bool VerificarEmail(string email)
         {
             datos = new AccesoDatos();
             try

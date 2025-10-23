@@ -1,10 +1,13 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Threading;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
@@ -95,22 +98,20 @@ namespace Libreria
         }
         protected void Btn_AgregarCarrito(object sender, CommandEventArgs e)
         {
+            Usuario usuario = (Usuario)Session["usuario"];
             if (Session["usuario"] == null)
             {
                 MostrarErrorSinLogin();
             }
-            if(Session["usuario"] != null)
+            if(usuario.TipoUsuario == TipoUsuario.Cliente || usuario.TipoUsuario == TipoUsuario.Empleado)
             {
-                dynamic usuario = Session["usuario"];
                 int idCliente = usuario.IdUsuario;
 
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
                 try
                 {
-                    AgregarAlCarrito(idCliente, idLibro);
-
-
+                   AgregarAlCarrito(idCliente, idLibro);
                 }
                 catch (Exception ex)
                 {
@@ -143,13 +144,13 @@ namespace Libreria
         }
         protected void Btn_AgregarLista (object sender, CommandEventArgs e)
         {
+            Usuario usuario = (Usuario)Session["usuario"];
             if (Session["usuario"] == null)
             {
                 MostrarErrorSinLogin();
             }
-            if (Session["usuario"] != null)
+            if (usuario.TipoUsuario == TipoUsuario.Cliente || usuario.TipoUsuario == TipoUsuario.Empleado)
             {
-                dynamic usuario = Session["usuario"];
                 int idCliente = usuario.IdUsuario;
 
                 int idLibro = Convert.ToInt32(e.CommandArgument);

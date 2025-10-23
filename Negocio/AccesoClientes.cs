@@ -16,7 +16,7 @@ namespace Negocio
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -86,7 +86,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
+                datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
                 datos.Leer();
                 datos.Lector.Read();
                 aux = new Cliente
@@ -115,7 +115,7 @@ namespace Negocio
             }
             return aux;
         }
-        public bool BuscarClientePorMail(string email)
+        public bool BuscarClientePorEmail(string email)
         {
             datos = new AccesoDatos();
 
@@ -141,7 +141,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono, U.TipoUsuario, U.Mail, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
+                datos.Consultar("SELECT C.IDCliente, IDCategoria, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Mail, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
                 datos.SetearParametro("@Dni", dni);
                 datos.Leer();
 
@@ -185,7 +185,7 @@ namespace Negocio
                 datos.Cerrar();
 
                 datos.Conectar();
-                datos.Consultar("UPDATE Clientes SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
+                datos.Consultar("UPDATE Clientes SET IDCategoria = @IDCategoria, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
                 datos.SetearParametro("@DNI", mod.Dni);
                 datos.SetearParametro("@Nombre", mod.Nombre);
                 datos.SetearParametro("@Apellido", mod.Apellido);
@@ -246,7 +246,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Mail = '" + aux.Usuario.Mail + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Mail + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

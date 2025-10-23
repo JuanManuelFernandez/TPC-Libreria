@@ -1,65 +1,32 @@
-﻿<%@ Page Title="Mi Cuenta" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Cuenta.aspx.cs" Inherits="Libreria.Cuenta" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Cuenta.aspx.cs" Inherits="Libreria.Cuenta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Aquí puedes agregar otros elementos dentro de la cabecera si es necesario -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .breadcrumb {
-            background-color: transparent;
-            padding: 0;
-        }
-
-        .section-title {
-            font-weight: bold;
-        }
-
-        .info-box {
-            margin-bottom: 20px;
-        }
-
-        .btn-shop {
-            width: 100%;
-            font-weight: bold;
-        }
-    </style>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
-        <!-- Barra de navegación -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mi Cuenta</li>
-            </ol>
-        </nav>
 
-        <div class="row">
-            <!-- Datos personales -->
-            <div class="col-md-8">
-                <h1>Mi cuenta</h1>
-                <div class="info-box">
-                    <h4 class="section-title">Datos Personales</h4>
-                    <p><strong>Nombre:</strong> <%= UserName %></p>
-                    <p><strong>Mail:</strong> <%= UserMail %></p>
-                    <p><strong>Teléfono:</strong> <%= UserPhone %></p>
-                    <a href="Datos.aspx" class="btn btn-link">Editar</a>
-                </div>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center mb-4"">
+            <asp:Label ID="LblMaIL" runat="server" Text="Correo electronico" ForeColor="Blue" Visible="true"></asp:Label>
+            
+            <div class="form-group mb-3">
+                <asp:TextBox ID="MailTxt" runat="server" Visible="true" CssClass="form-control form-control-lg"></asp:TextBox>
             </div>
 
-            <!-- Carrito -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <img src="assets/cart.png" alt="Carrito" width="50">
-                        <p class="mt-2">¡Hacé tu primera compra!</p>
-                        <a href="Default.aspx" class="btn btn-primary btn-shop">IR A LA TIENDA</a>
-                    </div>
+            <asp:Label ID="LblClave" runat="server" Text="Contraseña" ForeColor="Blue" CssClass="form-label" Visible="true"></asp:Label>
+            <div class="form-group mb-3">
+                <asp:TextBox ID="ClaveTxt" runat="server" Visible="true" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+
+                <div class="row justify-content-center mt-3">
+                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" Visible="true" CssClass="btn btn-primary btn-lg mx-3" OnClick ="btnIngresar_Click" />
+
+                    <asp:Label ID="lblError" runat="server" Text="Email o Clave incorrecto..." Visible="false" ForeColor="Red"></asp:Label>
                 </div>
             </div>
-        </div>
+            <div>
+                <asp:HyperLink ID="LinkRecuperar" runat="server" NavigateUrl="~/Recuperar.aspx" CssClass="text-primary" Text="Olvide mi contraseña"></asp:HyperLink>
+            </div>
+            <div>
+                <asp:HyperLink ID="LinkRegistro" runat="server" NavigateUrl="~/Registro.aspx" CssClass="text-primary" Text="¿No tienes cuenta? regístrate"></asp:HyperLink>
+            </div>
+         </div>
     </div>
-
-    <!-- Scripts JS de Bootstrap -->
-<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>--%>
 </asp:Content>

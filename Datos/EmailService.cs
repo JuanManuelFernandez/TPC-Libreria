@@ -4,12 +4,12 @@ using System.Net.Mail;
 
 namespace Dominio
 {
-    public class MailService
+    public class EmailService
     {
 
         private MailMessage email;
         private SmtpClient server;
-        public MailService()
+        public EmailService()
         {
             server = new SmtpClient
             {
@@ -30,7 +30,7 @@ namespace Dominio
             email.IsBodyHtml = true;
             email.Body = cuerpo;
         }
-        public void EnviarMail()
+        public void EnviarEmail()
         {
             try
             {

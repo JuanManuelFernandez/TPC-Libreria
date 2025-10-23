@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Contacto" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Contacto.aspx.cs" Inherits="Libreria.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Contacto.aspx.cs" Inherits="Libreria.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,9 +8,9 @@
         <div class="text-center mb-4"">
 
         <%--[ Mail ]--%>
-        <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Mail</label>
+        <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Email</label>
         <asp:Label ID="lblMail" runat="server" Text="" CssClass="form-label fw-bold"></asp:Label>
-        <asp:TextBox ID="txtMail" runat="server" Placeholder="pepito@gmail.com" TextMode="Mail" CssClass="form-control w-100" required="required" AutoPostBack="true" MaxLength="100"></asp:TextBox>
+        <asp:TextBox ID="txtMail" runat="server" Placeholder="pepito@gmail.com" TextMode="Email" CssClass="form-control w-100" required="required" AutoPostBack="true" MaxLength="100"></asp:TextBox>
 
         <%--[ Tema ]--%>
         <label class="form-label fs-5 fw-bold mb-3" for="ConsultaTxt">¿Cual es el motivo de su consulta?</label>

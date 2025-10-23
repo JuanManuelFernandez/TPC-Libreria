@@ -58,9 +58,13 @@ INSERT INTO Sucursales (Nombre, Direccion) VALUES
 INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
 ('cliente1@example.com', 'clave123', 1),
 ('cliente2@example.com', 'clave456', 1),
+('empleado1@example.com', 'clave789', 2),
 ('cliente3@example.com', 'clave321', 1),
 ('cliente4@example.com', 'pass1234', 1),
 ('cliente5@example.com', 'miClave!', 1),
+('empleado2@example.com', 'emple123', 2),
+('empleado3@example.com', 'trabajo456', 2),
+('cliente6@example.com', 'clave7890', 1),
 ('admin@example.com', 'adminpass', 2);
 
 -- Clientes
