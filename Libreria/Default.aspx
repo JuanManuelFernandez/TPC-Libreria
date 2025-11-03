@@ -22,7 +22,7 @@
             <ItemTemplate>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100 shadow-sm">
-                        <img src='assets/libros/<%# Eval("IDLibro") %>.jpg'
+                        <img src='assets/portadas/<%# Eval("IDLibro") %>.jpg'
                             class="card-img-top"
                             alt='<%# Eval("Titulo") %>'
                             style="width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;"
