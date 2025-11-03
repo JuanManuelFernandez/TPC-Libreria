@@ -1,18 +1,15 @@
-﻿using Dominio;
-using Negocio;
+﻿using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
 {
-    public partial class Wishlist : System.Web.UI.Page
+    public partial class Deseados : System.Web.UI.Page
     {
         private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
@@ -25,7 +22,9 @@ namespace Libreria
             {
                 LblAviso.Visible = false;
                 dynamic usuario = Session["usuario"];
-                int idCliente = usuario.IdUsuario;
+
+                var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 CargarLibros(idCliente);
             }
         }
@@ -162,8 +161,9 @@ namespace Libreria
             if (Session["usuario"] != null)
             {
                 dynamic usuario = Session["usuario"];
-                int idCliente = usuario.IdUsuario;
+                var dataCli = new AccesoClientes();
 
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
                 try
@@ -183,8 +183,9 @@ namespace Libreria
             if (Session["usuario"] != null)
             {
                 dynamic usuario = Session["usuario"];
-                int idCliente = usuario.IdUsuario;
+                var dataCli = new AccesoClientes();
 
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
                 try

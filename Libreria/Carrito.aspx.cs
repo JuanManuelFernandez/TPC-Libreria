@@ -110,7 +110,7 @@ namespace Libreria
             dynamic usuario = Session["usuario"];
 
             var dataCli = new AccesoClientes();
-            int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
+            int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
             int idLibro = Convert.ToInt32(e.CommandArgument);
 
             try

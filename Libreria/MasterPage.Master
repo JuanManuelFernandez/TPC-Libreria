@@ -21,30 +21,48 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnInicio_click">
                                 <img src="assets/home.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                             </asp:LinkButton>
                         </ul>
+
                         <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control me-2" type="search" placeholder="Que estas buscando?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <asp:LinkButton ID="btnAccount" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnAccount_click">
+
+                        <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCuenta_click">
                             <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnLogOut" runat="server" Visible="false" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCerrar_Click">
-                            <img src="assets/door.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+
+                        <% 
+                            var usuario = Session["usuario"] as Dominio.Usuario;
+                            if (usuario != null)
+                            {
+                        %>
+                        <div class="d-flex align-items-center ms-3">
+                            <p class="mb-0 me-2">¡Hola, <%= UserName %>!</p>
+                            <!-- Agregado margen derecho (me-2) para separar del botón -->
+                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnLogout_click">
+                            <img src="assets/logout.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
+                        </div>
+                        <%  
+                            }
+                        %>
+
                         <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnDeseados_click">
                             <img src="assets/heart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCarrito_click">
                             <img src="assets/cart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCuenta_click">
+                        <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnContacto_click">
                             <img src="assets/mail.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
+
                     </div>
                 </div>
             </nav>

@@ -1,13 +1,11 @@
 ﻿using Dominio;
 using Negocio;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Threading;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
@@ -28,7 +26,6 @@ namespace Libreria
         private void CargarLibros()
         {
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
-
             string connString = connSettings.ConnectionString;
             DataTable dtLibros = new DataTable();
 
@@ -99,13 +96,14 @@ namespace Libreria
         protected void Btn_AgregarCarrito(object sender, CommandEventArgs e)
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            if (Session["usuario"] == null)
+            if (usuario == null)
             {
                 MostrarErrorSinLogin();
             }
-            if(usuario.TipoUsuario == TipoUsuario.Cliente || usuario.TipoUsuario == TipoUsuario.Empleado)
+            if(usuario != null && usuario.TipoUsuario == TipoUsuario.Cliente)
             {
-                int idCliente = usuario.IdUsuario;
+                var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
 
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
@@ -117,6 +115,10 @@ namespace Libreria
                 {
                     throw ex;
                 }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
             }
         }
         protected void AgregarLista(int idCliente, int idLibro)
@@ -149,9 +151,10 @@ namespace Libreria
             {
                 MostrarErrorSinLogin();
             }
-            if (usuario.TipoUsuario == TipoUsuario.Cliente || usuario.TipoUsuario == TipoUsuario.Empleado)
+            if (usuario != null && usuario.TipoUsuario == TipoUsuario.Cliente)
             {
-                int idCliente = usuario.IdUsuario;
+                var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
 
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
@@ -163,6 +166,10 @@ namespace Libreria
                 {
                     throw ex;
                 }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
             }
         }
     }
