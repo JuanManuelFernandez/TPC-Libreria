@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <asp:HyperLink ID="lnkCambiarContrasena" runat="server" NavigateUrl="CambioContrasena.aspx" CssClass="btn btn-link">¿Querés cambiar tu contraseña?</asp:HyperLink>
+                    <asp:HyperLink ID="lnkRecuperar" runat="server" NavigateUrl="Recuperar.aspx" CssClass="btn btn-link">¿Querés cambiar tu contraseña?</asp:HyperLink>
                 </div>
             </div>
 

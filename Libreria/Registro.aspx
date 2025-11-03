@@ -52,7 +52,6 @@
         </div>
         
         <%-- Contraseña --%>
-        <label class="form-label text-primary fs-5 fw-bold mb-3" for="ClaveTxt">Contraseña</label>
         <div class="mb-3 position-relative">
             <asp:TextBox ID="ClaveTxt" runat="server" CssClass="form-control form-control-lg"
                 placeholder="Contraseña"

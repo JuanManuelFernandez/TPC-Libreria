@@ -1,12 +1,6 @@
 ﻿using Dominio;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -41,12 +35,12 @@ namespace Libreria
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            var cli = new Cliente();
+            Cliente nuevoCli = new Cliente();
             var datosCli = new AccesoClientes();
 
-            var usr = new Usuario();
+            Usuario nuevoUsr = new Usuario();
             var datosUsr = new AccesoUsuario();
-            //Usuario user = (Usuario)Session["usuario"];
+            Usuario user = (Usuario)Session["usuario"];
 
             //if (datosUsr.Listar().Find(x => x.Mail == txtMail.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             //{
@@ -54,16 +48,15 @@ namespace Libreria
             //    lblErrorMail.Text = "Este Mail no esta disponible";
             //}
 
-            cli.Nombre = txtNombre.Text;
+            nuevoCli.Nombre = txtNombre.Text;
             //cli.Apellido = txtApellido.Text;
-            cli.Telefono = txtTelefono.Text;
+            nuevoCli.Telefono = txtTelefono.Text;
 
-            usr.Mail = txtMail.Text;
-            //usr.TipoUsuario = user.TipoUsuario;
+            nuevoUsr.TipoUsuario = user.TipoUsuario;
+            nuevoUsr.Mail = txtMail.Text;
 
-            datosUsr.ModificarUsuario(usr);
-            datosCli.ModificarCliente(cli);
+            datosCli.ModificarCliente(nuevoCli);
+            datosUsr.ModificarUsuario(nuevoUsr);
         }
-
     }
 }

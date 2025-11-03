@@ -8,7 +8,7 @@ namespace Libreria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"]!=null)
+            if (Session["usuario"] != null)
             {
                 LblMaIL.Visible = false;
                 LblClave.Visible = false;

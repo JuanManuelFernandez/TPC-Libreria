@@ -26,9 +26,9 @@
             </asp:Panel>
 
             <div>
-                <asp:HyperLink ID="LinkRecuperar" runat="server" NavigateUrl="~/Recuperar.aspx" CssClass="text-primary" Text="Olvide mi contraseña"></asp:HyperLink>
+                <asp:HyperLink ID="lnkRecuperar" runat="server" NavigateUrl="~/Recuperar.aspx" CssClass="text-primary" Text="Olvide mi contraseña"></asp:HyperLink>
                 <br>
-                <asp:HyperLink ID="LinkRegistro" runat="server" NavigateUrl="~/Registro.aspx" CssClass="text-primary" Text="¿No tienes cuenta? Regístrate aqui"></asp:HyperLink>
+                <asp:HyperLink ID="lnkRegistro" runat="server" NavigateUrl="~/Registro.aspx" CssClass="text-primary" Text="¿No tienes cuenta? Regístrate aqui"></asp:HyperLink>
             </div>
 
          </div>

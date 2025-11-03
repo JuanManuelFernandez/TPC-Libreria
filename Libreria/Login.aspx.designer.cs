@@ -87,21 +87,21 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.Button btnCerrarSesion;
 
         /// <summary>
-        /// LinkRecuperar control.
+        /// lnkRecuperar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LinkRecuperar;
+        protected global::System.Web.UI.WebControls.HyperLink lnkRecuperar;
 
         /// <summary>
-        /// LinkRegistro control.
+        /// lnkRegistro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LinkRegistro;
+        protected global::System.Web.UI.WebControls.HyperLink lnkRegistro;
     }
 }
