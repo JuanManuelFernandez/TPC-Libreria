@@ -145,7 +145,7 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     usuario.IdUsuario = (int)datos.Lector["IdUsuario"];
-                    usuario.TipoUsuario = (int)datos.Lector["TipoUsuario"] == 1 ? TipoUsuario.Admin : (int)datos.Lector["TipoUsuario"] == 2 ? TipoUsuario.Empleado : TipoUsuario.Cliente;
+                    usuario.TipoUsuario = (int)datos.Lector["TipoUsuario"] == 1 ? TipoUsuario.Cliente : TipoUsuario.Admin;
                     return true;
                 }
             }

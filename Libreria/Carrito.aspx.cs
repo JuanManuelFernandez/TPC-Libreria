@@ -5,8 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
@@ -24,7 +22,9 @@ namespace Libreria
             {
                 LblAviso.Visible = false;
                 dynamic usuario = Session["usuario"];
-                int idCliente = usuario.IdUsuario;
+
+                var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
                 CargarLibros(idCliente);
             }
         }
@@ -108,8 +108,9 @@ namespace Libreria
             datos = new AccesoDatos();
             var auxiliar = new AccesoUsuario();
             dynamic usuario = Session["usuario"];
-            int idCliente = usuario.IdUsuario;
 
+            var dataCli = new AccesoClientes();
+            int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
             int idLibro = Convert.ToInt32(e.CommandArgument);
 
             try
