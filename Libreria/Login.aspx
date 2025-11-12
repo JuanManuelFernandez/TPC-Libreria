@@ -7,6 +7,7 @@
         <div class="text-center mb-4"">
 
             <asp:Panel ID="Panel1" runat="server" DefaultButton="btnIngresar">
+
                 <div class="form-group mb-3">
                     <asp:Label ID="LblMaIL" runat="server" Text="Correo electronico" ForeColor="Blue" Visible="true"></asp:Label>
                     <asp:TextBox ID="MailTxt" runat="server" Visible="true" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" CssClass="form-control form-control-lg"></asp:TextBox>
@@ -18,9 +19,9 @@
                 </div>
 
                 <div class="row justify-content-center mt-3">
-                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" Visible="true" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnIngresar_Click" />
+                    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" Visible="true" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnIngresar_Click" />
                     <asp:Label ID="lblError" runat="server" Text="Mail o Clave incorrecto..." Visible="false" ForeColor="Red"></asp:Label>
-                    <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar sesión" CssClass="btn btn-danger btn-lg mx-3" Visible="false" OnClick="btnCerrarSesion_Click" />
+                    <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar sesión" CssClass="btn btn-danger btn-lg mx-3" Visible="false" OnClick="BtnCerrarSesion_Click" />
                 </div>
 
             </asp:Panel>

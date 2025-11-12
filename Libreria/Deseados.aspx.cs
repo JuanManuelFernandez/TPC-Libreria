@@ -28,7 +28,6 @@ namespace Libreria
                 CargarLibros(idCliente);
             }
         }
-
         private void CargarLibros(int idCliente)
         {
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
@@ -120,9 +119,9 @@ namespace Libreria
                 datos.EjecutarNonQuery();
 
             }
-            catch (Exception er)
+            catch (Exception ex)
             {
-                throw er;
+                throw ex;
             }
             finally
             {

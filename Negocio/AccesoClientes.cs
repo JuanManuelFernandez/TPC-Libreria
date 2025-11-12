@@ -16,7 +16,9 @@ namespace Negocio
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar(
+                "SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave,U.Eliminado FROM Clientes C " +
+                "INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -79,14 +81,17 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public Cliente BuscarClientePorIdUsuario(int id)
+        public Cliente BuscarPorIdUsuario(int id)
         {
             datos = new AccesoDatos();
             Cliente aux;
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
+                datos.Consultar(
+                    "SELECT C.IDCliente,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Mail,U.Clave FROM Clientes C " +
+                    "INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario " +
+                    "WHERE U.IDUsuario = " + id);
                 datos.Leer();
                 datos.Lector.Read();
                 aux = new Cliente
@@ -115,14 +120,14 @@ namespace Negocio
             }
             return aux;
         }
-        public bool BuscarClientePorEmail(string email)
+        public bool BuscarPorMail(string mail)
         {
             datos = new AccesoDatos();
 
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT Mail, Eliminado FROM Usuarios WHERE Mail =" + email);
+                datos.Consultar("SELECT Mail, Eliminado FROM Usuarios WHERE Mail =" + mail);
                 datos.Leer();
                 datos.Lector.Read();
 
@@ -133,7 +138,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public Cliente BuscarClientePorDni(string dni)
+        public Cliente BuscarPorDni(string dni)
         {
             datos = new AccesoDatos();
             Cliente aux = null;
@@ -141,7 +146,10 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Mail, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
+                datos.Consultar(
+                    "SELECT C.IDCliente, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Mail, U.Clave FROM Clientes C " +
+                    "INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario " +
+                    "WHERE C.DNI = @Dni");
                 datos.SetearParametro("@Dni", dni);
                 datos.Leer();
 
@@ -174,14 +182,14 @@ namespace Negocio
             }
             return aux;
         }
-        public void ModificarCliente(Cliente mod)
+        public void Modificar(Cliente mod)
         {
             datos = new AccesoDatos();
             var dataUsuarios = new AccesoUsuario();
             try
             {
                 datos.Conectar();
-                dataUsuarios.ModificarUsuario(mod.Usuario);
+                dataUsuarios.Modificar(mod.Usuario);
                 datos.Cerrar();
 
                 datos.Conectar();
@@ -208,7 +216,9 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE Eliminado = 0 AND DNI = '" + dni + "'");
+                datos.Consultar(
+                    "SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario " +
+                    "WHERE Eliminado = 0 AND DNI = '" + dni + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
@@ -246,7 +256,11 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Mail + "'");
+                datos.Consultar(
+                    "SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND " +
+                    "C.DNI = '" + aux.Dni + "' AND " +
+                    "U.Clave = '" + aux.Usuario.Clave + "' AND " +
+                    "U.Mail = '" + aux.Usuario.Mail + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

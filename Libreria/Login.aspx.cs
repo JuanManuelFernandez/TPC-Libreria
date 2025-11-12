@@ -18,7 +18,7 @@ namespace Libreria
                 btnCerrarSesion.Visible = true;
             }
         }
-        protected void btnIngresar_Click(object sender, EventArgs e)
+        protected void BtnIngresar_Click(object sender, EventArgs e)
         {
             var accesousuario = new AccesoUsuario();
             try
@@ -42,7 +42,7 @@ namespace Libreria
                 throw ex;
             }
         }
-        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        protected void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("Default.aspx");

@@ -33,11 +33,12 @@ namespace Libreria
             {
                 emailService.EnviarEmail();
 
-                bool mailExitoso = true; // 
+                bool mailExitoso = true;
                 Session.Add("mailExitoso", mailExitoso);
             }
             catch (Exception ex)
             {
+                throw ex;
                 //Session.Add("error", ex);
                 //Response.Redirect("error.aspx");
             }

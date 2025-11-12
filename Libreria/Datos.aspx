@@ -34,14 +34,14 @@
     </style>
 </asp:Content>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <!-- Barra de navegación -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="Cuenta.aspx">Mi Cuenta</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Info</li>
+                <li class="breadcrumb-item active" aria-current="page">Datos</li>
             </ol>
         </nav>
 
@@ -68,7 +68,7 @@
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
                     </asp:Panel>
 
-                    <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Text="Guardar cambios" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Text="Guardar cambios" OnClick="BtnGuardar_Click" />
                 </div>
 
                 <div class="mt-4">

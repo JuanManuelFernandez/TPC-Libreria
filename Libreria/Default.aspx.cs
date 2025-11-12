@@ -83,9 +83,9 @@ namespace Libreria
 
                 datos.EjecutarNonQuery();
             }
-            catch (Exception er)
+            catch (Exception ex)
             {
-                throw er;
+                throw ex;
             }
             finally
             {
@@ -135,9 +135,9 @@ namespace Libreria
 
                 datos.EjecutarNonQuery();
             }
-            catch (Exception er)
+            catch (Exception ex)
             {
-                throw er;
+                throw ex;
             }
             finally
             {

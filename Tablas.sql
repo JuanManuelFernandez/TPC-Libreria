@@ -49,14 +49,6 @@ CREATE TABLE Clientes (
 )
 GO
 
---CREATE TABLE Empleados (
---	IDEmpleado INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
---	IDUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IDUsuario),
---	Nombre NVARCHAR(50) NOT NULL,
---	Apellido NVARCHAR(50) NOT NULL
---)
---GO
-
 CREATE TABLE Libros (
 	IDLibro INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 	IDAutor INT NOT NULL FOREIGN KEY REFERENCES Autores(IDAutor),
@@ -118,3 +110,7 @@ CREATE TABLE Devoluciones (
 	FechaDevolucion DATETIME NOT NULL
 )
 GO
+
+SELECT U.IDUsuario, U.TipoUsuario, U.Mail, U.Clave, U.Eliminado FROM Usuarios U
+INNER JOIN Clientes C ON U.IDUsuario = C.IDUsuario
+WHERE U.Mail = 'pura.sarasa@proton.me';

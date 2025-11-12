@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Negocio
 {
@@ -109,7 +110,6 @@ namespace Negocio
             }
             return usuarios;
         }
-
         public void AgregarUsuario(Usuario nuevo)
         {
             datos = new AccesoDatos();
@@ -159,7 +159,7 @@ namespace Negocio
             }
             return false;
         }
-        public Usuario BuscarUsuarioPorId(int id)
+        public Usuario BuscarPorId(int id)
         {
             datos = new AccesoDatos();
             Usuario aux;
@@ -189,6 +189,92 @@ namespace Negocio
             }
             return aux;
         }
+        public Cliente BuscarClientePorMail(string mail)
+        {
+            datos = new AccesoDatos();
+            Cliente aux = null;
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar(
+                    "SELECT U.IDUsuario, U.TipoUsuario, U.Mail, U.Clave, U.Eliminado, " +
+                    "C.IDCliente, C.DNI, C.Nombre, C.Apellido, C.Telefono " +
+                    "FROM Usuarios U " +
+                    "INNER JOIN Clientes C ON U.IDUsuario = C.IDUsuario " +
+                    "WHERE U.Mail =  '" + mail + "'");
+                datos.Leer();
+                datos.Lector.Read();
+
+                aux = new Cliente
+                {
+                    IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
+                    Usuario = new Usuario
+                    {
+                        IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                        TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
+                        Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
+                    },
+                    Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
+                    Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                    Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
+                    Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
+                };
+
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return aux;
+        }
+        public void Modificar(Usuario mod)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Usuarios SET TipoUsuario = @TipoUsuario, Mail = @Mail, Clave = @Clave, Eliminado = @Eliminado WHERE IDUsuario = @IDUsuario");
+                datos.SetearParametro("@TipoUsuario", mod.TipoUsuario);
+                datos.SetearParametro("@Mail", mod.Mail);
+                datos.SetearParametro("@Clave", mod.Clave);
+                datos.SetearParametro("@Eliminado", mod.Eliminado);
+                datos.SetearParametro("@IDUsuario", mod.IdUsuario);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public bool MailExiste(string mail)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Mail = '" + mail + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
         public void EliminarUsuarioId(int id)
         {
             datos = new AccesoDatos();
@@ -215,67 +301,6 @@ namespace Negocio
                 datos.Conectar();
                 datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE IDUsuario =" + id);
                 datos.EjecutarNonQuery();
-            }
-            catch (Exception er)
-            {
-                throw er;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-        }
-        public void ActivarUsuarioConEmail(string email)
-        {
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE Mail = @email");
-                datos.SetearParametro("@mail", email);
-                datos.EjecutarNonQuery();
-            }
-            catch (Exception er)
-            {
-                throw er;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-        }
-        public void ModificarUsuario(Usuario mod)
-        {
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("UPDATE Usuarios SET TipoUsuario = @TipoUsuario, Mail = @Mail, Clave = @Clave, Eliminado = @Eliminado WHERE IDUsuario = @IDUsuario");
-                datos.SetearParametro("@TipoUsuario", mod.TipoUsuario);
-                datos.SetearParametro("@Mail", mod.Mail);
-                datos.SetearParametro("@Clave", mod.Clave);
-                datos.SetearParametro("@Eliminado", mod.Eliminado);
-                datos.SetearParametro("@IDUsuario", mod.IdUsuario);
-                datos.EjecutarNonQuery();
-            }
-            catch (Exception er)
-            {
-                throw er;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-        }
-        public bool VerificarEmail(string email)
-        {
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Mail = '" + email + "'");
-                datos.Leer();
-                return datos.Lector.Read();
             }
             catch (Exception er)
             {

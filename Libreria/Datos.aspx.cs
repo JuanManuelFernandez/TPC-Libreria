@@ -6,7 +6,6 @@ namespace Libreria
 {
     public partial class Datos : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             var dataCli = new AccesoClientes();
@@ -32,7 +31,6 @@ namespace Libreria
                     break;
             }
         }
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             Cliente nuevoCli = new Cliente();
@@ -55,8 +53,8 @@ namespace Libreria
             nuevoUsr.TipoUsuario = user.TipoUsuario;
             nuevoUsr.Mail = txtMail.Text;
 
-            datosCli.ModificarCliente(nuevoCli);
-            datosUsr.ModificarUsuario(nuevoUsr);
+            datosCli.Modificar(nuevoCli);
+            datosUsr.Modificar(nuevoUsr);
         }
     }
 }

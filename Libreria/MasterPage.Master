@@ -23,7 +23,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnInicio_click">
+                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnInicio_click">
                                 <img src="assets/home.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                             </asp:LinkButton>
                         </ul>
@@ -33,7 +33,7 @@
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
 
-                        <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCuenta_click">
+                        <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCuenta_click">
                             <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
 
@@ -45,7 +45,7 @@
                         <div class="d-flex align-items-center ms-3">
                             <p class="mb-0 me-2">¡Hola, <%= UserName %>!</p>
                             <!-- Agregado margen derecho (me-2) para separar del botón -->
-                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnLogout_click">
+                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnLogout_click">
                             <img src="assets/logout.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
                         </div>
@@ -53,13 +53,13 @@
                             }
                         %>
 
-                        <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnDeseados_click">
+                        <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnDeseados_click">
                             <img src="assets/heart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnCarrito_click">
+                        <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCarrito_click">
                             <img src="assets/cart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="btnContacto_click">
+                        <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnContacto_click">
                             <img src="assets/mail.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                         </asp:LinkButton>
 
@@ -70,46 +70,60 @@
             </asp:ContentPlaceHolder>
             <hr />
 
-            <footer>
+<footer style="background-color:#21328F; color:white; padding:40px 0; font-family:'Segoe UI', sans-serif;">
 
-                <img src="assets/logo.png" style="width: 100px; height: 100px; margin-left: 100px; margin-top: 20px" href="https://utn.edu.ar/es/" />
-                <div class="col-6 col-lg-2 offset-lg-2 mt-2">
-                    <ul>
-                        <li>
-                            <img src="assets/instagram.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.instagram.com/utnba.ok/" /></li>
-                        <li>
-                            <img src="assets/facebook.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
-                        <li>
-                            <img src="assets/linkedin.png" style="width: 30px; height: 30px; margin-right: 10px;" href="https://www.facebook.com/UTN.AR/" /></li>
-                    </ul>
+    <div class="container-fluid">
+        <div class="row align-items-start justify-content-around">
+
+            <!-- Columna Izquierda -->
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center text-md-start mb-4">
+                <img src="assets/logo.png" alt="KEL Books in English" style="width:100px; height:auto; margin-bottom:15px;" />
+
+                <div class="d-flex justify-content-center justify-content-md-start mb-3">
+                    <a href="https://www.facebook.com/UTN.AR/" target="_blank">
+                        <img src="assets/facebook.png" style="width:30px; height:30px; margin-right:10px;" alt="Facebook" />
+                    </a>
+                    <a href="https://www.instagram.com/utnba.ok/" target="_blank">
+                        <img src="assets/instagram.png" style="width:30px; height:30px; margin-right:10px;" alt="Instagram" />
+                    </a>
+                    <a href="https://www.linkedin.com/school/utn/" target="_blank">
+                        <img src="assets/linkedin.png" style="width:30px; height:30px;" alt="LinkedIn" />
+                    </a>
                 </div>
 
-                <div class="row  mb-0 mt-5 mx-4 row-2 justify-content-xl-around justify-content-sm-between">
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 pt-4 order-1">
-                        <ul class="list-unstyled">
-                            <li class="mt-md-0 mt-4">
-                                <h3>Acerca de</h3>
-                            </li>
-                            <li>Quienes somos</li>
-                            <li>Trabaja con nosotros</li>
-                            <li>Contactanos </li>
-                            <li>Promociones </li>
-                        </ul>
-                    </div>
+                <p style="font-weight:bold;">(11) 4890-9900</p>
+            </div>
 
-                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 pt-4 order-2">
-                        <ul class="list-unstyled">
-                            <li class="mt-md-0 mt-4">
-                                <h3>Atencion al cliente</h3>
-                            </li>
-                            <li>+54-9-11-3344-2288</li>
-                            <li>soporte@libreriautn.com</li>
-                        </ul>
-                    </div>
+            <!-- Columna Central: Acerca de -->
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <ul class="list-unstyled">
+                    <li><h3 style="font-size:16px; font-weight:600; margin-bottom:12px;">Acerca de</h3></li>
+                    <li><a href="#" style="color:white; text-decoration:none;">Quienes somos</a></li>
+                    <li><a href="#" style="color:white; text-decoration:none;">Trabaja con nosotros</a></li>
+                    <li><a href="#" style="color:white; text-decoration:none;">Contactanos</a></li>
+                    <li><a href="#" style="color:white; text-decoration:none;">Promociones</a></li>
+                </ul>
+            </div>
 
-                </div>
-                <hr>
-            </footer>
+            <!-- Columna Derecha: Atención al cliente -->
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <ul class="list-unstyled">
+                    <li><h3 style="font-size:16px; font-weight:600; margin-bottom:12px;">Atención al cliente</h3></li>
+                    <li style="color:white;">+54-9-11-3344-2288</li>
+                    <li style="color:white;">soporte@libreriautn.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr style="border-color:rgba(255,255,255,0.2); margin-top:30px;">
+
+        <div class="text-center" style="color:#d1d1d1; font-size:13px;">
+            © 2025 KEL Books in English - Todos los derechos reservados
+        </div>
+    </div>
+
+</footer>
+
         </div>
     </form>
 </body>
