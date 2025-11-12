@@ -26,11 +26,11 @@ namespace Libreria
                 }
             }
         }
-        protected void btnInicio_click(object sender, EventArgs e)
+        protected void BtnInicio_click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");
         }
-        protected void btnCuenta_click(object sender, EventArgs e)
+        protected void BtnCuenta_click(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
             {
@@ -39,20 +39,20 @@ namespace Libreria
             Response.Redirect("Cuenta.aspx");
 
         }
-        protected void btnDeseados_click(object sender, EventArgs e)
+        protected void BtnDeseados_click(object sender, EventArgs e)
         {
             Response.Redirect("Deseados.aspx");
         }
-        protected void btnCarrito_click(object sender, EventArgs e)
+        protected void BtnCarrito_click(object sender, EventArgs e)
         {
             Response.Redirect("Carrito.aspx");
         }
-        protected void btnContacto_click(object sender, EventArgs e)
+        protected void BtnContacto_click(object sender, EventArgs e)
         {
             Response.Redirect("Contacto.aspx");
         }
 
-        protected void btnLogout_click(object sender, EventArgs e)
+        protected void BtnLogout_click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("Default.aspx");
