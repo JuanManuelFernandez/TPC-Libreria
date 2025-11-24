@@ -119,7 +119,7 @@
 
                     <!-- Mail -->
                     <asp:Panel ID="MailPanel" runat="server" CssClass="mb-3">
-                        <asp:Label ID="lblMail" runat="server" AssociatedControlID="txtMail" Text="Mail" CssClass="form-label" />
+                        <asp:Label ID="lblMail" runat="server" AssociatedControlID="txtMail" Text="Mail de cuenta" CssClass="form-label" />
                         <asp:TextBox ID="txtMail" runat="server" CssClass="form-control" />
                         <asp:Label ID="lblMensaje" runat="server" Visible="false" />
                     </asp:Panel>

@@ -8,7 +8,7 @@
 
     <%--Imagen de presentación--%>
     <div class="container-fluid">
-        <img src="assets/Header.png" class="img-fluid w-100" style="height: 900px; object-fit: cover;" />
+        <img src="assets/Header2.png" class="img-fluid w-100" style="height: 900px; object-fit: cover;" />
     </div>
 
     <!-- Sección dinámica de libros desde la BD -->
@@ -26,7 +26,7 @@
                             class="card-img-top"
                             alt='<%# Eval("Titulo") %>'
                             style="width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;"
-                            onerror="src='assets/libros/default.png';" />
+                            onerror="src='assets/portadas/default.png';" />
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><%# Eval("Titulo") %></h5>
                             <p class="card-text"><%# Eval("Descripcion") %></p>

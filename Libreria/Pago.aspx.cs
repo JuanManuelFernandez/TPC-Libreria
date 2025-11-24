@@ -11,7 +11,8 @@ namespace Libreria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            TxtNumeroTarjeta.Attributes.Add("placeholder", "0000-0000-0000-0000");
+            TxtTelefono.Attributes.Add("placeholder", "11-1111-1111");
         }
     }
 }
