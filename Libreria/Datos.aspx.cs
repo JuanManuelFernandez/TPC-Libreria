@@ -8,53 +8,70 @@ namespace Libreria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var dataCli = new AccesoClientes();
-            Usuario user = (Usuario)Session["usuario"];
-
-            switch (user.TipoUsuario)
+            if (!IsPostBack)
             {
-                // Admin
-                default:
-                    txtNombre.Text = "Admin";
-                    txtNombre.Enabled = false;
+                var dataCli = new AccesoClientes();
+                Usuario user = (Usuario)Session["usuario"];
 
-                    txtMail.Text = user.Mail;
+                switch (user.TipoUsuario)
+                {
+                    // Admin
+                    default:
+                        txtNombre.Text = "Admin";
+                        txtNombre.Enabled = false;
 
-                    txtTelefono.Text = "N/A";
-                    txtTelefono.Enabled = false;
-                    break;
-                // Cliente
-                case TipoUsuario.Cliente:
-                    txtNombre.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
-                    txtMail.Text = user.Mail;
-                    txtTelefono.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
-                    break;
+                        txtMail.Text = user.Mail;
+
+                        txtTelefono.Text = "N/A";
+                        txtTelefono.Enabled = false;
+                        break;
+                    // Cliente
+                    case TipoUsuario.Cliente:
+                        txtNombre.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
+                        txtMail.Text = user.Mail;
+                        txtTelefono.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
+                        break;
+                }
             }
         }
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Cliente nuevoCli = new Cliente();
             var datosCli = new AccesoClientes();
-
-            Usuario nuevoUsr = new Usuario();
             var datosUsr = new AccesoUsuario();
             Usuario user = (Usuario)Session["usuario"];
 
-            //if (datosUsr.Listar().Find(x => x.Mail == txtMail.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
-            //{
-            //    lblErrorMail.Visible = true;
-            //    lblErrorMail.Text = "Este Mail no esta disponible";
-            //}
+            // Validar que el mail no esté en uso por otro usuario
+            var usuarioExistente = datosUsr.Listar().Find(
+                x => x.Mail == txtMail.Text && x.IdUsuario != user.IdUsuario);
 
-            nuevoCli.Nombre = txtNombre.Text;
-            //cli.Apellido = txtApellido.Text;
-            nuevoCli.Telefono = txtTelefono.Text;
+            if (usuarioExistente != null)
+            {
+                lblErrorMail.Visible = true;
+                lblErrorMail.Text = "Este Mail no está disponible";
+                return; // Detener la ejecución si el mail ya existe
+            }
 
-            nuevoUsr.TipoUsuario = user.TipoUsuario;
-            nuevoUsr.Mail = txtMail.Text;
+            // Modificar Usuario - usar el objeto de sesión y actualizar sus propiedades
+            user.Mail = txtMail.Text;
+            datosUsr.Modificar(user);
 
-            datosCli.Modificar(nuevoCli);
-            datosUsr.Modificar(nuevoUsr);
+            // Modificar Cliente solo si es un cliente
+            if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
+                Cliente cliente = datosCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+                if (cliente != null)
+                {
+                    cliente.Nombre = txtNombre.Text;
+                    cliente.Telefono = txtTelefono.Text;
+                    datosCli.Modificar(cliente);
+                }
+            }
+
+            // Actualizar la sesión
+            Session["usuario"] = user;
+
+            // Opcional: Mostrar mensaje de éxito
+            Response.Redirect("Cuenta.aspx");
         }
     }
 }
