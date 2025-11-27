@@ -9,7 +9,6 @@ namespace Negocio
     {
         private List<Libro> libros = null;
         private AccesoDatos datos = null;
-
         public List<Libro> Listar()
         {
             libros = new List<Libro>();
@@ -33,7 +32,7 @@ namespace Negocio
                         Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
                         FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,
-                        Precio = datos.Lector["Precio"] != DBNull.Value ? (float)datos.Lector["Precio"] : 0,
+                        Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0,
                         Paginas = datos.Lector["Paginas"] != DBNull.Value ? (int)datos.Lector["Paginas"] : 0,
                         Stock = datos.Lector["Stock"] != DBNull.Value ? (int)datos.Lector["Stock"] : 0
                     };
@@ -96,7 +95,7 @@ namespace Negocio
                     Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
                     Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
                     FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,
-                    Precio = datos.Lector["Precio"] != DBNull.Value ? (float)datos.Lector["Precio"] : 0,
+                    Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0,
                     Paginas = datos.Lector["Paginas"] != DBNull.Value ? (int)datos.Lector["Paginas"] : 0,
                     Stock = datos.Lector["Stock"] != DBNull.Value ? (int)datos.Lector["Stock"] : 0
                 };
@@ -110,6 +109,59 @@ namespace Negocio
                 datos.Cerrar();
             }
             return aux;
+        }
+        public List<Libro> BuscarLibros(string termino)
+        {
+            libros = new List<Libro>();
+            datos = new AccesoDatos();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar(@"SELECT DISTINCT L.IDLibro, L.IDAutor, L.IDGenero, L.IDEditorial, L.IDSucursal, 
+                         L.Titulo, L.Descripcion, L.FechaPublicacion, L.Precio, L.Paginas, L.Stock
+                         FROM Libros L
+                         LEFT JOIN Autores A ON L.IDAutor = A.IDAutor
+                         LEFT JOIN Editoriales E ON L.IDEditorial = E.IDEditorial
+                         LEFT JOIN Generos G ON L.IDGenero = G.IDGenero
+                         WHERE L.Titulo LIKE @termino 
+                         OR (A.Nombre + ' ' + A.Apellido) LIKE @termino
+                         OR A.Apellido LIKE @termino
+                         OR E.Nombre LIKE @termino
+                         OR G.Nombre LIKE @termino");
+
+                datos.SetearParametro("@termino", "%" + termino + "%");
+                datos.Leer();
+
+                while (datos.Lector.Read())
+                {
+                    var aux = new Libro
+                    {
+                        IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
+                        IdAutor = datos.Lector["IDAutor"] != DBNull.Value ? (int)datos.Lector["IDAutor"] : 0,
+                        IdGenero = datos.Lector["IDGenero"] != DBNull.Value ? (int)datos.Lector["IDGenero"] : 0,
+                        IdEditorial = datos.Lector["IDEditorial"] != DBNull.Value ? (int)datos.Lector["IDEditorial"] : 0,
+                        IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0,
+                        Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
+                        Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
+                        FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,
+                        Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0,
+                        Paginas = datos.Lector["Paginas"] != DBNull.Value ? (int)datos.Lector["Paginas"] : 0,
+                        Stock = datos.Lector["Stock"] != DBNull.Value ? (int)datos.Lector["Stock"] : 0
+                    };
+
+                    libros.Add(aux);
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return libros;
         }
     }
 }

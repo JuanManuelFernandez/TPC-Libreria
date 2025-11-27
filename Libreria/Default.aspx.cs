@@ -144,7 +144,7 @@ namespace Libreria
                 datos.Cerrar();
             }
         }
-        protected void Btn_AgregarLista (object sender, CommandEventArgs e)
+        protected void Btn_AgregarLista(object sender, CommandEventArgs e)
         {
             Usuario usuario = (Usuario)Session["usuario"];
             if (Session["usuario"] == null)

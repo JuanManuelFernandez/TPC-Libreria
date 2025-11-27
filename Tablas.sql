@@ -111,6 +111,6 @@ CREATE TABLE Devoluciones (
 )
 GO
 
-SELECT U.IDUsuario, U.TipoUsuario, U.Mail, U.Clave, U.Eliminado FROM Usuarios U
-INNER JOIN Clientes C ON U.IDUsuario = C.IDUsuario
-WHERE U.Mail = 'pura.sarasa@proton.me';
+--SELECT U.IDUsuario, U.TipoUsuario, U.Mail, U.Clave, U.Eliminado FROM Usuarios U
+--INNER JOIN Clientes C ON U.IDUsuario = C.IDUsuario
+--WHERE U.Mail = 'test.libreria.8um4x@silomails.com';

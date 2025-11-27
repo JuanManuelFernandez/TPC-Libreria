@@ -28,10 +28,15 @@
                             </asp:LinkButton>
                         </ul>
 
-                        <form class="d-flex">
+                        <%--<form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Que estas buscando?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </form>--%>
+
+                        <div class="d-flex">
+                            <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control me-2" placeholder="¿Qué estás buscando?" />
+                            <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success" Text="Buscar" OnClick="BtnBuscar_click" />
+                        </div>
 
                         <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCuenta_click">
                             <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
@@ -47,7 +52,7 @@
                             <!-- Agregado margen derecho (me-2) para separar del botón -->
                             <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnLogout_click">
                             <img src="assets/logout.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                        </asp:LinkButton>
+                            </asp:LinkButton>
                         </div>
                         <%  
                             }
@@ -70,59 +75,63 @@
             </asp:ContentPlaceHolder>
             <hr />
 
-<footer style="background-color:#21328F; color:white; padding:40px 0; font-family:'Segoe UI', sans-serif;">
+            <footer style="background-color: #21328F; color: white; padding: 40px 0; font-family: 'Segoe UI', sans-serif;">
 
-    <div class="container-fluid">
-        <div class="row align-items-start justify-content-around">
+                <div class="container-fluid">
+                    <div class="row align-items-start justify-content-around">
 
-            <!-- Columna Izquierda -->
-            <div class="col-lg-3 col-md-6 col-sm-12 text-center text-md-start mb-4">
-                <img src="assets/logo.png" alt="KEL Books in English" style="width:100px; height:auto; margin-bottom:15px;" />
+                        <!-- Columna Izquierda -->
+                        <div class="col-lg-3 col-md-6 col-sm-12 text-center text-md-start mb-4">
+                            <img src="assets/logo.png" alt="KEL Books in English" style="width: 100px; height: auto; margin-bottom: 15px;" />
 
-                <div class="d-flex justify-content-center justify-content-md-start mb-3">
-                    <a href="https://www.facebook.com/UTN.AR/" target="_blank">
-                        <img src="assets/facebook.png" style="width:30px; height:30px; margin-right:10px;" alt="Facebook" />
-                    </a>
-                    <a href="https://www.instagram.com/utnba.ok/" target="_blank">
-                        <img src="assets/instagram.png" style="width:30px; height:30px; margin-right:10px;" alt="Instagram" />
-                    </a>
-                    <a href="https://www.linkedin.com/school/utn/" target="_blank">
-                        <img src="assets/linkedin.png" style="width:30px; height:30px;" alt="LinkedIn" />
-                    </a>
+                            <div class="d-flex justify-content-center justify-content-md-start mb-3">
+                                <a href="https://www.facebook.com/UTN.AR/" target="_blank">
+                                    <img src="assets/facebook.png" style="width: 30px; height: 30px; margin-right: 10px;" alt="Facebook" />
+                                </a>
+                                <a href="https://www.instagram.com/utnba.ok/" target="_blank">
+                                    <img src="assets/instagram.png" style="width: 30px; height: 30px; margin-right: 10px;" alt="Instagram" />
+                                </a>
+                                <a href="https://www.linkedin.com/school/utn/" target="_blank">
+                                    <img src="assets/linkedin.png" style="width: 30px; height: 30px;" alt="LinkedIn" />
+                                </a>
+                            </div>
+
+                            <p style="font-weight: bold;">(11) 4890-9900</p>
+                        </div>
+
+                        <!-- Columna Central: Acerca de -->
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Acerca de</h3>
+                                </li>
+                                <li><a href="#" style="color: white; text-decoration: none;">Quienes somos</a></li>
+                                <li><a href="#" style="color: white; text-decoration: none;">Trabaja con nosotros</a></li>
+                                <li><a href="#" style="color: white; text-decoration: none;">Contactanos</a></li>
+                                <li><a href="#" style="color: white; text-decoration: none;">Promociones</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Columna Derecha: Atención al cliente -->
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Atención al cliente</h3>
+                                </li>
+                                <li style="color: white;">+54-9-11-3344-2288</li>
+                                <li style="color: white;">soporte@libreriautn.com</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr style="border-color: rgba(255,255,255,0.2); margin-top: 30px;">
+
+                    <div class="text-center" style="color: #d1d1d1; font-size: 13px;">
+                        © 2025 KEL Books in English - Todos los derechos reservados
+                    </div>
                 </div>
 
-                <p style="font-weight:bold;">(11) 4890-9900</p>
-            </div>
-
-            <!-- Columna Central: Acerca de -->
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <ul class="list-unstyled">
-                    <li><h3 style="font-size:16px; font-weight:600; margin-bottom:12px;">Acerca de</h3></li>
-                    <li><a href="#" style="color:white; text-decoration:none;">Quienes somos</a></li>
-                    <li><a href="#" style="color:white; text-decoration:none;">Trabaja con nosotros</a></li>
-                    <li><a href="#" style="color:white; text-decoration:none;">Contactanos</a></li>
-                    <li><a href="#" style="color:white; text-decoration:none;">Promociones</a></li>
-                </ul>
-            </div>
-
-            <!-- Columna Derecha: Atención al cliente -->
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <ul class="list-unstyled">
-                    <li><h3 style="font-size:16px; font-weight:600; margin-bottom:12px;">Atención al cliente</h3></li>
-                    <li style="color:white;">+54-9-11-3344-2288</li>
-                    <li style="color:white;">soporte@libreriautn.com</li>
-                </ul>
-            </div>
-        </div>
-
-        <hr style="border-color:rgba(255,255,255,0.2); margin-top:30px;">
-
-        <div class="text-center" style="color:#d1d1d1; font-size:13px;">
-            © 2025 KEL Books in English - Todos los derechos reservados
-        </div>
-    </div>
-
-</footer>
+            </footer>
 
         </div>
     </form>

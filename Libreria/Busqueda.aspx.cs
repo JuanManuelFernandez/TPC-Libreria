@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,23 +10,23 @@ using System.Web.UI.WebControls;
 
 namespace Libreria
 {
-    public partial class Deseados : System.Web.UI.Page
+    public partial class Busqueda : System.Web.UI.Page
     {
         private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
+            if (!IsPostBack)
             {
-                LblAviso.Visible = true;
-            }
-            else
-            {
-                LblAviso.Visible = false;
-                dynamic usuario = Session["usuario"];
-
-                var dataCli = new AccesoClientes();
-                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
-                CargarLibros(idCliente);
+                string termino = Request.QueryString["q"];
+                if (!string.IsNullOrEmpty(termino))
+                {
+                    litTermino.Text = Server.HtmlEncode(termino);
+                    CargarResultados(termino);
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
+                }
             }
         }
         private void CargarLibros(int idCliente)
@@ -104,6 +105,72 @@ namespace Libreria
                 }
             }
         }
+        private void MostrarErrorSinLogin()
+        {
+            foreach (RepeaterItem item in rptLibros.Items)
+            {
+                Label lblError = (Label)item.FindControl("lblError");
+                if (lblError != null)
+                {
+                    lblError.Visible = true;
+                }
+            }
+        }
+        private void CargarResultados(string termino)
+        {
+            try
+            {
+                AccesoLibros negocioLibros = new AccesoLibros();
+                AccesoAutores negocioAutores = new AccesoAutores();
+
+                List<Libro> resultados = negocioLibros.BuscarLibros(termino);
+
+                if (resultados.Count > 0)
+                {
+                    var librosMostrar = new List<object>();
+
+                    foreach (var libro in resultados)
+                    {
+                        librosMostrar.Add(new
+                        {
+                            IdLibro = libro.IdLibro,
+                            Titulo = libro.Titulo,
+                            Descripcion = libro.Descripcion,
+                            NombreAutor = negocioAutores.ObtenerNombreCompleto(libro.IdAutor),
+                            Precio = libro.Precio
+                        });
+                    }
+
+                    rptLibros.DataSource = librosMostrar;
+                    rptLibros.DataBind();
+
+                    rptLibros.Visible = true;
+                    lblMensaje.Visible = false;
+                }
+                else
+                {
+                    rptLibros.Visible = false;
+                    lblMensaje.Text = "No se encontraron resultados para tu búsqueda. Intenta con otros términos.";
+                    lblMensaje.CssClass = "alert alert-warning";
+                    lblMensaje.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                rptLibros.Visible = false;
+                lblMensaje.Text = "Error al realizar la búsqueda: " + ex.Message;
+                lblMensaje.CssClass = "alert alert-danger";
+                lblMensaje.Visible = true;
+            }
+        }
+        protected void BtnComprar_Click(object sender, EventArgs e)
+        {
+            var btn = (System.Web.UI.WebControls.Button)sender;
+            string idLibro = btn.CommandArgument;
+
+            // Redirigir a la página de detalle del libro
+            Response.Redirect($"DetalleLibro.aspx?id={idLibro}");
+        }
         private void AgregarAlCarrito(int idCliente, int idLibro)
         {
             datos = new AccesoDatos();
@@ -117,7 +184,6 @@ namespace Libreria
                 datos.SetearParametro("@IDLibro", idLibro);
 
                 datos.EjecutarNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -127,11 +193,10 @@ namespace Libreria
             {
                 datos.Cerrar();
             }
-            CargarLibros(idCliente);
 
         }
         private void BorrarDeDeseados(int idCliente, int idLibro)
-       {
+        {
             datos = new AccesoDatos();
             var auxiliar = new AccesoUsuario();
             dynamic usuario = Session["usuario"];
@@ -177,25 +242,55 @@ namespace Libreria
                 }
             }
         }
-        protected void Btn_Eliminar(object sender, CommandEventArgs e)
+        protected void Btn_AgregarLista(object sender, CommandEventArgs e)
         {
-            if (Session["usuario"] != null)
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (Session["usuario"] == null)
             {
-                dynamic usuario = Session["usuario"];
+                MostrarErrorSinLogin();
+            }
+            if (usuario != null && usuario.TipoUsuario == TipoUsuario.Cliente)
+            {
                 var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
 
-                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
                 try
                 {
-                    BorrarDeDeseados(idCliente, idLibro);
-                    CargarLibros(idCliente);
+                    AgregarLista(idCliente, idLibro);
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
+        protected void AgregarLista(int idCliente, int idLibro)
+        {
+            datos = new AccesoDatos();
+            var auxiliar = new AccesoUsuario();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Deseados (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.SetearParametro("@IDLibro", idLibro);
+
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Libreria
                 Usuario user = (Usuario)Session["usuario"];
                 switch (user.TipoUsuario)
                 {
-                    // admin
+                    // Admin
                     default:
                         UserName = "Admin";
                         break;
@@ -24,6 +24,14 @@ namespace Libreria
                         UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
                         break;
                 }
+            }
+        }
+        protected void BtnBuscar_click(object sender, EventArgs e)
+        {
+            string termino = txtBusqueda.Text.Trim();
+            if (!string.IsNullOrEmpty(termino))
+            {
+                Response.Redirect($"Busqueda.aspx?q={Server.UrlEncode(termino)}");
             }
         }
         protected void BtnInicio_click(object sender, EventArgs e)

@@ -93,5 +93,17 @@ namespace Negocio
             }
             return aux;
         }
+        public string ObtenerNombreCompleto(int idAutor)
+        {
+            try
+            {
+                Autor autor = BuscarPorIdAutor(idAutor);
+                return $"{autor.Nombre} {autor.Apellido}".Trim();
+            }
+            catch (Exception)
+            {
+                return "Autor desconocido";
+            }
+        }
     }
 }

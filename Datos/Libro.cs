@@ -15,5 +15,6 @@ namespace Dominio
         public float Precio { get; set; }
         public int Paginas { get; set; }
         public int Stock { get; set; }
+        public string NombreAutor { get; set; }
     }
 }
