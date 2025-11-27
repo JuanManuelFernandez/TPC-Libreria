@@ -63,9 +63,6 @@ INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
 ('cliente1@example.com', 'clave1111!', 1),
 ('cliente2@example.com', 'clave2222!', 1),
 ('cliente3@example.com', 'clave3333!', 1),
---('empleado1@example.com', 'clave789', 2),
---('empleado2@example.com', 'emple123', 2),
---('empleado3@example.com', 'trabajo456', 2),
 ('admin@example.com', 'adminpass', 2);
 GO
 
@@ -87,7 +84,8 @@ INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripc
 (7, 7, 7, 1, 'Kafka en la orilla', 'Novela contemporánea con realismo mágico.', CAST('2002-09-12' AS DATE), 22000, 505, 6),
 (1, 1, 1, 2, 'Orgullo y prejuicio', 'Novela romántica clásica.', CAST('1813-01-28' AS DATE), 25000, 279, 14),
 (2, 5, 2, 3, 'Las aventuras de Tom Sawyer', 'Novela de aventuras y formación.', CAST('1876-01-01' AS DATE), 15000, 274, 11),
-(8, 6, 3, 4, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18000, 220, 8);
+(8, 6, 3, 4, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18000, 220, 8),
+(3, 3, 3, 3, 'Rebelion en la granja', 'Rebelión de animales contra humanos, corrupción del poder, dictadura de cerdos.', CAST('1945-08-17' AS DATE), 14000, 328, 5);
 GO
 
 -- Portadas
@@ -101,7 +99,8 @@ INSERT INTO Portadas (IDLibro, Imagen) VALUES
 (7, 'kafka_orilla.jpg'),
 (8, 'orgullo_prejuicio.jpg'),
 (9, 'tom_sawyer.jpg'),
-(10, 'ensayos_escogidos.jpg');
+(10, 'ensayos_escogidos.jpg'),
+(11, 'rebelion_en_la_granja.jpg');
 GO
 
 -- Deseados
@@ -169,8 +168,9 @@ INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolu
 (3, 9, 9, 'Contenido distinto', '2023-11-15');
 GO
 
--- Consultas finales
+-- Consultas de prueba
 SELECT * FROM Libros;
+SELECT * FROM Portadas;
 
 SELECT * FROM Clientes;
 SELECT * FROM Usuarios;
