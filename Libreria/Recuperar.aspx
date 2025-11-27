@@ -127,9 +127,6 @@
                     <asp:Button ID="btnEnviarMail" runat="server" CssClass="btn btn-primary" Text="Enviar mail" OnClick="BtnEnviarMail_Click" />
                 </div>
 
-                <div class="mt-4">
-                    <asp:HyperLink ID="lnkRecuperar" runat="server" NavigateUrl="Recuperar.aspx" CssClass="btn btn-link">¿Querés cambiar tu contraseña?</asp:HyperLink>
-                </div>
             </div>
 
         </div>
@@ -147,34 +144,87 @@
             <h2 class="verification-header">Te enviamos un código a:</h2>
 
             <!-- Correo electrónico -->
-            <p class="verification-email"><%= txtMail.Text %> </p>
+            <p class="verification-email"><%= Session["MailRecuperacion"] %></p>
 
             <!-- Instrucción -->
-            <p>Ingresa el Token que recibiste via mail a continuacion</p>
+            <p>Ingresa el Token que recibiste vía mail a continuación</p>
 
-            <!-- Campo de ingreso del código -->
-            <div class="verification-code-input">
-                <input type="text" maxlength="1" />
-                <input type="text" maxlength="1" />
-                <input type="text" maxlength="1" />
-                <input type="text" maxlength="1" />
-                <input type="text" maxlength="1" />
-                <input type="text" maxlength="1" />
+            <!-- Campo único de ingreso del código -->
+            <div class="mb-3">
+                <asp:TextBox ID="txtCodigoVerificacion" runat="server"
+                    CssClass="form-control text-center"
+                    MaxLength="6"
+                    placeholder="000000"
+                    Style="font-size: 24px; letter-spacing: 10px; font-weight: bold;"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
             </div>
 
-            <asp:Button ID="btnEnviarToken" runat="server" CssClass="btn btn-primary" Text="Enviar token" OnClick="BtnEnviarToken_Click" />
+            <asp:Button ID="btnEnviarToken" runat="server" CssClass="btn btn-primary" Text="Verificar código" OnClick="BtnEnviarToken_Click" />
 
-            <!-- TO DO -->
-            <!-- Tiempo de expiración (placeholder) -->
-            <p class="verification-time">El código expira en 60 minutos</p>
-            <!-- Botón para reenvío  -->
-            <p class="re-send">Solicita un reenvío de código en 00:05</p>
-            <!-- Enlace para reenviar el correo -->
-            <a href="#" class="resend-link">¿No recibiste el correo? Reenviar email</a>
+            <!-- Tiempo de expiración con temporizador -->
+            <p class="verification-time" id="timerDisplay">El código expira en <span id="countdown">05:00</span></p>
 
+            <!-- Botón de reenvío (oculto inicialmente) -->
+            <div id="resendContainer" style="display: none;">
+                <asp:LinkButton ID="btnReenviarCodigo" runat="server" CssClass="resend-link" OnClick="BtnReenviarCodigo_Click">
+            <i class="bi bi-arrow-clockwise"></i> Enviar código nuevamente
+                </asp:LinkButton>
+            </div>
         </div>
-    </div>
-    <%  
-        }
-    %>
+
+        <script>
+            // Función para mover al siguiente campo
+            function moveToNext(current, nextFieldID) {
+                if (current.value.length >= current.maxLength) {
+                    if (nextFieldID) {
+                        document.getElementById(nextFieldID).focus();
+                    }
+                }
+            }
+
+            // Temporizador de cuenta regresiva
+            (function () {
+                // 5 minutos = 300 segundos
+                let timeRemaining = 5 * 60;
+
+                const countdownElement = document.getElementById('countdown');
+                const timerDisplay = document.getElementById('timerDisplay');
+                const resendContainer = document.getElementById('resendContainer');
+
+                function updateTimer() {
+                    if (timeRemaining <= 0) {
+                        // Tiempo expirado
+                        timerDisplay.innerHTML = '<span style="color: #dc3545; font-weight: bold;">El código ha expirado</span>';
+                        resendContainer.style.display = 'block';
+                        clearInterval(timerInterval);
+                        return;
+                    }
+
+                    // Calcular minutos y segundos
+                    const minutes = Math.floor(timeRemaining / 60);
+                    const seconds = timeRemaining % 60;
+
+                    // Formatear con ceros a la izquierda
+                    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    countdownElement.textContent = formattedTime;
+
+                    // Cambiar color cuando quede poco tiempo
+                    if (timeRemaining <= 60) { // Último minuto
+                        countdownElement.style.color = '#dc3545'; // Rojo
+                        countdownElement.style.fontWeight = 'bold';
+                    } else if (timeRemaining <= 120) { // Últimos 2 minutos
+                        countdownElement.style.color = '#ffc107'; // Amarillo
+                    }
+
+                    timeRemaining--;
+                }
+
+                // Actualizar cada segundo
+                updateTimer(); // Llamada inicial
+                const timerInterval = setInterval(updateTimer, 1000);
+            })();
+        </script>
+        <%  
+            }
+        %>
 </asp:Content>

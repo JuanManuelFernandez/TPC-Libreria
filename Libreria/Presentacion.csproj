@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Busqueda.aspx" />
+    <Content Include="CambiarClave.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Cuenta.aspx" />
     <Content Include="Datos.aspx" />
@@ -86,6 +87,13 @@
     </Compile>
     <Compile Include="Busqueda.aspx.designer.cs">
       <DependentUpon>Busqueda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CambiarClave.aspx.cs">
+      <DependentUpon>CambiarClave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambiarClave.aspx.designer.cs">
+      <DependentUpon>CambiarClave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>

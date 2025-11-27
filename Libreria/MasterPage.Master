@@ -22,51 +22,57 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnInicio_click">
-                                <img src="assets/home.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                            </asp:LinkButton>
-                        </ul>
-
-                        <%--<form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Que estas buscando?" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>--%>
-
-                        <div class="d-flex">
+                        <!-- Barra de búsqueda -->
+                        <div class="d-flex flex-grow-1 me-3">
                             <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control me-2" placeholder="¿Qué estás buscando?" />
                             <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success" Text="Buscar" OnClick="BtnBuscar_click" />
                         </div>
 
-                        <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCuenta_click">
-                            <img src="assets/account.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                        </asp:LinkButton>
+                        <!-- Botones de navegación -->
+                        <div class="d-flex align-items-center">
 
-                        <% 
-                            var usuario = Session["usuario"] as Dominio.Usuario;
-                            if (usuario != null)
-                            {
-                        %>
-                        <div class="d-flex align-items-center ms-3">
-                            <p class="mb-0 me-2">¡Hola, <%= UserName %>!</p>
-                            <!-- Agregado margen derecho (me-2) para separar del botón -->
-                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnLogout_click">
-                            <img src="assets/logout.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                            <asp:LinkButton ID="btnHome" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                            OnClick="BtnInicio_click">
+                            <img src="assets/home.png" style="width: 30px; height: 30px;" />
                             </asp:LinkButton>
-                        </div>
-                        <%  
-                            }
-                        %>
 
-                        <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnDeseados_click">
-                            <img src="assets/heart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCarrito_click">
-                            <img src="assets/cart.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" OnClick="BtnContacto_click">
-                            <img src="assets/mail.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                        </asp:LinkButton>
+                            <asp:LinkButton ID="btnCuenta" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                            OnClick="BtnCuenta_click">
+                            <img src="assets/account.png" style="width: 30px; height: 30px;" />
+                            </asp:LinkButton>
+
+                            <% 
+                                var usuario = Session["usuario"] as Dominio.Usuario;
+                                if (usuario != null)
+                                {
+                            %>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 me-2 text-nowrap">¡Hola, <%= UserName %>!</p>
+                                <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                                OnClick="BtnLogout_click">
+                                <img src="assets/logout.png" style="width: 30px; height: 30px;" />
+                                </asp:LinkButton>
+                            </div>
+                            <%  
+                                }
+                            %>
+
+                            <asp:LinkButton ID="btnDeseados" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                            OnClick="BtnDeseados_click">
+                            <img src="assets/heart.png" style="width: 30px; height: 30px;" />
+                            </asp:LinkButton>
+
+                            <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                            OnClick="BtnCarrito_click">
+                            <img src="assets/cart.png" style="width: 30px; height: 30px;" />
+                            </asp:LinkButton>
+
+                            <asp:LinkButton ID="btnContacto" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
+                            OnClick="BtnContacto_click">
+                            <img src="assets/mail.png" style="width: 30px; height: 30px;" />
+                            </asp:LinkButton>
+
+                        </div>
 
                     </div>
                 </div>
@@ -82,7 +88,7 @@
 
                         <!-- Columna Izquierda -->
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center text-md-start mb-4">
-                            <img src="assets/logo.png" alt="KEL Books in English" style="width: 100px; height: auto; margin-bottom: 15px;" />
+                            <img src="assets/logo.png" alt="Libreria UTN FRGP" style="width: 100px; height: auto; margin-bottom: 15px;" />
 
                             <div class="d-flex justify-content-center justify-content-md-start mb-3">
                                 <a href="https://www.facebook.com/UTN.AR/" target="_blank">
@@ -127,7 +133,7 @@
                     <hr style="border-color: rgba(255,255,255,0.2); margin-top: 30px;">
 
                     <div class="text-center" style="color: #d1d1d1; font-size: 13px;">
-                        © 2025 KEL Books in English - Todos los derechos reservados
+                        © 2025 Libreria UTN FRGP - Todos los derechos reservados
                     </div>
                 </div>
 

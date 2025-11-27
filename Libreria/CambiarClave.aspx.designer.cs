@@ -11,35 +11,17 @@ namespace Libreria
 {
 
 
-    public partial class Recuperar
+    public partial class CambiarClave
     {
 
         /// <summary>
-        /// MailPanel control.
+        /// pnlMensaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MailPanel;
-
-        /// <summary>
-        /// lblMail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMail;
-
-        /// <summary>
-        /// txtMail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMail;
+        protected global::System.Web.UI.WebControls.Panel pnlMensaje;
 
         /// <summary>
         /// lblMensaje control.
@@ -51,39 +33,84 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.Label lblMensaje;
 
         /// <summary>
-        /// btnEnviarMail control.
+        /// NuevaClavePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarMail;
+        protected global::System.Web.UI.WebControls.Panel NuevaClavePanel;
 
         /// <summary>
-        /// txtCodigoVerificacion control.
+        /// lblNuevaClave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoVerificacion;
+        protected global::System.Web.UI.WebControls.Label lblNuevaClave;
 
         /// <summary>
-        /// btnEnviarToken control.
+        /// txtNuevaClave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarToken;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevaClave;
 
         /// <summary>
-        /// btnReenviarCodigo control.
+        /// ConfirmarClavePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnReenviarCodigo;
+        protected global::System.Web.UI.WebControls.Panel ConfirmarClavePanel;
+
+        /// <summary>
+        /// lblConfirmarClave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmarClave;
+
+        /// <summary>
+        /// txtConfirmarClave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmarClave;
+
+        /// <summary>
+        /// lblErrorConfirmacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorConfirmacion;
+
+        /// <summary>
+        /// btnCambiarClave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiarClave;
+
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

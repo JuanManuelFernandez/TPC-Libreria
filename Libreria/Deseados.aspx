@@ -26,6 +26,7 @@
                             <p class="card-text"><%# Eval("Descripcion") %></p>
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
                         </div>
+
                         <div class="mt-auto">
                             <asp:LinkButton ID="btnAgregarCarrito" runat="server" CssClass="btn btn-success w-100" CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_AgregarCarrito" Text='<i class="bi bi-cart-plus me-2"></i>AGREGAR'/>
                         </div>
