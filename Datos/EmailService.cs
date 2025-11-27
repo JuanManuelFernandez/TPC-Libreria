@@ -13,7 +13,7 @@ namespace Dominio
         {
             server = new SmtpClient
             {
-                Credentials = new NetworkCredential("libreriautnfrgp@gmail.com", "devn vtvn ehnn dysv"), // Clave de Google App Libreria UTN FRGP
+                Credentials = new NetworkCredential("utnfrgplibreria@gmail.com", "vvpt zzcf ytpb reuf"), // Clave de Google App Libreria UTN FRGP
                 EnableSsl = true,
                 Port = 587,
                 Host = "smtp.gmail.com"
