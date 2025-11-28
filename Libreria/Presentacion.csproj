@@ -74,6 +74,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Pago.aspx" />
+    <Content Include="PagoCompletado.aspx" />
     <Content Include="Recuperar.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Web.config" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="Pago.aspx.designer.cs">
       <DependentUpon>Pago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagoCompletado.aspx.cs">
+      <DependentUpon>PagoCompletado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagoCompletado.aspx.designer.cs">
+      <DependentUpon>PagoCompletado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contacto.aspx.cs">

@@ -44,20 +44,6 @@ INSERT INTO Generos (Nombre) VALUES
 ('Ensayo');
 GO
 
--- Sucursales
-INSERT INTO Sucursales (Nombre, Direccion) VALUES
-('Sucursal Centro', 'Av. Libertador 1234'),
-('Sucursal Norte', 'Calle Falsa 5678'),
-('Sucursal Sur', 'Calle Real 91011'),
-('Sucursal Este', 'Av. Siempre Viva 200'),
-('Sucursal Oeste', 'Boulevard Central 45'),
-('Sucursal Bioquímica', 'Calle Ciencia 12'),
-('Sucursal Tecnológica', 'Paseo de la Tecnología 88'),
-('Sucursal Universitaria', 'Av. Campus 1'),
-('Sucursal Plaza', 'Plaza Mayor 3'),
-('Sucursal Lago', 'Rambla del Lago 5');
-GO
-
 -- Usuarios
 INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
 ('cliente1@example.com', 'clave1111!', 1),
@@ -74,18 +60,18 @@ INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES
 GO
 
 -- Libros
-INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock) VALUES
-(1, 1, 1, 1, 'Cien anios de soledad', 'Una novela sobre la familia Buendia.', CAST('1967-06-05' AS DATE), 20000, 400, 10),
-(2, 2, 2, 2, 'Harry Potter y la piedra filosofal', 'La historia de un joven mago.', CAST('1997-06-26' AS DATE), 15000, 223, 15),
-(3, 3, 3, 3, '1984', 'Una novela distopica sobre un futuro totalitario.', CAST('1949-06-08' AS DATE), 14000, 328, 5),
-(4, 4, 4, 4, 'La casa de los espíritus', 'Novela familiar con elementos sobrenaturales.', CAST('1982-01-01' AS DATE), 24000, 448, 12),
-(5, 2, 5, 5, 'Don Quijote de la Mancha', 'Clásico de la literatura española.', CAST('1605-01-16' AS DATE), 20000, 992, 7),
-(6, 3, 6, 6, 'Crimen y castigo', 'Relato sobre culpa y redención.', CAST('1866-01-01' AS DATE), 22000, 671, 9),
-(7, 7, 7, 1, 'Kafka en la orilla', 'Novela contemporánea con realismo mágico.', CAST('2002-09-12' AS DATE), 22000, 505, 6),
-(1, 1, 1, 2, 'Orgullo y prejuicio', 'Novela romántica clásica.', CAST('1813-01-28' AS DATE), 25000, 279, 14),
-(2, 5, 2, 3, 'Las aventuras de Tom Sawyer', 'Novela de aventuras y formación.', CAST('1876-01-01' AS DATE), 15000, 274, 11),
-(8, 6, 3, 4, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18000, 220, 8),
-(3, 3, 3, 3, 'Rebelion en la granja', 'Rebelión de animales contra humanos, corrupción del poder, dictadura de cerdos.', CAST('1945-08-17' AS DATE), 14000, 328, 5);
+INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock) VALUES
+(1, 1, 1, 'Cien anios de soledad', 'Una novela sobre la familia Buendia.', CAST('1967-06-05' AS DATE), 20000, 400, 10),
+(2, 2, 2, 'Harry Potter y la piedra filosofal', 'La historia de un joven mago.', CAST('1997-06-26' AS DATE), 15000, 223, 15),
+(3, 3, 3, '1984', 'Una novela distopica sobre un futuro totalitario.', CAST('1949-06-08' AS DATE), 14000, 328, 5),
+(4, 4, 4, 'La casa de los espíritus', 'Novela familiar con elementos sobrenaturales.', CAST('1982-01-01' AS DATE), 24000, 448, 12),
+(5, 2, 5, 'Don Quijote de la Mancha', 'Clásico de la literatura española.', CAST('1605-01-16' AS DATE), 20000, 992, 7),
+(6, 3, 6, 'Crimen y castigo', 'Relato sobre culpa y redención.', CAST('1866-01-01' AS DATE), 22000, 671, 9),
+(7, 7, 7, 'Kafka en la orilla', 'Novela contemporánea con realismo mágico.', CAST('2002-09-12' AS DATE), 22000, 505, 6),
+(1, 1, 1, 'Orgullo y prejuicio', 'Novela romántica clásica.', CAST('1813-01-28' AS DATE), 25000, 279, 14),
+(2, 5, 2, 'Las aventuras de Tom Sawyer', 'Novela de aventuras y formación.', CAST('1876-01-01' AS DATE), 15000, 274, 11),
+(8, 6, 3, 'Ensayos escogidos', 'Colección de ensayos contemporáneos.', CAST('2010-05-10' AS DATE), 18000, 220, 8),
+(3, 3, 3, 'Rebelion en la granja', 'Rebelión de animales contra humanos, corrupción del poder, dictadura de cerdos.', CAST('1945-08-17' AS DATE), 14000, 328, 5);
 GO
 
 -- Portadas
@@ -143,16 +129,16 @@ INSERT INTO Stocks (IDLibro, Cantidad) VALUES
 GO
 
 -- Compras
-INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, IDSucursal) VALUES
-('2023-10-01', 1, 1, 1),
-('2023-10-02', 1, 2, 2),
-('2023-10-03', 1, 3, 3),
-('2023-11-01', 2, 4, 4),
-('2023-11-02', 2, 5, 5),
-('2023-11-03', 2, 6, 6),
-('2023-11-04', 3, 7, 1),
-('2023-11-05', 3, 8, 2),
-('2023-11-06', 3, 9, 3);
+INSERT INTO Compras (FechaCompra, IDCliente, IDLibro) VALUES
+('2023-10-01', 1, 1),
+('2023-10-02', 1, 2),
+('2023-10-03', 1, 3),
+('2023-11-01', 2, 4),
+('2023-11-02', 2, 5),
+('2023-11-03', 2, 6),
+('2023-11-04', 3, 7),
+('2023-11-05', 3, 8),
+('2023-11-06', 3, 9);
 GO
 
 -- Devoluciones
@@ -177,3 +163,5 @@ SELECT * FROM Usuarios;
 
 SELECT * FROM Carrito;
 SELECT * FROM Deseados;
+
+SELECT * FROM Compras;

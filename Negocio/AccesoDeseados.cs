@@ -15,7 +15,7 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDDeseado, IDCliente, IDLibro, IDSucursal FROM Deseados");
+            datos.Consultar("SELECT IDDeseado, IDCliente, IDLibro FROM Deseados");
             datos.Leer();
 
             try

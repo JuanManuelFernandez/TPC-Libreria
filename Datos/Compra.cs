@@ -8,6 +8,5 @@ namespace Dominio
         public DateTime FechaCompra { get; set; }
         public int IdCliente { get; set; }
         public int IdLibro { get; set; }
-        public int IdSucursal { get; set; }
     }
 }

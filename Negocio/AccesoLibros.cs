@@ -15,7 +15,7 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDLibro, IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock FROM Libros");
+            datos.Consultar("SELECT IDLibro, IDAutor, IDGenero, IDEditorial, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock FROM Libros");
             datos.Leer();
 
             try
@@ -28,7 +28,6 @@ namespace Negocio
                         IdAutor = datos.Lector["IDAutor"] != DBNull.Value ? (int)datos.Lector["IDAutor"] : 0,
                         IdGenero = datos.Lector["IDGenero"] != DBNull.Value ? (int)datos.Lector["IDGenero"] : 0,
                         IdEditorial = datos.Lector["IDEditorial"] != DBNull.Value ? (int)datos.Lector["IDEditorial"] : 0,
-                        IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0,
                         Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
                         FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,
@@ -58,8 +57,8 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Libros (IDLibro, IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock)" +
-                                "VALUES (@IDLibro, @IDAutor, @IDGenero, @IDEditorial, @IDSucursal, @Titulo, @Descripcion, @FechaPublicacion, @Precio, @Paginas, @Stock)");
+                datos.Consultar("INSERT INTO Libros (IDLibro, IDAutor, IDGenero, IDEditorial, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock)" +
+                                "VALUES (@IDLibro, @IDAutor, @IDGenero, @IDEditorial, @Titulo, @Descripcion, @FechaPublicacion, @Precio, @Paginas, @Stock)");
                 datos.SetearParametro("@IDLibro", aux.Listar()[aux.Listar().Count - 1].IdLibro);
 
                 datos.EjecutarNonQuery();
@@ -81,7 +80,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDLibro, IDAutor, IDGenero, IDEditorial, IDSucursal, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock FROM Libros WHERE IDLibro = " + id);
+                datos.Consultar("SELECT IDLibro, IDAutor, IDGenero, IDEditorial, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock FROM Libros WHERE IDLibro = " + id);
                 datos.Leer();
                 datos.Lector.Read();
 
@@ -91,7 +90,6 @@ namespace Negocio
                     IdAutor = datos.Lector["IDAutor"] != DBNull.Value ? (int)datos.Lector["IDAutor"] : 0,
                     IdGenero = datos.Lector["IDGenero"] != DBNull.Value ? (int)datos.Lector["IDGenero"] : 0,
                     IdEditorial = datos.Lector["IDEditorial"] != DBNull.Value ? (int)datos.Lector["IDEditorial"] : 0,
-                    IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0,
                     Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
                     Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
                     FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,
@@ -118,7 +116,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar(@"SELECT DISTINCT L.IDLibro, L.IDAutor, L.IDGenero, L.IDEditorial, L.IDSucursal, 
+                datos.Consultar(@"SELECT DISTINCT L.IDLibro, L.IDAutor, L.IDGenero, L.IDEditorial, 
                          L.Titulo, L.Descripcion, L.FechaPublicacion, L.Precio, L.Paginas, L.Stock
                          FROM Libros L
                          LEFT JOIN Autores A ON L.IDAutor = A.IDAutor
@@ -141,7 +139,6 @@ namespace Negocio
                         IdAutor = datos.Lector["IDAutor"] != DBNull.Value ? (int)datos.Lector["IDAutor"] : 0,
                         IdGenero = datos.Lector["IDGenero"] != DBNull.Value ? (int)datos.Lector["IDGenero"] : 0,
                         IdEditorial = datos.Lector["IDEditorial"] != DBNull.Value ? (int)datos.Lector["IDEditorial"] : 0,
-                        IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0,
                         Titulo = datos.Lector["Titulo"] != DBNull.Value ? (string)datos.Lector["Titulo"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty,
                         FechaPublicacion = datos.Lector["FechaPublicacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaPublicacion"] : DateTime.MaxValue,

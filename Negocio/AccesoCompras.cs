@@ -15,7 +15,7 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDCompra, IDCliente, IDLibro, IDSucursal FROM Compras");
+            datos.Consultar("SELECT IDCompra, IDCliente, IDLibro, FROM Compras");
             datos.Leer();
 
             try
@@ -28,7 +28,6 @@ namespace Negocio
                         FechaCompra = datos.Lector["FechaCompra"] != DBNull.Value ? (DateTime)datos.Lector["FechaCompra"] : DateTime.MaxValue,
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
-                        IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0
                     };
 
                     compras.Add(aux);
@@ -52,7 +51,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Compras (IDCompra, IDCliente, IDLibro, IDSucursal) VALUES (@IDCompra, @IDCliente, @IDLibro, @IDSucursal)");
+                datos.Consultar("INSERT INTO Compras (IDCompra, IDCliente, IDLibro) VALUES (@IDCompra, @IDCliente, @IDLibro)");
                 datos.SetearParametro("@IDCompra", aux.Listar()[aux.Listar().Count - 1].IdCompra);
 
                 datos.EjecutarNonQuery();
@@ -74,7 +73,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDCompra, IDCliente, IDLibro, IDSucursal FROM Compras WHERE IDCompra = " + id);
+                datos.Consultar("SELECT IDCompra, IDCliente, IDLibro FROM Compras WHERE IDCompra = " + id);
                 datos.Leer();
                 datos.Lector.Read();
 
@@ -83,7 +82,6 @@ namespace Negocio
                     IdCompra = datos.Lector["IDCompra"] != DBNull.Value ? (int)datos.Lector["IDCompra"] : 0,
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                     IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
-                    IdSucursal = datos.Lector["IDSucursal"] != DBNull.Value ? (int)datos.Lector["IDSucursal"] : 0
                 };
             }
             catch (Exception er)

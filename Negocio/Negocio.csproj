@@ -106,7 +106,6 @@
     <Compile Include="AccesoGeneros.cs" />
     <Compile Include="AccesoLibros.cs" />
     <Compile Include="AccesoStocks.cs" />
-    <Compile Include="AccesoSucursales.cs" />
     <Compile Include="AccesoUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

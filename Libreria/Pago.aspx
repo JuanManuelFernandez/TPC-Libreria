@@ -18,7 +18,7 @@
                     <div class="d-flex align-items-center gap-4">
                         <asp:TextBox ID="TxtMes" runat="server" CssClass="form-control form-control-lg" style="width: 65px !important;"></asp:TextBox>
                         <h2>/</h2>
-                        <asp:TextBox ID="TxtYear" runat="server" CssClass="form-control form-control-lg" style="width: 65px !important;"></asp:TextBox>
+                        <asp:TextBox ID="TxtYear" runat="server" CssClass="form-control form-control-lg" style="width: 80px !important;"></asp:TextBox>
                         <asp:TextBox ID="TxtCodigoSeguridad" runat="server" CssClass="form-control form-control-lg" style="width: 80px !important;"></asp:TextBox>
                     </div>
                 </div>
@@ -65,6 +65,10 @@
             <div class="text-center mt-3">
                 <asp:Label ID="LblTelefono" runat="server" Text="Teléfono" style="margin-left: -100px;"></asp:Label>
                 <asp:TextBox ID="TxtTelefono" runat="server" CssClass="form-control form-control-lg" style="margin-left: 190px; width: 155px !important"></asp:TextBox>
+            </div>
+
+            <div class="mt-2 text-center">
+                <asp:LinkButton ID="btnPagar" runat="server" CssClass="btn btn-primary" OnCommand="Btn_Comprar" Visible="true" Text='Finalizar compra' style="margin-left: -100px;" />
             </div>
         </div>
     </div>
