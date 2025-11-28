@@ -18,7 +18,15 @@ namespace Libreria
             if (!IsPostBack)
             {
                 string termino = Request.QueryString["q"];
-                if (!string.IsNullOrEmpty(termino))
+                string generoId = Request.QueryString["genero"];
+
+                if (!string.IsNullOrEmpty(generoId))
+                {
+                    // Filtrar por género
+                    int idGenero = int.Parse(generoId);
+                    CargarResultadosPorGenero(idGenero);
+                }
+                else if (!string.IsNullOrEmpty(termino))
                 {
                     litTermino.Text = Server.HtmlEncode(termino);
                     CargarResultados(termino);
@@ -29,6 +37,62 @@ namespace Libreria
                 }
             }
         }
+
+        private void CargarResultadosPorGenero(int idGenero)
+        {
+            try
+            {
+                AccesoLibros negocioLibros = new AccesoLibros();
+                AccesoAutores negocioAutores = new AccesoAutores();
+                AccesoGeneros negocioGeneros = new AccesoGeneros();
+
+                // Obtener nombre del género
+                Genero genero = negocioGeneros.Listar().Find(g => g.IdGenero == idGenero);
+                if (genero != null)
+                {
+                    litTermino.Text = genero.Nombre;
+                }
+
+                List<Libro> resultados = negocioLibros.Listar().FindAll(l => l.IdGenero == idGenero);
+
+                if (resultados.Count > 0)
+                {
+                    var librosMostrar = new List<object>();
+
+                    foreach (var libro in resultados)
+                    {
+                        librosMostrar.Add(new
+                        {
+                            libro.IdLibro,
+                            libro.Titulo,
+                            libro.Descripcion,
+                            NombreAutor = negocioAutores.ObtenerNombreCompleto(libro.IdAutor),
+                            libro.Precio
+                        });
+                    }
+                    rptLibros.DataSource = librosMostrar;
+                    rptLibros.DataBind();
+
+                    rptLibros.Visible = true;
+                    lblMensaje.Visible = false;
+                }
+                else
+                {
+                    rptLibros.Visible = false;
+                    lblMensaje.Text = "No se encontraron libros en esta categoría.";
+                    lblMensaje.CssClass = "alert alert-warning";
+                    lblMensaje.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                rptLibros.Visible = false;
+                lblMensaje.Text = "Error al cargar los libros: " + ex.Message;
+                lblMensaje.CssClass = "alert alert-danger";
+                lblMensaje.Visible = true;
+            }
+        }
+
         private void CargarLibros(int idCliente)
         {
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];

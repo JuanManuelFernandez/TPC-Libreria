@@ -15,9 +15,9 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDGenero, Nombre FROM Generos");
+            datos.Consultar("SELECT IDGenero, Nombre FROM Generos ORDER BY Nombre");
             datos.Leer();
-            
+
             try
             {
                 while (datos.Lector.Read())
@@ -41,6 +41,7 @@ namespace Negocio
             }
             return generos;
         }
+
         public void AgregarGenero(Genero nuevo)
         {
             datos = new AccesoDatos();
@@ -63,6 +64,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
+
         public Genero BuscarPorIdGenero(int id)
         {
             datos = new AccesoDatos();
