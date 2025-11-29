@@ -67,6 +67,10 @@
                 <asp:TextBox ID="TxtTelefono" runat="server" CssClass="form-control form-control-lg" style="margin-left: 190px; width: 155px !important"></asp:TextBox>
             </div>
 
+            <div class="text-center mt-2">
+                <asp:Label ID="LblTotal" runat="server" Text="Label" CssClass="text-success" style="margin-left: -100px;"></asp:Label>
+            </div>
+
             <div class="mt-2 text-center">
                 <asp:LinkButton ID="btnPagar" runat="server" CssClass="btn btn-primary" OnCommand="Btn_Comprar" Visible="true" Text='Finalizar compra' style="margin-left: -100px;" />
             </div>

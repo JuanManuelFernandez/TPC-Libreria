@@ -16,6 +16,26 @@ namespace Libreria
         {
             TxtNumeroTarjeta.Attributes.Add("placeholder", "0000-0000-0000-0000");
             TxtTelefono.Attributes.Add("placeholder", "11-1111-1111");
+
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (usuario != null)
+            {
+                try
+                {
+                    var dataCli = new AccesoClientes();
+                    var cliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario);
+                    if (cliente != null)
+                    {
+                        int idCliente = cliente.IdCliente;
+                        decimal total = CalcularTotalCompra(idCliente);
+                        LblTotal.Text = "Monto a pagar: " + total.ToString("C"); // C para que se muestre como moneda.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LblTotal.Text = "Error al calcular el total: " + ex;
+                }
+            }
         }
         private void AgregarCompra(int idCliente, decimal TotalCompra)
         {
