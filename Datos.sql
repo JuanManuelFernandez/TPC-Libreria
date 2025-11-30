@@ -129,21 +129,21 @@ INSERT INTO Stocks (IDLibro, Cantidad) VALUES
 GO
 
 -- Compras
-INSERT INTO Compras (FechaCompra, IDCliente, IDLibro) VALUES
-('2023-10-01', 1, 1),
-('2023-10-02', 1, 2),
-('2023-10-03', 1, 3),
-('2023-11-01', 2, 4),
-('2023-11-02', 2, 5),
-('2023-11-03', 2, 6),
-('2023-11-04', 3, 7),
-('2023-11-05', 3, 8),
-('2023-11-06', 3, 9);
+INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, Correo, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES
+('2023-10-01', 1, 1, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 20000),
+('2023-10-02', 1, 2, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 15000),
+('2023-10-03', 1, 3, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 14000),
+('2023-11-01', 2, 4, 'cliente2@example.com', 'Ana', 'Gomez', 'Calle San Martin 567', 'Cordoba', '5000', '987654321', 24000),
+('2023-11-02', 2, 5, 'cliente2@example.com', 'Ana', 'Gomez', 'Calle San Martin 567', 'Cordoba', '5000', '987654321', 20000),
+('2023-11-03', 2, 6, 'cliente2@example.com', 'Ana', 'Gomez', 'Calle San Martin 567', 'Cordoba', '5000', '987654321', 22000),
+('2023-11-04', 3, 7, 'cliente3@example.com', 'Luis', 'Diaz', 'Belgrano 890', 'Rosario', '2000', '456789123', 22000),
+('2023-11-05', 3, 8, 'cliente3@example.com', 'Luis', 'Diaz', 'Belgrano 890', 'Rosario', '2000', '456789123', 25000),
+('2023-11-06', 3, 9, 'cliente3@example.com', 'Luis', 'Diaz', 'Belgrano 890', 'Rosario', '2000', '456789123', 15000);
 GO
 
 -- Devoluciones
 INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolucion) VALUES
-(1, 1, 1, 'Libro en mal estado', '2023-10-05'),
+(1, 3, 1, 'Libro en mal estado', '2023-10-05'),
 (1, 2, 2, 'No era lo que esperaba', '2023-10-06'),
 (1, 3, 3, 'Cambio de opinion', '2023-10-07'),
 (2, 4, 4, 'Daños en la cubierta', '2023-11-10'),
@@ -164,4 +164,6 @@ SELECT * FROM Usuarios;
 SELECT * FROM Carrito;
 SELECT * FROM Deseados;
 
+SELECT * FROM Stocks;
 SELECT * FROM Compras;
+SELECT * FROM Devoluciones;
