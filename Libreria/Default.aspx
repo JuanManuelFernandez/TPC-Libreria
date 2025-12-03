@@ -46,6 +46,9 @@
                 </div>
             </FooterTemplate>
         </asp:Repeater>
+        <div class="text-center">
+            <asp:Button ID="Btn_Agregar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" Visible="false" OnCommand="Btn_AgregarLibro"/>
+        </div>
 
         <!-- Mensaje si no hay libros -->
         <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">

@@ -11,34 +11,25 @@ namespace Libreria
 {
 
 
-    public partial class Default
+    public partial class LibroAgregado
     {
 
         /// <summary>
-        /// Control rptLibros.
+        /// Control Btn_VolverInicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptLibros;
+        protected global::System.Web.UI.WebControls.Button Btn_VolverInicio;
 
         /// <summary>
-        /// Control Btn_Agregar.
+        /// Control Btn_AgregarOtro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn_Agregar;
-
-        /// <summary>
-        /// Control pnlNoLibros.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNoLibros;
+        protected global::System.Web.UI.WebControls.Button Btn_AgregarOtro;
     }
 }
