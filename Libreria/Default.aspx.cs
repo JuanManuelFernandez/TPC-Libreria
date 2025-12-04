@@ -17,9 +17,14 @@ namespace Libreria
         {
             if (!IsPostBack)
             {
+                Usuario usuario = (Usuario)Session["usuario"];
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-AR");
                 CargarLibros();
+                if(usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+                {
+                    Btn_Agregar.Visible = true;
+                }
             }
         }
 
@@ -171,6 +176,10 @@ namespace Libreria
             {
                 Response.Redirect("Login.aspx");
             }
+        }
+        protected void Btn_AgregarLibro(object sender, CommandEventArgs e)
+        {
+            Response.Redirect("AgregarLibro.aspx");
         }
     }
 }
