@@ -124,6 +124,7 @@
             <!-- Barra de filtros de categorías -->
             <div class="category-filter-bar">
                 <div class="container-fluid">
+
                     <div class="d-flex justify-content-center align-items-center flex-wrap py-2">
                         <asp:LinkButton ID="btnFiltroTodos" runat="server"
                             CssClass="category-filter-btn active"
@@ -142,6 +143,9 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
+
+                        <asp:Label ID="lblMensaje" runat="server" CssClass="alert" Visible="false" />
+
                     </div>
                 </div>
             </div>

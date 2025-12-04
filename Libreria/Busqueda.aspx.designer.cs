@@ -24,6 +24,69 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.Literal litTermino;
 
         /// <summary>
+        /// pnlFiltrosActivos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFiltrosActivos;
+
+        /// <summary>
+        /// litFiltrosActivos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFiltrosActivos;
+
+        /// <summary>
+        /// btnLimpiarFiltros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiarFiltros;
+
+        /// <summary>
+        /// rptFiltroGeneros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFiltroGeneros;
+
+        /// <summary>
+        /// rptFiltroEditoriales control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFiltroEditoriales;
+
+        /// <summary>
+        /// rptFiltroAutores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFiltroAutores;
+
+        /// <summary>
+        /// litCantidadResultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litCantidadResultados;
+
+        /// <summary>
         /// lblMensaje control.
         /// </summary>
         /// <remarks>

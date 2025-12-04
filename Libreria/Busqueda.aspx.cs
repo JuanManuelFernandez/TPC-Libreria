@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Libreria
@@ -13,6 +14,32 @@ namespace Libreria
     public partial class Busqueda : System.Web.UI.Page
     {
         private AccesoDatos datos = null;
+
+        // ViewState para mantener filtros seleccionados
+        private List<int> GenerosSeleccionados
+        {
+            get { return ViewState["GenerosSeleccionados"] as List<int> ?? new List<int>(); }
+            set { ViewState["GenerosSeleccionados"] = value; }
+        }
+
+        private List<int> EditorialesSeleccionadas
+        {
+            get { return ViewState["EditorialesSeleccionadas"] as List<int> ?? new List<int>(); }
+            set { ViewState["EditorialesSeleccionadas"] = value; }
+        }
+
+        private List<int> AutoresSeleccionados
+        {
+            get { return ViewState["AutoresSeleccionados"] as List<int> ?? new List<int>(); }
+            set { ViewState["AutoresSeleccionados"] = value; }
+        }
+
+        private string TerminoBusqueda
+        {
+            get { return ViewState["TerminoBusqueda"] as string ?? string.Empty; }
+            set { ViewState["TerminoBusqueda"] = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,41 +47,302 @@ namespace Libreria
                 string termino = Request.QueryString["q"];
                 string generoId = Request.QueryString["genero"];
 
+                // CASO 1: Filtro por género desde MasterPage
                 if (!string.IsNullOrEmpty(generoId))
                 {
-                    // Filtrar por género
                     int idGenero = int.Parse(generoId);
-                    CargarResultadosPorGenero(idGenero);
+                    GenerosSeleccionados = new List<int> { idGenero };
+
+                    AccesoGeneros negocioGeneros = new AccesoGeneros();
+                    Genero genero = negocioGeneros.BuscarPorIdGenero(idGenero);
+                    if (genero != null)
+                    {
+                        litTermino.Text = genero.Nombre;
+                        TerminoBusqueda = ""; // No hay término de búsqueda, solo filtro
+                    }
+
+                    CargarFiltros();
+                    AplicarFiltros();
                 }
+                // CASO 2: Búsqueda por término
                 else if (!string.IsNullOrEmpty(termino))
                 {
                     litTermino.Text = Server.HtmlEncode(termino);
-                    CargarResultados(termino);
+                    TerminoBusqueda = termino;
+                    CargarFiltros();
+                    AplicarFiltros();
                 }
+                // CASO 3: Sin parámetros, redirigir
                 else
                 {
                     Response.Redirect("Default.aspx");
                 }
             }
+            else
+            {
+                // Manejar la eliminación de filtros individuales desde los tags
+                string eventTarget = Request.Form["__EVENTTARGET"];
+                if (!string.IsNullOrEmpty(eventTarget) && eventTarget.StartsWith("removerFiltro_"))
+                {
+                    string[] partes = eventTarget.Split('_');
+                    if (partes.Length == 3)
+                    {
+                        string tipoFiltro = partes[1]; // "genero", "editorial", "autor"
+                        int idFiltro = int.Parse(partes[2]);
+
+                        RemoverFiltroIndividual(tipoFiltro, idFiltro);
+                    }
+                }
+            }
         }
 
-        private void CargarResultadosPorGenero(int idGenero)
+        private void RemoverFiltroIndividual(string tipo, int id)
+        {
+            switch (tipo)
+            {
+                case "genero":
+                    GenerosSeleccionados.Remove(id);
+                    break;
+                case "editorial":
+                    EditorialesSeleccionadas.Remove(id);
+                    break;
+                case "autor":
+                    AutoresSeleccionados.Remove(id);
+                    break;
+            }
+
+            // Recargar filtros y aplicar cambios
+            CargarFiltros();
+            AplicarFiltros();
+        }
+
+        private void CargarFiltros()
+        {
+            try
+            {
+                AccesoLibros negocioLibros = new AccesoLibros();
+                List<Libro> todosLibros = negocioLibros.Listar();
+
+                // Si hay un término de búsqueda, filtrar primero por ese término
+                // para que los contadores de los filtros reflejen solo los libros que coinciden
+                if (!string.IsNullOrEmpty(TerminoBusqueda))
+                {
+                    todosLibros = negocioLibros.BuscarLibros(TerminoBusqueda);
+                }
+
+                // Cargar filtro de géneros con conteo
+                var generosConConteo = todosLibros
+                    .GroupBy(l => l.IdGenero)
+                    .Select(g => new
+                    {
+                        IdGenero = g.Key,
+                        Nombre = ObtenerNombreGenero(g.Key),
+                        Cantidad = g.Count()
+                    })
+                    .OrderBy(x => x.Nombre)
+                    .ToList();
+
+                rptFiltroGeneros.DataSource = generosConConteo;
+                rptFiltroGeneros.DataBind();
+
+                // Cargar filtro de editoriales con conteo
+                var editorialesConConteo = todosLibros
+                    .GroupBy(l => l.IdEditorial)
+                    .Select(e => new
+                    {
+                        IdEditorial = e.Key,
+                        Nombre = ObtenerNombreEditorial(e.Key),
+                        Cantidad = e.Count()
+                    })
+                    .OrderBy(x => x.Nombre)
+                    .ToList();
+
+                rptFiltroEditoriales.DataSource = editorialesConConteo;
+                rptFiltroEditoriales.DataBind();
+
+                // Cargar filtro de autores con conteo
+                var autoresConConteo = todosLibros
+                    .GroupBy(l => l.IdAutor)
+                    .Select(a => new
+                    {
+                        IdAutor = a.Key,
+                        NombreCompleto = ObtenerNombreAutor(a.Key),
+                        Cantidad = a.Count()
+                    })
+                    .OrderBy(x => x.NombreCompleto)
+                    .ToList();
+
+                rptFiltroAutores.DataSource = autoresConConteo;
+                rptFiltroAutores.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text = "Error al cargar filtros: " + ex.Message;
+                lblMensaje.CssClass = "alert alert-danger";
+                lblMensaje.Visible = true;
+            }
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            // Marcar los checkboxes justo antes de renderizar
+            MarcarFiltrosSeleccionados();
+
+            // Registrar el script para manejar los clicks en los tags
+            RegistrarScriptRemoverFiltros();
+        }
+
+        private void RegistrarScriptRemoverFiltros()
+        {
+            string script = @"
+                function removerFiltro(tipo, id) {
+                    __doPostBack('removerFiltro_' + tipo + '_' + id, '');
+                }
+            ";
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "RemoverFiltroScript", script, true);
+        }
+
+        private void MarcarFiltrosSeleccionados()
+        {
+            // Marcar géneros seleccionados
+            foreach (RepeaterItem item in rptFiltroGeneros.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkGenero");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnGeneroId");
+                if (chk != null && hdn != null)
+                {
+                    int id = int.Parse(hdn.Value);
+                    chk.Checked = GenerosSeleccionados.Contains(id);
+                }
+            }
+
+            // Marcar editoriales seleccionadas
+            foreach (RepeaterItem item in rptFiltroEditoriales.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkEditorial");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnEditorialId");
+                if (chk != null && hdn != null)
+                {
+                    int id = int.Parse(hdn.Value);
+                    chk.Checked = EditorialesSeleccionadas.Contains(id);
+                }
+            }
+
+            // Marcar autores seleccionados
+            foreach (RepeaterItem item in rptFiltroAutores.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkAutor");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnAutorId");
+                if (chk != null && hdn != null)
+                {
+                    int id = int.Parse(hdn.Value);
+                    chk.Checked = AutoresSeleccionados.Contains(id);
+                }
+            }
+        }
+
+        protected void FiltroChanged(object sender, EventArgs e)
+        {
+            // PRIMERO: Actualizar las listas de filtros seleccionados
+            ActualizarFiltrosSeleccionados();
+
+            // SEGUNDO: Recargar los filtros (para que se muestren correctamente)
+            CargarFiltros();
+
+            // TERCERO: Aplicar los filtros a los resultados
+            AplicarFiltros();
+
+            // CUARTO: Mostrar los filtros activos
+            MostrarFiltrosActivos();
+        }
+
+        private void ActualizarFiltrosSeleccionados()
+        {
+            // Limpiar las listas
+            List<int> nuevosGeneros = new List<int>();
+            List<int> nuevasEditoriales = new List<int>();
+            List<int> nuevosAutores = new List<int>();
+
+            // Actualizar géneros
+            foreach (RepeaterItem item in rptFiltroGeneros.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkGenero");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnGeneroId");
+                if (chk != null && hdn != null && chk.Checked)
+                {
+                    nuevosGeneros.Add(int.Parse(hdn.Value));
+                }
+            }
+
+            // Actualizar editoriales
+            foreach (RepeaterItem item in rptFiltroEditoriales.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkEditorial");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnEditorialId");
+                if (chk != null && hdn != null && chk.Checked)
+                {
+                    nuevasEditoriales.Add(int.Parse(hdn.Value));
+                }
+            }
+
+            // Actualizar autores
+            foreach (RepeaterItem item in rptFiltroAutores.Items)
+            {
+                CheckBox chk = (CheckBox)item.FindControl("chkAutor");
+                HiddenField hdn = (HiddenField)item.FindControl("hdnAutorId");
+                if (chk != null && hdn != null && chk.Checked)
+                {
+                    nuevosAutores.Add(int.Parse(hdn.Value));
+                }
+            }
+
+            // Guardar en ViewState
+            GenerosSeleccionados = nuevosGeneros;
+            EditorialesSeleccionadas = nuevasEditoriales;
+            AutoresSeleccionados = nuevosAutores;
+        }
+
+        private void AplicarFiltros()
         {
             try
             {
                 AccesoLibros negocioLibros = new AccesoLibros();
                 AccesoAutores negocioAutores = new AccesoAutores();
-                AccesoGeneros negocioGeneros = new AccesoGeneros();
+                List<Libro> resultados;
 
-                // Obtener nombre del género
-                Genero genero = negocioGeneros.Listar().Find(g => g.IdGenero == idGenero);
-                if (genero != null)
+                // PASO 1: Obtener lista base de libros
+                // Si hay un término de búsqueda, filtrar por ese término primero
+                if (!string.IsNullOrEmpty(TerminoBusqueda))
                 {
-                    litTermino.Text = genero.Nombre;
+                    resultados = negocioLibros.BuscarLibros(TerminoBusqueda);
+                }
+                else
+                {
+                    // Si no hay término, obtener todos los libros
+                    resultados = negocioLibros.Listar();
                 }
 
-                List<Libro> resultados = negocioLibros.Listar().FindAll(l => l.IdGenero == idGenero);
+                // PASO 2: Aplicar filtro de géneros
+                if (GenerosSeleccionados != null && GenerosSeleccionados.Count > 0)
+                {
+                    resultados = resultados.Where(l => GenerosSeleccionados.Contains(l.IdGenero)).ToList();
+                }
 
+                // PASO 3: Aplicar filtro de editoriales
+                if (EditorialesSeleccionadas != null && EditorialesSeleccionadas.Count > 0)
+                {
+                    resultados = resultados.Where(l => EditorialesSeleccionadas.Contains(l.IdEditorial)).ToList();
+                }
+
+                // PASO 4: Aplicar filtro de autores
+                if (AutoresSeleccionados != null && AutoresSeleccionados.Count > 0)
+                {
+                    resultados = resultados.Where(l => AutoresSeleccionados.Contains(l.IdAutor)).ToList();
+                }
+
+                // PASO 5: Mostrar resultados
                 if (resultados.Count > 0)
                 {
                     var librosMostrar = new List<object>();
@@ -70,116 +358,104 @@ namespace Libreria
                             libro.Precio
                         });
                     }
+
                     rptLibros.DataSource = librosMostrar;
                     rptLibros.DataBind();
 
                     rptLibros.Visible = true;
+                    pnlNoLibros.Visible = false;
                     lblMensaje.Visible = false;
+
+                    // Mostrar cantidad de resultados
+                    litCantidadResultados.Text = $"Se encontraron {resultados.Count} resultado(s)";
                 }
                 else
                 {
                     rptLibros.Visible = false;
-                    lblMensaje.Text = "No se encontraron libros en esta categoría.";
-                    lblMensaje.CssClass = "alert alert-warning";
-                    lblMensaje.Visible = true;
+                    pnlNoLibros.Visible = true;
+                    litCantidadResultados.Text = "0 resultados";
                 }
+
+                // Mostrar filtros activos
+                MostrarFiltrosActivos();
             }
             catch (Exception ex)
             {
-                rptLibros.Visible = false;
-                lblMensaje.Text = "Error al cargar los libros: " + ex.Message;
+                lblMensaje.Text = "Error al aplicar filtros: " + ex.Message;
                 lblMensaje.CssClass = "alert alert-danger";
                 lblMensaje.Visible = true;
             }
         }
 
-        private void CargarLibros(int idCliente)
+        private void MostrarFiltrosActivos()
         {
-            var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
-            string connString = connSettings.ConnectionString;
-            DataTable dtLibros = new DataTable();
+            bool hayFiltros = (GenerosSeleccionados != null && GenerosSeleccionados.Count > 0) ||
+                             (EditorialesSeleccionadas != null && EditorialesSeleccionadas.Count > 0) ||
+                             (AutoresSeleccionados != null && AutoresSeleccionados.Count > 0);
 
-            List<int> IdsLibros = new List<int>();
-
-            string queryIds = "SELECT IDLibro FROM Deseados WHERE IDCliente = @IDCliente";
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmdIds = new SqlCommand(queryIds, conn))
+            if (hayFiltros)
             {
-                cmdIds.Parameters.AddWithValue("@IDCliente", idCliente);
+                string filtrosHtml = "";
 
-                try
+                // Mostrar géneros seleccionados
+                if (GenerosSeleccionados != null)
                 {
-                    conn.Open();
-                    using (SqlDataReader reader = cmdIds.ExecuteReader())
+                    foreach (int id in GenerosSeleccionados)
                     {
-                        while (reader.Read())
-                        {
-                            IdsLibros.Add(reader.GetInt32(0));
-                        }
+                        string nombreGenero = ObtenerNombreGenero(id);
+                        filtrosHtml += $"<span class='filter-tag'>{nombreGenero} " +
+                                      $"<span class='remove-filter' onclick='removerFiltro(\"genero\", {id})' style='cursor: pointer;'>×</span></span>";
                     }
-                    conn.Close();
                 }
-                catch (Exception ex)
+
+                // Mostrar editoriales seleccionadas
+                if (EditorialesSeleccionadas != null)
                 {
-                    throw ex;
+                    foreach (int id in EditorialesSeleccionadas)
+                    {
+                        string nombreEditorial = ObtenerNombreEditorial(id);
+                        filtrosHtml += $"<span class='filter-tag'>{nombreEditorial} " +
+                                      $"<span class='remove-filter' onclick='removerFiltro(\"editorial\", {id})' style='cursor: pointer;'>×</span></span>";
+                    }
                 }
+
+                // Mostrar autores seleccionados
+                if (AutoresSeleccionados != null)
+                {
+                    foreach (int id in AutoresSeleccionados)
+                    {
+                        string nombreAutor = ObtenerNombreAutor(id);
+                        filtrosHtml += $"<span class='filter-tag'>{nombreAutor} " +
+                                      $"<span class='remove-filter' onclick='removerFiltro(\"autor\", {id})' style='cursor: pointer;'>×</span></span>";
+                    }
+                }
+
+                litFiltrosActivos.Text = filtrosHtml;
+                pnlFiltrosActivos.Visible = true;
             }
-            if (IdsLibros.Count == 0)
+            else
             {
-                rptLibros.Visible = false;
-                pnlNoLibros.Visible = true;
-                return;
-            }
-
-            string[] parametros = IdsLibros.Select((id, index) => "@id" + index).ToArray();
-            string queryLibros = $"SELECT * FROM Libros WHERE IDLibro IN ({string.Join(",", parametros)}) ORDER BY IDLibro";
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmdLibros = new SqlCommand(queryLibros, conn))
-            {
-                for (int i = 0; i < IdsLibros.Count; i++)
-                {
-                    cmdLibros.Parameters.AddWithValue(parametros[i], IdsLibros[i]);
-                }
-
-                try
-                {
-                    conn.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmdLibros);
-                    adapter.Fill(dtLibros);
-
-                    rptLibros.DataSource = dtLibros;
-                    rptLibros.DataBind();
-
-                    if (dtLibros.Rows.Count == 0)
-                    {
-                        rptLibros.Visible = false;
-                        pnlNoLibros.Visible = true;
-                    }
-                    else
-                    {
-                        rptLibros.Visible = true;
-                        pnlNoLibros.Visible = false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                pnlFiltrosActivos.Visible = false;
             }
         }
-        private void MostrarErrorSinLogin()
+
+        protected void BtnLimpiarFiltros_Click(object sender, EventArgs e)
         {
-            foreach (RepeaterItem item in rptLibros.Items)
-            {
-                Label lblError = (Label)item.FindControl("lblError");
-                if (lblError != null)
-                {
-                    lblError.Visible = true;
-                }
-            }
+            // Limpiar todos los filtros
+            GenerosSeleccionados = new List<int>();
+            EditorialesSeleccionadas = new List<int>();
+            AutoresSeleccionados = new List<int>();
+
+            // Recargar filtros para desmarcar los checkboxes
+            CargarFiltros();
+
+            // Aplicar filtros (sin filtros = mostrar todos los resultados de búsqueda)
+            AplicarFiltros();
+
+            // Ocultar panel de filtros activos
+            pnlFiltrosActivos.Visible = false;
         }
+
         private void CargarResultados(string termino)
         {
             try
@@ -197,11 +473,11 @@ namespace Libreria
                     {
                         librosMostrar.Add(new
                         {
-                            IdLibro = libro.IdLibro,
-                            Titulo = libro.Titulo,
-                            Descripcion = libro.Descripcion,
+                            libro.IdLibro,
+                            libro.Titulo,
+                            libro.Descripcion,
                             NombreAutor = negocioAutores.ObtenerNombreCompleto(libro.IdAutor),
-                            Precio = libro.Precio
+                            libro.Precio
                         });
                     }
 
@@ -209,14 +485,19 @@ namespace Libreria
                     rptLibros.DataBind();
 
                     rptLibros.Visible = true;
+                    pnlNoLibros.Visible = false;
                     lblMensaje.Visible = false;
+
+                    litCantidadResultados.Text = $"Se encontraron {resultados.Count} resultado(s)";
                 }
                 else
                 {
                     rptLibros.Visible = false;
+                    pnlNoLibros.Visible = true;
                     lblMensaje.Text = "No se encontraron resultados para tu búsqueda. Intenta con otros términos.";
                     lblMensaje.CssClass = "alert alert-warning";
                     lblMensaje.Visible = true;
+                    litCantidadResultados.Text = "0 resultados";
                 }
             }
             catch (Exception ex)
@@ -227,63 +508,50 @@ namespace Libreria
                 lblMensaje.Visible = true;
             }
         }
-        protected void BtnComprar_Click(object sender, EventArgs e)
-        {
-            var btn = (System.Web.UI.WebControls.Button)sender;
-            string idLibro = btn.CommandArgument;
 
-            // Redirigir a la página de detalle del libro
-            Response.Redirect($"DetalleLibro.aspx?id={idLibro}");
-        }
-        private void AgregarAlCarrito(int idCliente, int idLibro)
+        // Métodos auxiliares para obtener nombres
+        private string ObtenerNombreGenero(int idGenero)
         {
-            datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
-
             try
             {
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Carrito (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.SetearParametro("@IDLibro", idLibro);
-
-                datos.EjecutarNonQuery();
+                AccesoGeneros negocioGeneros = new AccesoGeneros();
+                Genero genero = negocioGeneros.BuscarPorIdGenero(idGenero);
+                return genero?.Nombre ?? "Desconocido";
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                return "Desconocido";
             }
-            finally
-            {
-                datos.Cerrar();
-            }
-
         }
-        private void BorrarDeDeseados(int idCliente, int idLibro)
-        {
-            datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
-            dynamic usuario = Session["usuario"];
 
+        private string ObtenerNombreEditorial(int idEditorial)
+        {
             try
             {
-                datos.Conectar();
-                datos.Consultar("DELETE FROM Deseados WHERE IDCliente = @idCliente AND IDLibro = @idLibro");
-                datos.SetearParametro("@idCliente", idCliente);
-                datos.SetearParametro("@idLibro", idLibro);
-
-                datos.EjecutarNonQuery();
-
+                AccesoEditoriales negocioEditoriales = new AccesoEditoriales();
+                Editorial editorial = negocioEditoriales.BuscarPorIdEditorial(idEditorial);
+                return editorial?.Nombre ?? "Desconocido";
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
+                return "Desconocido";
             }
         }
+
+        private string ObtenerNombreAutor(int idAutor)
+        {
+            try
+            {
+                AccesoAutores negocioAutores = new AccesoAutores();
+                return negocioAutores.ObtenerNombreCompleto(idAutor);
+            }
+            catch
+            {
+                return "Desconocido";
+            }
+        }
+
+        // Métodos para carrito y lista de deseados
         protected void Btn_AgregarCarrito(object sender, CommandEventArgs e)
         {
             if (Session["usuario"] != null)
@@ -297,36 +565,13 @@ namespace Libreria
                 try
                 {
                     AgregarAlCarrito(idCliente, idLibro);
-                    BorrarDeDeseados(idCliente, idLibro);
-                    CargarLibros(idCliente);
+                    // Mostrar mensaje de éxito o redireccionar
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
-                }
-            }
-        }
-        protected void Btn_AgregarLista(object sender, CommandEventArgs e)
-        {
-            Usuario usuario = (Usuario)Session["usuario"];
-            if (Session["usuario"] == null)
-            {
-                MostrarErrorSinLogin();
-            }
-            if (usuario != null && usuario.TipoUsuario == TipoUsuario.Cliente)
-            {
-                var dataCli = new AccesoClientes();
-                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
-
-                int idLibro = Convert.ToInt32(e.CommandArgument);
-
-                try
-                {
-                    AgregarLista(idCliente, idLibro);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    lblMensaje.Text = "Error al agregar al carrito: " + ex.Message;
+                    lblMensaje.CssClass = "alert alert-danger";
+                    lblMensaje.Visible = true;
                 }
             }
             else
@@ -334,10 +579,65 @@ namespace Libreria
                 Response.Redirect("Login.aspx");
             }
         }
+
+        protected void Btn_AgregarLista(object sender, CommandEventArgs e)
+        {
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            if (usuario != null && usuario.TipoUsuario == TipoUsuario.Cliente)
+            {
+                var dataCli = new AccesoClientes();
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
+                int idLibro = Convert.ToInt32(e.CommandArgument);
+
+                try
+                {
+                    AgregarLista(idCliente, idLibro);
+                    // Mostrar mensaje de éxito
+                }
+                catch (Exception ex)
+                {
+                    lblMensaje.Text = "Error al agregar a la lista: " + ex.Message;
+                    lblMensaje.CssClass = "alert alert-danger";
+                    lblMensaje.Visible = true;
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
+
+        private void AgregarAlCarrito(int idCliente, int idLibro)
+        {
+            datos = new AccesoDatos();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Carrito (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.SetearParametro("@IDLibro", idLibro);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+
         protected void AgregarLista(int idCliente, int idLibro)
         {
             datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
 
             try
             {
@@ -345,7 +645,6 @@ namespace Libreria
                 datos.Consultar("INSERT INTO Deseados (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
                 datos.SetearParametro("@IDCliente", idCliente);
                 datos.SetearParametro("@IDLibro", idLibro);
-
                 datos.EjecutarNonQuery();
             }
             catch (Exception ex)

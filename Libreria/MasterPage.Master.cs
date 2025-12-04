@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -15,6 +16,9 @@ namespace Libreria
             {
                 CargarCategorias();
             }
+
+            // Marcar el filtro activo en cada carga de página
+            MarcarFiltroActivo();
 
             if (Session["usuario"] != null)
             {
@@ -46,22 +50,58 @@ namespace Libreria
             }
             catch (Exception ex)
             {
-                // Manejar error si es necesario
+                lblMensaje.Text = "Error al cargar categorias: " + ex.Message;
+                lblMensaje.CssClass = "alert alert-danger";
+                lblMensaje.Visible = true;
+            }
+        }
+
+        private void MarcarFiltroActivo()
+        {
+            // Obtener parámetros de la URL
+            string generoId = Request.QueryString["genero"];
+            string paginaActual = System.IO.Path.GetFileName(Request.Path);
+
+            // Remover clase active de todos los botones primero
+            btnFiltroTodos.CssClass = "category-filter-btn";
+
+            // Si estamos en Default.aspx o no hay filtro, marcar "TODOS"
+            if (paginaActual == "Default.aspx" || (string.IsNullOrEmpty(generoId) && Request.QueryString["q"] == null))
+            {
+                btnFiltroTodos.CssClass = "category-filter-btn active";
+            }
+            // Si hay un filtro de género, marcar ese botón
+            else if (!string.IsNullOrEmpty(generoId))
+            {
+                int idGeneroActivo = int.Parse(generoId);
+
+                // Iterar por los items del repeater para encontrar el botón correcto
+                foreach (RepeaterItem item in rptCategorias.Items)
+                {
+                    LinkButton btnCategoria = (LinkButton)item.FindControl("btnCategoria");
+                    if (btnCategoria != null)
+                    {
+                        if (btnCategoria.CommandArgument == idGeneroActivo.ToString())
+                        {
+                            btnCategoria.CssClass = "category-filter-btn active";
+                        }
+                        else
+                        {
+                            btnCategoria.CssClass = "category-filter-btn";
+                        }
+                    }
+                }
             }
         }
 
         protected void BtnFiltroCategoria_Click(object sender, EventArgs e)
         {
-            var btn = (System.Web.UI.WebControls.LinkButton)sender;
+            var btn = (LinkButton)sender;
             int idGenero = int.Parse(btn.CommandArgument);
-
-            // Remover clase active de todos los botones
-            btnFiltroTodos.CssClass = "category-filter-btn";
 
             // Si es "TODOS" (idGenero = 0)
             if (idGenero == 0)
             {
-                btnFiltroTodos.CssClass = "category-filter-btn active";
                 Response.Redirect("Default.aspx");
             }
             else
