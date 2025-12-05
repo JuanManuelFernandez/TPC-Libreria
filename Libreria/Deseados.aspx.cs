@@ -16,11 +16,11 @@ namespace Libreria
         {
             if (Session["usuario"] == null)
             {
-                LblAviso.Visible = true;
+                Response.Redirect("Login.aspx");
             }
             else
             {
-                LblAviso.Visible = false;
+                //LblAviso.Visible = false;
                 dynamic usuario = Session["usuario"];
 
                 var dataCli = new AccesoClientes();

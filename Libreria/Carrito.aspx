@@ -3,9 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="text-center">
+
+<%--    <div class="text-center">
         <asp:Label ID="LblAviso" runat="server" Visible="false" ForeColor="red" Text="Debes iniciar sesión para visualizar tu carrito"></asp:Label>
-    </div>
+    </div>--%>
 
     <div class="container my-5">
         <h2 class="text-center mb-4">Tu carrito de compras</h2>

@@ -3,9 +3,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="text-center">
+
+<%--    <div class="text-center">
         <asp:Label ID="LblAviso" runat="server" visible="false" forecolor="red" Text="Debes iniciar sesión para visualizar tu lista de deseados"></asp:Label>
-    </div>
+    </div>--%>
 
     <div class="container my-5">
         <h2 class="text-center mb-4">Lista de deseados</h2>
