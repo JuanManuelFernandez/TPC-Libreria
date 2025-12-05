@@ -28,6 +28,7 @@ namespace Libreria
                     // Cliente
                     case TipoUsuario.Cliente:
                         txtNombre.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
+                        txtApellido.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
                         txtMail.Text = user.Mail;
                         txtTelefono.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
                         break;
@@ -51,26 +52,27 @@ namespace Libreria
                 return; // Detener la ejecución si el mail ya existe
             }
 
-            // Modificar Usuario - usar el objeto de sesión y actualizar sus propiedades
+            // Modificar Usuario - usar el usuario de la sesión y lo actualizo
             user.Mail = txtMail.Text;
             datosUsr.Modificar(user);
 
-            // Modificar Cliente solo si es un cliente
+            // Modificar Cliente - solo si es un cliente
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 Cliente cliente = datosCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
                 if (cliente != null)
                 {
                     cliente.Nombre = txtNombre.Text;
+                    cliente.Apellido = txtApellido.Text;
                     cliente.Telefono = txtTelefono.Text;
                     datosCli.Modificar(cliente);
                 }
             }
 
-            // Actualizar la sesión
+            // Actualizo la sesión
             Session["usuario"] = user;
 
-            // Opcional: Mostrar mensaje de éxito
+            // Recargo la pagina
             Response.Redirect("Cuenta.aspx");
         }
     }

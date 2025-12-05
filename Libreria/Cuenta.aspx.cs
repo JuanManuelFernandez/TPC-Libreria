@@ -7,6 +7,7 @@ namespace Libreria
     public partial class Cuenta : System.Web.UI.Page
     {
         public string UserName { get; set; }
+        public string UserSurname { get; set; }
         public string UserMail { get; set; }
         public string UserPhone { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -27,6 +28,7 @@ namespace Libreria
                     // Cliente
                     case TipoUsuario.Cliente:
                         UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
+                        UserSurname = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
                         UserMail = user.Mail;
                         UserPhone = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
                         break;

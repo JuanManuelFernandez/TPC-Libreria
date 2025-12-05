@@ -41,6 +41,7 @@
                 <div class="info-box">
                     <h4 class="section-title">Datos Personales</h4>
                     <p><strong>Nombre:</strong> <%= UserName %></p>
+                    <p><strong>Apellido:</strong> <%= UserSurname %></p>
                     <p><strong>Mail:</strong> <%= UserMail %></p>
                     <p><strong>Teléfono:</strong> <%= UserPhone %></p>
                     <a href="Datos.aspx" class="btn btn-link">Editar</a>

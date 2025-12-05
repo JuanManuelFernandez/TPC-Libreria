@@ -55,6 +55,9 @@
                     <asp:Panel ID="DatosPersonalesPanel" runat="server" CssClass="mb-3">
                         <asp:Label ID="lblNombre" runat="server" AssociatedControlID="txtNombre" Text="Nombre" CssClass="form-label" />
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+
+                        <asp:Label ID="lblApellido" runat="server" AssociatedControlID="txtNombre" Text="Apellido" CssClass="form-label" />
+                        <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
                     </asp:Panel>
 
                     <asp:Panel ID="MailPanel" runat="server" CssClass="mb-3">
