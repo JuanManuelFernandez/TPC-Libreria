@@ -32,7 +32,7 @@
             margin-bottom: 20px;
         }
 
-        /* Estilos adicionales para la sección del código de verificación */
+        /* Sección del código de verificación */
         .verification-container {
             background-color: white;
             border-radius: 10px;
@@ -146,10 +146,9 @@
             <!-- Correo electrónico -->
             <p class="verification-email"><%= Session["MailRecuperacion"] %></p>
 
-            <!-- Instrucción -->
             <p>Ingresa el Token que recibiste vía mail a continuación</p>
 
-            <!-- Campo único de ingreso del código -->
+            <!-- Campo de ingreso del código -->
             <div class="mb-3">
                 <asp:TextBox ID="txtCodigoVerificacion" runat="server"
                     CssClass="form-control text-center"
@@ -164,7 +163,7 @@
             <!-- Tiempo de expiración con temporizador -->
             <p class="verification-time" id="timerDisplay">El código expira en <span id="countdown">05:00</span></p>
 
-            <!-- Botón de reenvío (oculto inicialmente) -->
+            <!-- Botón de reenvío (oculto hasta expirado el timer inicialmente) -->
             <div id="resendContainer" style="display: none;">
                 <asp:LinkButton ID="btnReenviarCodigo" runat="server" CssClass="resend-link" OnClick="BtnReenviarCodigo_Click">
             <i class="bi bi-arrow-clockwise"></i> Enviar código nuevamente
