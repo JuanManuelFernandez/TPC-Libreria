@@ -210,6 +210,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
+        // Validaciones
         public bool VerificarDni(string dni)
         {
             datos = new AccesoDatos();

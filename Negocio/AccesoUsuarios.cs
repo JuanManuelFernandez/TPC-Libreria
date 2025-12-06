@@ -137,7 +137,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IdUsuario, TipoUsuario, Mail, Clave FROM Usuarios WHERE Mail = @Mail AND Clave = @Clave");
+                datos.Consultar("SELECT IdUsuario, TipoUsuario, Mail, Clave FROM Usuarios WHERE Mail = @Mail AND Clave = @Clave AND Eliminado = 0");
                 datos.SetearParametro("@Mail", usuario.Mail);
                 datos.SetearParametro("@Clave", usuario.Clave);
 
@@ -159,6 +159,7 @@ namespace Negocio
             }
             return false;
         }
+
         public Usuario BuscarPorId(int id)
         {
             datos = new AccesoDatos();

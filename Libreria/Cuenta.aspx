@@ -26,7 +26,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <!-- Barra de navegación -->
+        <!-- Barra de navegacion -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
@@ -36,7 +36,7 @@
 
         <div class="row">
             <!-- Datos personales -->
-            <div class="col-md-8">
+            <asp:Panel ID="datosPersonales" runat="server" CssClass="col-md-8">
                 <h1>Mi cuenta</h1>
                 <div class="info-box">
                     <h4 class="section-title">Datos Personales</h4>
@@ -45,8 +45,17 @@
                     <p><strong>Mail:</strong> <%= UserMail %></p>
                     <p><strong>Teléfono:</strong> <%= UserPhone %></p>
                     <a href="Datos.aspx" class="btn btn-link">Editar</a>
+                    <asp:Button ID="btnEliminarCuenta" runat="server" CssClass="btn btn-link" Text="Eliminar cuenta" OnClick="BtnEliminarCuenta_Click"
+                        Style="color: red; background-color: transparent; border: none;" />
                 </div>
-            </div>
+            </asp:Panel>
+
+            <!-- Mensaje de confirmacion -->
+            <asp:Panel ID="confirmacion" runat="server" CssClass="col-md-8" Visible="false">
+                <h1>¿Estás seguro de que quieres eliminar tu cuenta?</h1>
+                <asp:Button ID="btnSi" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BtnSi_Click" />
+                <asp:Button ID="btnNo" runat="server" Text="No" CssClass="btn btn-danger" OnClick="BtnNo_Click" />
+            </asp:Panel>
 
             <!-- Carrito -->
             <div class="col-md-4">
@@ -61,6 +70,4 @@
         </div>
     </div>
 
-    <!-- Scripts JS de Bootstrap -->
-    <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>--%>
 </asp:Content>

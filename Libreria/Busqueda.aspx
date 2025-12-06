@@ -24,9 +24,9 @@
             border-bottom: 1px solid #e9ecef;
         }
 
-        .filter-section:last-child {
-            border-bottom: none;
-        }
+            .filter-section:last-child {
+                border-bottom: none;
+            }
 
         .filter-title {
             font-size: 16px;
@@ -45,15 +45,15 @@
             transition: all 0.2s;
         }
 
-        .filter-item:hover {
-            color: #0d6efd;
-            padding-left: 5px;
-        }
+            .filter-item:hover {
+                color: #0d6efd;
+                padding-left: 5px;
+            }
 
-        .filter-item input[type="checkbox"] {
-            margin-right: 10px;
-            cursor: pointer;
-        }
+            .filter-item input[type="checkbox"] {
+                margin-right: 10px;
+                cursor: pointer;
+            }
 
         .filter-label {
             flex-grow: 1;
@@ -88,20 +88,37 @@
             font-size: 13px;
         }
 
-        .filter-tag .remove-filter {
-            margin-left: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+            .filter-tag .remove-filter {
+                margin-left: 8px;
+                cursor: pointer;
+                font-weight: bold;
+            }
 
-        .filter-tag .remove-filter:hover {
-            color: #ffeb3b;
-        }
+                .filter-tag .remove-filter:hover {
+                    color: #ffeb3b;
+                }
 
         .results-count {
             font-size: 14px;
             color: #6c757d;
             margin-bottom: 15px;
+        }
+
+        /* Altura fija para las imágenes de los libros */
+        .book-image-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .book-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
         }
     </style>
 </asp:Content>
@@ -125,9 +142,9 @@
                         <div id="activeTags">
                             <asp:Literal ID="litFiltrosActivos" runat="server" />
                         </div>
-                        <asp:Button ID="btnLimpiarFiltros" runat="server" 
-                            CssClass="btn btn-sm btn-outline-danger btn-clear-filters" 
-                            Text="Limpiar todos los filtros" 
+                        <asp:Button ID="btnLimpiarFiltros" runat="server"
+                            CssClass="btn btn-sm btn-outline-danger btn-clear-filters"
+                            Text="Limpiar todos los filtros"
                             OnClick="BtnLimpiarFiltros_Click" />
                     </asp:Panel>
 
@@ -137,7 +154,7 @@
                         <asp:Repeater ID="rptFiltroGeneros" runat="server">
                             <ItemTemplate>
                                 <div class="filter-item">
-                                    <asp:CheckBox ID="chkGenero" runat="server" 
+                                    <asp:CheckBox ID="chkGenero" runat="server"
                                         CssClass="filter-checkbox"
                                         AutoPostBack="true"
                                         OnCheckedChanged="FiltroChanged"
@@ -155,7 +172,7 @@
                         <asp:Repeater ID="rptFiltroEditoriales" runat="server">
                             <ItemTemplate>
                                 <div class="filter-item">
-                                    <asp:CheckBox ID="chkEditorial" runat="server" 
+                                    <asp:CheckBox ID="chkEditorial" runat="server"
                                         CssClass="filter-checkbox"
                                         AutoPostBack="true"
                                         OnCheckedChanged="FiltroChanged"
@@ -173,7 +190,7 @@
                         <asp:Repeater ID="rptFiltroAutores" runat="server">
                             <ItemTemplate>
                                 <div class="filter-item">
-                                    <asp:CheckBox ID="chkAutor" runat="server" 
+                                    <asp:CheckBox ID="chkAutor" runat="server"
                                         CssClass="filter-checkbox"
                                         AutoPostBack="true"
                                         OnCheckedChanged="FiltroChanged"
@@ -201,13 +218,14 @@
                         <div class="row">
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                             <div class="card h-100 shadow-sm">
-                                <img src='assets/portadas/<%# Eval("IdLibro") %>.jpg'
-                                    class="card-img-top"
-                                    alt='<%# Eval("Titulo") %>'
-                                    style="width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;"
-                                    onerror="this.src='assets/portadas/default.png';" />
+                                <!-- Contenedor de imagen con altura fija -->
+                                <div class="book-image-container">
+                                    <img src='assets/portadas/<%# Eval("IdLibro") %>.jpg'
+                                        alt='<%# Eval("Titulo") %>'
+                                        onerror="this.src='assets/portadas/default.png';" />
+                                </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title"><%# Eval("Titulo") %></h5>
                                     <p class="card-text text-muted"><%# Eval("NombreAutor") %></p>
