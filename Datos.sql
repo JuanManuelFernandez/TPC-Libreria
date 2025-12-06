@@ -49,6 +49,7 @@ INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
 ('cliente1@example.com', 'clave1111!', 1),
 ('cliente2@example.com', 'clave2222!', 1),
 ('cliente3@example.com', 'clave3333!', 1),
+('test.libreria.8um4x@silomails.com', 'clave4444!', 1),
 ('admin@example.com', 'adminpass', 2);
 GO
 
@@ -56,7 +57,8 @@ GO
 INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES
 (1, 12345678, 'Juan', 'Perez', 123456789),
 (2, 97765432, 'Ana', 'Gomez', 987654321),
-(3, 11222333, 'Luis', 'Diaz', 456789123);
+(3, 11222333, 'Luis', 'Diaz', 456789123),
+(5, 11222333, 'Test', 'Mail', 856789124);
 GO
 
 -- Libros
