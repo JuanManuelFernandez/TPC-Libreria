@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Mi Cuenta" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Cuenta.aspx.cs" Inherits="Libreria.Cuenta" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Aquí puedes agregar otros elementos dentro de la cabecera si es necesario -->
+    <!-- CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .breadcrumb {
@@ -45,8 +45,10 @@
                     <p><strong>Mail:</strong> <%= UserMail %></p>
                     <p><strong>Teléfono:</strong> <%= UserPhone %></p>
                     <a href="Datos.aspx" class="btn btn-link">Editar</a>
+
                     <asp:Button ID="btnEliminarCuenta" runat="server" CssClass="btn btn-link" Text="Eliminar cuenta" OnClick="BtnEliminarCuenta_Click"
                         Style="color: red; background-color: transparent; border: none;" />
+
                 </div>
             </asp:Panel>
 
@@ -58,7 +60,7 @@
             </asp:Panel>
 
             <!-- Carrito -->
-            <div class="col-md-4">
+            <asp:Panel ID="carrito" runat="server" CssClass="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <img src="assets/cart.png" alt="Carrito" width="50">
@@ -66,7 +68,8 @@
                         <a href="Default.aspx" class="btn btn-primary btn-shop">IR A LA TIENDA</a>
                     </div>
                 </div>
-            </div>
+            </asp:Panel>
+
         </div>
     </div>
 

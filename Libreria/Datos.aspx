@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Mis Datos" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Datos.aspx.cs" Inherits="Libreria.Datos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Agregar CSS de Bootstrap -->
+    <!-- CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .breadcrumb {
@@ -48,7 +48,7 @@
         <div class="row">
             <!-- Edición de datos personales -->
             <div class="col-md-8">
-                <h1 class="section-header">Mis datos</h1>
+
                 <div class="info-box">
                     <h4 class="section-title">Editar Datos Personales</h4>
 

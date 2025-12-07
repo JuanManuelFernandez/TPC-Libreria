@@ -13,30 +13,36 @@ namespace Libreria
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] != null)
+            if (!IsPostBack)
             {
-                var dataCli = new AccesoClientes();
-                Usuario user = (Usuario)Session["usuario"];
-
-                switch (user.TipoUsuario)
+                if (Session["usuario"] != null)
                 {
-                    default:
-                        UserName = "Admin";
-                        UserMail = user.Mail;
-                        UserPhone = "N/A";
-                        break;
+                    var dataCli = new AccesoClientes();
+                    Usuario user = (Usuario)Session["usuario"];
 
-                    case TipoUsuario.Cliente:
-                        UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
-                        UserSurname = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
-                        UserMail = user.Mail;
-                        UserPhone = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
-                        break;
+                    switch (user.TipoUsuario)
+                    {
+                        case TipoUsuario.Admin:
+                            UserName = "Admin";
+                            UserMail = user.Mail;
+                            UserPhone = "N/A";
+                            btnEliminarCuenta.Visible = false;
+                            break;
+
+                        case TipoUsuario.Cliente:
+                            UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
+                            UserSurname = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
+                            UserMail = user.Mail;
+                            UserPhone = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Response.Redirect("Login.aspx");
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
@@ -45,6 +51,7 @@ namespace Libreria
         {
             // Oculto datos personales y muestro confirmacion
             datosPersonales.Visible = false;
+            carrito.Visible = false;
             confirmacion.Visible = true;
         }
 
@@ -67,6 +74,7 @@ namespace Libreria
         {
             // Muestro datos personales y oculto confirmacion
             datosPersonales.Visible = true;
+            carrito.Visible = true;
             confirmacion.Visible = false;
         }
     }

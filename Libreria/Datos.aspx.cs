@@ -15,17 +15,19 @@ namespace Libreria
 
                 switch (user.TipoUsuario)
                 {
-                    // Admin
-                    default:
+                    case TipoUsuario.Admin:
                         txtNombre.Text = "Admin";
                         txtNombre.Enabled = false;
+
+                        txtApellido.Text = "N/A";
+                        txtApellido.Enabled = false;
 
                         txtMail.Text = user.Mail;
 
                         txtTelefono.Text = "N/A";
                         txtTelefono.Enabled = false;
                         break;
-                    // Cliente
+
                     case TipoUsuario.Cliente:
                         txtNombre.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
                         txtApellido.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
