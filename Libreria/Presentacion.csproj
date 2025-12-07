@@ -75,6 +75,7 @@
     <Content Include="EditarLibro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LibroAgregado.aspx" />
+    <Content Include="LibroModificado.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pago.aspx" />
     <Content Include="PagoCompletado.aspx" />
@@ -150,6 +151,13 @@
     </Compile>
     <Compile Include="LibroAgregado.aspx.designer.cs">
       <DependentUpon>LibroAgregado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LibroModificado.aspx.cs">
+      <DependentUpon>LibroModificado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LibroModificado.aspx.designer.cs">
+      <DependentUpon>LibroModificado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

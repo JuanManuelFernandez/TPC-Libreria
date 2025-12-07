@@ -70,10 +70,9 @@ namespace Libreria
             }
             finally
             {
+                Response.Redirect("LibroModificado.aspx");
                 datos.Cerrar();
             }
-            Response.Redirect("Default.aspx");
-
         }
     }
 }
