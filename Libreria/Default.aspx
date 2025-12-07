@@ -77,6 +77,13 @@
                                     OnCommand="Btn_DarDeAltaLibro"
                                     Text="Mostrar"/>
                             </div>
+                            <div class="mt-2">
+                                <asp:LinkButton ID="btnModificar" runat="server"
+                                    CssClass="btn btn-primary w-100"
+                                    CommandArgument='<%# Eval("IDLibro")%>'
+                                    OnCommand="Btn_Modificar"
+                                    Text="Editar"/>
+                            </div>
                             <asp:Label ID="lblError" runat="server"
                                 Text="Debes iniciar sesión."
                                 Visible="false"

@@ -230,6 +230,12 @@ namespace Libreria
                 datos.Cerrar();
             }
         }
+        protected void Btn_Modificar(object sender, CommandEventArgs e)
+        {
+            int idLibro = Convert.ToInt32(e.CommandArgument);
+            //Pasamos el id del libro para modificarlo
+            Response.Redirect("EditarLibro.aspx?id=" + idLibro);
+        }
         protected void Btn_AgregarLibro(object sender, CommandEventArgs e)
         {
             Response.Redirect("AgregarLibro.aspx");
@@ -247,13 +253,15 @@ namespace Libreria
                     btnAgregarCarrito.Visible = false;
                     btnAgregarLista.Visible = false;
                 }
-                if(usuario == null || usuario.TipoUsuario == TipoUsuario.Cliente)
+                if (usuario == null || usuario.TipoUsuario == TipoUsuario.Cliente)
                 {
                     LinkButton btnEliminarLibro = (LinkButton)e.Item.FindControl("btnEliminarLibro");
                     LinkButton btnDarDeAlta = (LinkButton)e.Item.FindControl("btnDarDeAlta");
+                    LinkButton btnModificar = (LinkButton)e.Item.FindControl("btnModificar");
 
                     btnEliminarLibro.Visible = false;
                     btnDarDeAlta.Visible = false;
+                    btnModificar.Visible = false;
                     
                 }
                 
