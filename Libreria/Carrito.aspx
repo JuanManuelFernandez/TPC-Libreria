@@ -60,7 +60,7 @@
         </div>
         <!-- Mensaje si no hay libros -->
         <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">
-            <p>Todav�a no has agregado libros a tu carrito.</p>
+            <p>Todavía no has agregado libros a tu carrito.</p>
         </asp:Panel>
     </div>
 </asp:Content>

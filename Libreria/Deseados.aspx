@@ -60,7 +60,7 @@
         </asp:Repeater>
         <!-- Mensaje si no hay libros -->
         <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">
-            <p>Todav�a no has agregado libros a tu lista de deseados.</p>
+            <p>Todavía no has agregado libros a tu lista de deseados.</p>
         </asp:Panel>
     </div>
 </asp:Content>

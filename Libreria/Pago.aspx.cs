@@ -100,6 +100,48 @@ namespace Libreria
             }
             return total;
         }
+        private void ActualizarStock(int idCliente)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar(@"UPDATE L
+                          SET L.Stock = L.Stock - C.Cantidad
+                          FROM Libros L
+                          INNER JOIN Carrito C ON L.IDLibro = C.IDLibro
+                          WHERE C.IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        private void VaciarCarrito(int idCliente)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("DELETE FROM Carrito WHERE IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
         protected void Btn_Comprar(object sender, EventArgs e)
         {
             Usuario usuario = (Usuario)Session["usuario"];
@@ -110,6 +152,8 @@ namespace Libreria
             try
             {
                 AgregarCompra(idCliente, TotalCompra);
+                ActualizarStock(idCliente);
+                VaciarCarrito(idCliente);
             }
             catch (Exception ex)
             {

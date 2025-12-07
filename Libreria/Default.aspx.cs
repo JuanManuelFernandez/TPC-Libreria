@@ -33,9 +33,22 @@ namespace Libreria
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
             string connString = connSettings.ConnectionString;
             DataTable dtLibros = new DataTable();
+            Usuario usuario = (Usuario)Session["usuario"];
+
+            string query;
+
+            if(usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+            {
+                query = "SELECT * FROM Libros";
+            }
+            else
+            {
+                query = "SELECT * FROM Libros WHERE Disponible = 1 ORDER BY IDLibro";
+            }
 
             using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Libros ORDER BY IDLibro", conn)) 
+            
+            using (SqlCommand cmd = new SqlCommand(query, conn)) 
             {
                 try
                 {
@@ -177,9 +190,74 @@ namespace Libreria
                 Response.Redirect("Login.aspx");
             }
         }
+        protected void Btn_EliminarLibro(object sender, CommandEventArgs e)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int idLibro = Convert.ToInt32(e.CommandArgument);
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Libros SET Disponible = 0 WHERE IDLibro = @IDLibro");
+                datos.SetearParametro("@IDLibro", idLibro);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        protected void Btn_DarDeAltaLibro (object sender, CommandEventArgs e)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int idLibro = Convert.ToInt32 (e.CommandArgument);
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Libros SET Disponible = 1 WHERE IDLibro = @IDLibro");
+                datos.SetearParametro("@IDLibro", idLibro);
+                datos.EjecutarNonQuery();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
         protected void Btn_AgregarLibro(object sender, CommandEventArgs e)
         {
             Response.Redirect("AgregarLibro.aspx");
+        }
+        protected void Ocultar_Botones(object sender, RepeaterItemEventArgs e)
+        {
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if(usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+                {
+                    LinkButton btnAgregarCarrito = (LinkButton)e.Item.FindControl("btnAgregarCarrito");
+                    LinkButton btnAgregarLista = (LinkButton)e.Item.FindControl("btnAgregarLista");
+
+                    btnAgregarCarrito.Visible = false;
+                    btnAgregarLista.Visible = false;
+                }
+                if(usuario == null || usuario.TipoUsuario == TipoUsuario.Cliente)
+                {
+                    LinkButton btnEliminarLibro = (LinkButton)e.Item.FindControl("btnEliminarLibro");
+                    LinkButton btnDarDeAlta = (LinkButton)e.Item.FindControl("btnDarDeAlta");
+
+                    btnEliminarLibro.Visible = false;
+                    btnDarDeAlta.Visible = false;
+                    
+                }
+                
+            }
         }
     }
 }

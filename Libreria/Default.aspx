@@ -29,7 +29,7 @@
     <!-- Sección dinámica de libros desde la BD -->
     <div class="container my-5">
         <h2 class="text-center mb-4">Catálogo</h2>
-        <asp:Repeater ID="rptLibros" runat="server">
+        <asp:Repeater ID="rptLibros" runat="server" OnItemDataBound="Ocultar_Botones">
             <HeaderTemplate>
                 <div class="row justify-content-center">
             </HeaderTemplate>
@@ -46,12 +46,15 @@
                             <h5 class="card-title"><%# Eval("Titulo") %></h5>
                             <p class="card-text"><%# Eval("Descripcion") %></p>
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
+                            <p class="card-text"> <%# Eval("Stock") + " disponibles" %></p>
+
                             <div class="mt-auto">
                                 <asp:LinkButton ID="btnAgregarCarrito" runat="server"
                                     CssClass="btn btn-success w-100"
                                     CommandArgument='<%# Eval("IDLibro") %>'
                                     OnCommand="Btn_AgregarCarrito"
-                                    Text='<i class="bi bi-cart-plus me-2"></i>AGREGAR' />
+                                    Text='<i class="bi bi-cart-plus me-2"></i>AGREGAR'
+                                    Visible='<%# Convert.ToInt32(Eval("Stock")) > 0 %>' />
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnAgregarLista" runat="server"
@@ -59,6 +62,20 @@
                                     CommandArgument='<%# Eval("IDLibro") %>'
                                     OnCommand="Btn_AgregarLista"
                                     Text='LISTA DE DESEADOS' />
+                            </div>
+                            <div class="mt-2">
+                                <asp:LinkButton ID="btnEliminarLibro" runat="server"
+                                    CssClass="btn btn-danger w-100"
+                                    CommandArgument='<%# Eval("IDLibro")%>'
+                                    OnCommand="Btn_EliminarLibro"
+                                    Text="Eliminar"/>
+                            </div>
+                            <div class="mt-2">
+                                <asp:LinkButton ID="btnDarDeAlta" runat="server"
+                                    CssClass="btn btn-success w-100"
+                                    CommandArgument='<%# Eval("IDLibro")%>'
+                                    OnCommand="Btn_DarDeAltaLibro"
+                                    Text="Mostrar"/>
                             </div>
                             <asp:Label ID="lblError" runat="server"
                                 Text="Debes iniciar sesión."
