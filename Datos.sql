@@ -58,7 +58,8 @@ INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES
 (1, 12345678, 'Juan', 'Perez', 123456789),
 (2, 97765432, 'Ana', 'Gomez', 987654321),
 (3, 11222333, 'Luis', 'Diaz', 456789123),
-(5, 11222333, 'Test', 'Mail', 856789124);
+(4, 11222333, 'Test', 'Mail', 856789124),
+(5, 11333777, 'Mister', 'Master', 000000000);
 GO
 
 -- Libros
@@ -131,7 +132,7 @@ INSERT INTO Stocks (IDLibro, Cantidad) VALUES
 GO
 
 -- Compras
-INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, Correo, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES
+INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES
 ('2023-10-01', 1, 1, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 20000),
 ('2023-10-02', 1, 2, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 15000),
 ('2023-10-03', 1, 3, 'cliente1@example.com', 'Juan', 'Perez', 'Av. Corrientes 1234', 'Buenos Aires', '1043', '123456789', 14000),

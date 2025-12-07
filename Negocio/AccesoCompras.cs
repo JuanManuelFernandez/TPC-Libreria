@@ -15,7 +15,7 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDCompra, IDCliente, IDLibro, FROM Compras");
+            datos.Consultar("SELECT IDCompra, FechaCompra, IDCliente, IDLibro, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total FROM Compras");
             datos.Leer();
 
             try
@@ -28,6 +28,14 @@ namespace Negocio
                         FechaCompra = datos.Lector["FechaCompra"] != DBNull.Value ? (DateTime)datos.Lector["FechaCompra"] : DateTime.MaxValue,
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
+                        Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
+                        Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                        Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
+                        DFacturacion = datos.Lector["DFacturacion"] != DBNull.Value ? (string)datos.Lector["DFacturacion"] : string.Empty,
+                        Localidad = datos.Lector["Localidad"] != DBNull.Value ? (string)datos.Lector["Localidad"] : string.Empty,
+                        Codigo = datos.Lector["Codigo"] != DBNull.Value ? (string)datos.Lector["Codigo"] : string.Empty,
+                        Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty,
+                        Total = datos.Lector["Total"] != DBNull.Value ? (decimal)datos.Lector["Total"] : 0
                     };
 
                     compras.Add(aux);
@@ -43,16 +51,27 @@ namespace Negocio
             }
             return compras;
         }
+
         public void AgregarCompra(Compra nuevo)
         {
             datos = new AccesoDatos();
-            var aux = new AccesoCompras();
 
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Compras (IDCompra, IDCliente, IDLibro) VALUES (@IDCompra, @IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDCompra", aux.Listar()[aux.Listar().Count - 1].IdCompra);
+                datos.Consultar("INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES (@FechaCompra, @IDCliente, @IDLibro, @Mail, @Nombre, @Apellido, @DFacturacion, @Localidad, @Codigo, @Telefono, @Total)");
+
+                datos.SetearParametro("@FechaCompra", nuevo.FechaCompra);
+                datos.SetearParametro("@IDCliente", nuevo.IdCliente);
+                datos.SetearParametro("@IDLibro", nuevo.IdLibro);
+                datos.SetearParametro("@Mail", nuevo.Mail);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@DFacturacion", nuevo.DFacturacion);
+                datos.SetearParametro("@Localidad", nuevo.Localidad);
+                datos.SetearParametro("@Codigo", nuevo.Codigo);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@Total", nuevo.Total);
 
                 datos.EjecutarNonQuery();
             }
@@ -65,6 +84,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
+
         public Compra BuscarPorIdCompra(int id)
         {
             datos = new AccesoDatos();
@@ -73,15 +93,25 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDCompra, IDCliente, IDLibro FROM Compras WHERE IDCompra = " + id);
+                datos.Consultar("SELECT IDCompra, FechaCompra, IDCliente, IDLibro, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total FROM Compras WHERE IDCompra = @IDCompra");
+                datos.SetearParametro("@IDCompra", id);
                 datos.Leer();
                 datos.Lector.Read();
 
                 aux = new Compra
                 {
                     IdCompra = datos.Lector["IDCompra"] != DBNull.Value ? (int)datos.Lector["IDCompra"] : 0,
+                    FechaCompra = datos.Lector["FechaCompra"] != DBNull.Value ? (DateTime)datos.Lector["FechaCompra"] : DateTime.MaxValue,
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                     IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0,
+                    Mail = datos.Lector["Mail"] != DBNull.Value ? (string)datos.Lector["Mail"] : string.Empty,
+                    Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                    Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
+                    DFacturacion = datos.Lector["DFacturacion"] != DBNull.Value ? (string)datos.Lector["DFacturacion"] : string.Empty,
+                    Localidad = datos.Lector["Localidad"] != DBNull.Value ? (string)datos.Lector["Localidad"] : string.Empty,
+                    Codigo = datos.Lector["Codigo"] != DBNull.Value ? (string)datos.Lector["Codigo"] : string.Empty,
+                    Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty,
+                    Total = datos.Lector["Total"] != DBNull.Value ? (decimal)datos.Lector["Total"] : 0
                 };
             }
             catch (Exception er)
