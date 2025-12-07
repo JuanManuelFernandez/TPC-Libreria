@@ -1,11 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="AgregarLibro.aspx.cs" Inherits="Libreria.AgregarLibro" %>
+﻿<%@ Page Title="Agregar Libro" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="AgregarLibro.aspx.cs" Inherits="Libreria.AgregarLibro" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="text-center">
         <h1>Agregar libro</h1>
     </div>
-    
+
     <%--Agregar libro--%>
 
     <%--IDAutor--%>
@@ -31,7 +33,7 @@
 
     <%--Titulo--%>
     <div class="text-center mt-3">
-        <div class="col-md-3 mx-auto"> 
+        <div class="col-md-3 mx-auto">
             <asp:TextBox ID="TxtTitulo" runat="server" placeholder="Titulo del libro" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
@@ -70,7 +72,7 @@
             <asp:TextBox ID="TxtStock" runat="server" placeholder="Disponibles" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
-    
+
     <%--Portada--%>
     <div class="text-center mt-3">
         <asp:FileUpload ID="FilePortada" runat="server" />
@@ -78,7 +80,7 @@
 
     <%--Boton agregar--%>
     <div class="text-center mt-3">
-        <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" OnCommand="Btn_Agregar"/>
+        <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" OnCommand="Btn_Agregar" />
     </div>
 
 </asp:Content>

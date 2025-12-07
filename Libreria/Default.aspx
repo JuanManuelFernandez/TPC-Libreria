@@ -1,7 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Libreria.Default" %>
+﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Libreria.Default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+
     <style>
         /* Altura fija para las imágenes de los libros */
         .book-image-container {
@@ -13,12 +15,12 @@
             overflow: hidden;
         }
 
-        .book-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
+            .book-image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                padding: 10px;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -46,7 +48,7 @@
                             <h5 class="card-title"><%# Eval("Titulo") %></h5>
                             <p class="card-text"><%# Eval("Descripcion") %></p>
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
-                            <p class="card-text"> <%# Eval("Stock") + " disponibles" %></p>
+                            <p class="card-text"><%# Eval("Stock") + " disponibles" %></p>
 
                             <div class="mt-auto">
                                 <asp:LinkButton ID="btnAgregarCarrito" runat="server"
@@ -68,21 +70,21 @@
                                     CssClass="btn btn-danger w-100"
                                     CommandArgument='<%# Eval("IDLibro")%>'
                                     OnCommand="Btn_EliminarLibro"
-                                    Text="Eliminar"/>
+                                    Text="Eliminar" />
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnDarDeAlta" runat="server"
                                     CssClass="btn btn-success w-100"
                                     CommandArgument='<%# Eval("IDLibro")%>'
                                     OnCommand="Btn_DarDeAltaLibro"
-                                    Text="Mostrar"/>
+                                    Text="Mostrar" />
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnModificar" runat="server"
                                     CssClass="btn btn-primary w-100"
                                     CommandArgument='<%# Eval("IDLibro")%>'
                                     OnCommand="Btn_Modificar"
-                                    Text="Editar"/>
+                                    Text="Editar" />
                             </div>
                             <asp:Label ID="lblError" runat="server"
                                 Text="Debes iniciar sesión."
@@ -97,9 +99,11 @@
                 </div>
             </FooterTemplate>
         </asp:Repeater>
+
         <div class="text-center">
-            <asp:Button ID="Btn_Agregar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" Visible="false" OnCommand="Btn_AgregarLibro" />
+            <asp:Button ID="btnAgregarLibro" runat="server" Text="Agregar libro" CssClass="btn btn-primary" Visible="false" OnCommand="Btn_AgregarLibro" />
         </div>
+
         <!-- Mensaje si no hay libros -->
         <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">
             <p>No hay libros disponibles en este momento, vuelve más tarde.</p>

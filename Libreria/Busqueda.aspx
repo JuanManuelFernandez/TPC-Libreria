@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Busqueda.aspx.cs" Inherits="Libreria.Busqueda" %>
+﻿<%@ Page Title="Buscar Libros" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Busqueda.aspx.cs" Inherits="Libreria.Busqueda" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>

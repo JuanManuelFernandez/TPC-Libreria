@@ -21,9 +21,10 @@ namespace Libreria
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-AR");
                 CargarLibros();
-                if(usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+
+                if (usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
                 {
-                    Btn_Agregar.Visible = true;
+                    btnAgregarLibro.Visible = true;
                 }
             }
         }
