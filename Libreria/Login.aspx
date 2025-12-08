@@ -9,7 +9,7 @@
             <asp:Panel ID="Panel1" runat="server" DefaultButton="btnIngresar">
 
                 <div class="form-group mb-3">
-                    <asp:Label ID="LblMaIL" runat="server" Text="Correo electronico" ForeColor="Blue" Visible="true"></asp:Label>
+                    <asp:Label ID="LblMail" runat="server" Text="Mail" ForeColor="Blue" Visible="true"></asp:Label>
                     <asp:TextBox ID="MailTxt" runat="server" Visible="true" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" CssClass="form-control form-control-lg"></asp:TextBox>
                 </div>
 

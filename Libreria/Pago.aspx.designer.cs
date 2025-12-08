@@ -69,22 +69,22 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtCodigoSeguridad;
 
         /// <summary>
-        /// LblCorreo control.
+        /// LblMail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblCorreo;
+        protected global::System.Web.UI.WebControls.Label LblMail;
 
         /// <summary>
-        /// TxtCorreo control.
+        /// TxtMail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtCorreo;
+        protected global::System.Web.UI.WebControls.TextBox TxtMail;
 
         /// <summary>
         /// LblNombre control.

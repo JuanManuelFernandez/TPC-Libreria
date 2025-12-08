@@ -52,18 +52,17 @@ namespace Negocio
             return compras;
         }
 
-        public void AgregarCompra(Compra nuevo)
+        public void Agregar(Compra nuevo)
         {
             datos = new AccesoDatos();
 
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Compras (FechaCompra, IDCliente, IDLibro, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES (@FechaCompra, @IDCliente, @IDLibro, @Mail, @Nombre, @Apellido, @DFacturacion, @Localidad, @Codigo, @Telefono, @Total)");
-
+                datos.Consultar("INSERT INTO Compras (FechaCompra, IDCliente, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total)" +
+                                "VALUES (@FechaCompra, @IDCliente, @Mail, @Nombre, @Apellido, @DFacturacion, @Localidad, @Codigo, @Telefono, @Total)");
                 datos.SetearParametro("@FechaCompra", nuevo.FechaCompra);
                 datos.SetearParametro("@IDCliente", nuevo.IdCliente);
-                datos.SetearParametro("@IDLibro", nuevo.IdLibro);
                 datos.SetearParametro("@Mail", nuevo.Mail);
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
@@ -83,6 +82,36 @@ namespace Negocio
             {
                 datos.Cerrar();
             }
+        }
+
+        public decimal ObtenerTotal(int idCompra)
+        {
+            datos = new AccesoDatos();
+            decimal total = 0;
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT SUM(Subtotal) FROM LibrosPorCompra WHERE IDCompra = @IDCompra");
+                datos.SetearParametro("@IDCompra", idCompra);
+
+                object resultado = datos.EjectuarScalar();
+
+                if (resultado != null && resultado != DBNull.Value)
+                {
+                    total = (decimal)resultado;
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+
+            return total;
         }
 
         public Compra BuscarPorIdCompra(int id)

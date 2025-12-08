@@ -1,11 +1,6 @@
 ﻿using Dominio;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Libreria
 {
@@ -14,157 +9,84 @@ namespace Libreria
         private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            TxtNumeroTarjeta.Attributes.Add("placeholder", "0000-0000-0000-0000");
-            TxtTelefono.Attributes.Add("placeholder", "11-1111-1111");
-
-            Usuario usuario = (Usuario)Session["usuario"];
-            if (usuario != null)
+            if (!IsPostBack)
             {
-                try
+                Usuario usuario = (Usuario)Session["usuario"];
+
+                if (usuario != null) //No valido TipoUsuario!!
                 {
-                    var dataCli = new AccesoClientes();
-                    var cliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario);
-                    if (cliente != null)
+                    try
                     {
-                        int idCliente = cliente.IdCliente;
-                        decimal total = CalcularTotalCompra(idCliente);
-                        LblTotal.Text = "Monto a pagar: " + total.ToString("C"); // C para que se muestre como moneda.
+                        var dataCli = new AccesoClientes();
+
+                        //Autofill
+                        TxtMail.Text = usuario.Mail;
+                        TxtNombre.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).Nombre;
+                        TxtApellido.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).Apellido;
+                        TxtTelefono.Text = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).Telefono;
+
+                        //Calculo total a pagar
+                        var cliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario);
+                        var dataCompras = new AccesoCompras();
+
+                        if (cliente != null)
+                        {
+                            int idCliente = cliente.IdCliente;
+                            decimal total = dataCompras.ObtenerTotal(idCliente);
+                            LblTotal.Text = "Monto a pagar: " + total.ToString("C"); // C para que se muestre como moneda.
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LblTotal.Text = "Error al calcular el total: " + ex;
                     }
                 }
-                catch (Exception ex)
-                {
-                    LblTotal.Text = "Error al calcular el total: " + ex;
-                }
             }
         }
-        private void AgregarCompra(int idCliente, decimal TotalCompra)
-        {
-            datos = new AccesoDatos();
-            //Usuario
-            var auxiliar = new AccesoUsuario();
-            var usuario = new Usuario();
-            //Cliente
-            var dataCli = new AccesoClientes();
-            var cliente = dataCli.Listar().Find(x => x.IdCliente == idCliente);
 
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Compras (FechaCompra, IDCliente, Correo, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) " +
-                                "VALUES (@FechaCompra, @IDCliente, @Correo, @Nombre, @Apellido, @DFacturacion, @Localidad, @Codigo, @Telefono, @Total)");
-                datos.SetearParametro("@FechaCompra", DateTime.Now);
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.SetearParametro("@Correo", usuario.Mail);
-                datos.SetearParametro("@Nombre", cliente.Nombre);
-                datos.SetearParametro("@Apellido", cliente.Apellido);
-                datos.SetearParametro("@DFacturacion", TxtDireccion.Text);
-                datos.SetearParametro("@Localidad", TxtLocalidad.Text);
-                datos.SetearParametro("@Codigo", TxtCodigoPostal.Text);
-                datos.SetearParametro("@Telefono", TxtTelefono.Text);
-                datos.SetearParametro("@Total", TotalCompra);
-
-                datos.EjecutarNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-
-        }
-        private decimal CalcularTotalCompra(int idCliente)
-        {
-            decimal total = 0;
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("SELECT SUM(L.Precio * C.Cantidad) FROM Carrito C INNER JOIN Libros L ON C.IDLibro = L.IDLibro WHERE C.IDCliente = @IDCliente");
-                datos.SetearParametro("@IDCliente", idCliente);
-                var resultado = datos.EjectuarScalar();
-                if (resultado != null && resultado != DBNull.Value)
-                {
-                    total = Convert.ToDecimal(resultado);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-            return total;
-        }
-        private void ActualizarStock(int idCliente)
-        {
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar(@"UPDATE L
-                          SET L.Stock = L.Stock - C.Cantidad
-                          FROM Libros L
-                          INNER JOIN Carrito C ON L.IDLibro = C.IDLibro
-                          WHERE C.IDCliente = @IDCliente");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.EjecutarNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-        }
-        private void VaciarCarrito(int idCliente)
-        {
-            datos = new AccesoDatos();
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("DELETE FROM Carrito WHERE IDCliente = @IDCliente");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.EjecutarNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-        }
         protected void Btn_Comprar(object sender, EventArgs e)
         {
             Usuario usuario = (Usuario)Session["usuario"];
             var dataCli = new AccesoClientes();
-            int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
+            Cliente cliente = dataCli.BuscarPorIdUsuario(usuario.IdUsuario);
+            int idCliente = cliente.IdCliente;
 
-            decimal TotalCompra = CalcularTotalCompra(idCliente);
+            var dataCompras = new AccesoCompras();
+            var dataStocks = new AccesoStocks();
+            var dataCarritos = new AccesoCarritos();
+
+            decimal TotalCompra = dataCompras.ObtenerTotal(idCliente);
+
+            Compra nuevaCompra = new Compra
+            {
+                FechaCompra = DateTime.Now,
+                IdCliente = idCliente,
+                Mail = usuario.Mail,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                DFacturacion = TxtDireccion.Text,
+                Localidad = TxtLocalidad.Text,
+                Codigo = TxtCodigoPostal.Text,
+                Telefono = TxtTelefono.Text,
+                Total = TotalCompra
+            };
+
             try
             {
-                AgregarCompra(idCliente, TotalCompra);
-                ActualizarStock(idCliente);
-                VaciarCarrito(idCliente);
+                dataCompras.Agregar(nuevaCompra);
+                dataStocks.Actualizar(idCliente); // Quizas tenga mas sentido actualizar el stock en base a la misma compra
+                dataCarritos.Vaciar(idCliente);
             }
-            catch (Exception ex)
+            catch (Exception er)
             {
-                throw ex;
+                throw er;
             }
 
             TxtNumeroTarjeta.Text = "";
             TxtYear.Text = "";
             TxtMes.Text = "";
             TxtCodigoSeguridad.Text = "";
-            TxtCorreo.Text = "";
+            TxtMail.Text = "";
             TxtNombre.Text = "";
             TxtApellido.Text = "";
             TxtDireccion.Text = "";

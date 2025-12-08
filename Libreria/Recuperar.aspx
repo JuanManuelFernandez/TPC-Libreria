@@ -143,7 +143,7 @@
             <!-- Título -->
             <h2 class="verification-header">Te enviamos un código a:</h2>
 
-            <!-- Correo electrónico -->
+            <!-- Mail -->
             <p class="verification-email"><%= Session["MailRecuperacion"] %></p>
 
             <p>Ingresa el Token que recibiste vía mail a continuación</p>

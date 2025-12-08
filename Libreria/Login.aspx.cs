@@ -10,7 +10,7 @@ namespace Libreria
         {
             if (Session["usuario"] != null)
             {
-                LblMaIL.Visible = false;
+                LblMail.Visible = false;
                 LblClave.Visible = false;
                 MailTxt.Visible = false;
                 ClaveTxt.Visible = false;

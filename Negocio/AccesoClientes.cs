@@ -211,7 +211,7 @@ namespace Negocio
             }
         }
         // Validaciones
-        public bool VerificarDni(string dni)
+        public bool ValidarDni(string dni)
         {
             datos = new AccesoDatos();
             try
@@ -232,7 +232,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificarTelefono(string telefono)
+        public bool ValidarTelefono(string telefono)
         {
             datos = new AccesoDatos();
             try
@@ -251,7 +251,7 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public bool VerificaReactivar(Cliente aux)
+        public bool ValidarReactivar(Cliente aux)
         {
             datos = new AccesoDatos();
             try

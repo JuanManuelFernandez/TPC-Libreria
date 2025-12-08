@@ -28,10 +28,6 @@ namespace Libreria
                         Session.Add("usuario", usuario);
                         Response.Redirect("Default.aspx");
                     }
-                    //else
-                    //{
-                    //    lblError.Visible = true;
-                    //}
                 }
                 catch (Exception ex)
                 {

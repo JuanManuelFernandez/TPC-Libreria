@@ -87,12 +87,12 @@ namespace Libreria
                 Session["MailRecuperacion"] = email;
                 Session["TokenExpiracion"] = DateTime.Now.AddMinutes(5);
 
-                // Generar contenido del email
+                // Generar contenido del mail
                 string contenidoHTML = GenerarEmailHTML(cliente.Nombre, nuevoToken, esReenvio);
                 string asunto = esReenvio ? "Nuevo código de verificación" : "Cambio de contraseña";
 
-                // Enviar email
-                emailService.ArmarCorreo(email, asunto, contenidoHTML);
+                // Enviar mail
+                emailService.ArmarMail(email, asunto, contenidoHTML);
                 emailService.EnviarEmail();
 
                 return true;
@@ -117,24 +117,24 @@ namespace Libreria
 
             if (!mailExiste)
             {
-                MostrarMensaje("No encontramos ninguna cuenta registrada con este email. Inténtalo nuevamente chequeando que esté bien escrito.", false);
+                MostrarMensaje("No encontramos ninguna cuenta registrada con este mail. Inténtalo nuevamente chequeando que esté bien escrito.", false);
                 return;
             }
 
-            bool emailEnviado = EnviarCodigoRecuperacion(txtMail.Text);
+            bool mailEnviado = EnviarCodigoRecuperacion(txtMail.Text);
 
-            if (emailEnviado)
+            if (mailEnviado)
             {
                 MailEnviado = true;
-                MostrarMensaje("Email enviado con éxito. Revisa tu casilla de correo.", true);
+                MostrarMensaje("Mail enviado con éxito. Revisa tu casilla de mail.", true);
 
-                // Ocultar el panel de email
+                // Ocultar el panel de mail
                 MailPanel.Visible = false;
                 btnEnviarMail.Visible = false;
             }
             else
             {
-                MostrarMensaje("Error al enviar el email. Intenta nuevamente.", false);
+                MostrarMensaje("Error al enviar el mail. Intenta nuevamente.", false);
             }
         }
 
@@ -184,7 +184,7 @@ namespace Libreria
 
             if (string.IsNullOrEmpty(mailRecuperacion))
             {
-                MostrarMensaje("Sesión expirada. Por favor, ingresa tu email nuevamente.", false);
+                MostrarMensaje("Sesión expirada. Por favor, ingresa tu mail nuevamente.", false);
 
                 // Resetear el formulario
                 MailEnviado = false;
@@ -193,9 +193,9 @@ namespace Libreria
                 return;
             }
 
-            bool emailEnviado = EnviarCodigoRecuperacion(mailRecuperacion, esReenvio: true);
+            bool mailEnviado = EnviarCodigoRecuperacion(mailRecuperacion, esReenvio: true);
 
-            if (emailEnviado)
+            if (mailEnviado)
             {
                 // Recargar la página para reiniciar el temporizador
                 Response.Redirect(Request.RawUrl);

@@ -42,7 +42,7 @@ namespace Negocio
             }
             return stockes;
         }
-        public void AgregarStock(Stock nuevo)
+        public void Agregar(Stock nuevo)
         {
             datos = new AccesoDatos();
             var aux = new AccesoStocks();
@@ -64,6 +64,31 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
+
+        public void Actualizar(int idCliente)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar(@"UPDATE L
+                          SET L.Stock = L.Stock - C.Cantidad
+                          FROM Libros L
+                          INNER JOIN Carrito C ON L.IDLibro = C.IDLibro
+                          WHERE C.IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+
         public Stock BuscarPorIdStock(int id)
         {
             datos = new AccesoDatos();

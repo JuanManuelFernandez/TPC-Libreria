@@ -19,7 +19,7 @@ namespace Dominio
                 Host = "smtp.gmail.com"
             };
         }
-        public void ArmarCorreo(string emailDestino, string asunto, string cuerpo)
+        public void ArmarMail(string emailDestino, string asunto, string cuerpo)
         {
             email = new MailMessage
             {

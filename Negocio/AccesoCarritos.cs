@@ -42,7 +42,7 @@ namespace Negocio
             }
             return carritos;
         }
-        public void AgregarCarrito(Carrito nuevo)
+        public void Agregar(Carrito nuevo)
         {
             datos = new AccesoDatos();
             var aux = new AccesoCarritos();
@@ -58,6 +58,25 @@ namespace Negocio
             catch (Exception er)
             {
                 throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void Vaciar(int idCliente)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("DELETE FROM Carrito WHERE IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

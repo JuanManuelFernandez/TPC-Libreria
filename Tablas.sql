@@ -90,7 +90,6 @@ CREATE TABLE Compras (
 	IDCompra INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 	FechaCompra DATETIME NOT NULL,
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
-	IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
 	Mail NVARCHAR(50) NOT NULL,
 	Nombre NVARCHAR(50) NOT NULL,
 	Apellido NVARCHAR(50) NOT NULL,
@@ -99,6 +98,17 @@ CREATE TABLE Compras (
 	Codigo NVARCHAR(10) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL,
 	Total MONEY NOT NULL
+)
+GO
+
+CREATE TABLE LibrosPorCompra (
+	IDLibroPorCompra INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+	IDCompra INT NOT NULL FOREIGN KEY REFERENCES Compras(IDCompra),
+	IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
+	Cantidad INT NOT NULL DEFAULT 1,
+	PrecioUnitario MONEY NOT NULL,
+	Subtotal AS (Cantidad * PrecioUnitario) PERSISTED,
+	CONSTRAINT CHK_Cantidad CHECK (Cantidad > 0)
 )
 GO
 
@@ -111,7 +121,3 @@ CREATE TABLE Devoluciones (
 	FechaDevolucion DATETIME NOT NULL
 )
 GO
-
---SELECT U.IDUsuario, U.TipoUsuario, U.Mail, U.Clave, U.Eliminado FROM Usuarios U
---INNER JOIN Clientes C ON U.IDUsuario = C.IDUsuario
---WHERE U.Mail = 'test.libreria.8um4x@silomails.com';

@@ -28,7 +28,7 @@ namespace Libreria
                 return;
             }
 
-            emailService.ArmarCorreo(txtMail.Text, "Consulta: " + txtTema.Text, txtDescripcion.Text);
+            emailService.ArmarMail(txtMail.Text, "Consulta: " + txtTema.Text, txtDescripcion.Text);
             try
             {
                 emailService.EnviarEmail();

@@ -11,7 +11,7 @@
     </div>
     
     <div class="text-center">
-        <h5>Recibiras un correo con toda la información acerca de tu compra.</h5>
+        <h5>Recibiras un mail con toda la información acerca de tu compra.</h5>
     </div>
 
     <div class="mt-2 text-center">

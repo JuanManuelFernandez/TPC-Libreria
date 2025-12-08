@@ -39,7 +39,7 @@
                 TextMode="Email"
                 required="required"
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
-            <%--<div class="invalid-tooltip">Por favor, ingrese un correo electrónico válido.</div>--%>
+            <%--<div class="invalid-tooltip">Por favor, ingrese un mail válido.</div>--%>
         </div>
 
         <%-- Teléfono --%>
