@@ -36,7 +36,7 @@
                 <div class="row justify-content-center">
             </HeaderTemplate>
             <ItemTemplate>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4" id='libro<%# Eval("IDLibro") %>'>
                     <div class="card h-100 shadow-sm">
                         <!-- Contenedor de imagen con altura fija -->
                         <div class="book-image-container">
@@ -70,7 +70,9 @@
                                     CssClass="btn btn-danger w-100"
                                     CommandArgument='<%# Eval("IDLibro")%>'
                                     OnCommand="Btn_EliminarLibro"
-                                    Text="Eliminar" />
+                                    Text="Eliminar"
+                                    Visible='<%# Convert.ToBoolean(Eval("Disponible")) %>' />
+
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnDarDeAlta" runat="server"

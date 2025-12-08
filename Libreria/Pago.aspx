@@ -123,13 +123,8 @@
                 <asp:Label ID="LblTotal" runat="server" Text="Label" CssClass="text-success" Style="margin-left: -100px;"></asp:Label>
             </div>
 
-            <!-- Botón pagar -->
-            <div class="mt-2 text-center">
-                <asp:LinkButton ID="btnPagar" runat="server" CssClass="btn btn-primary"
-                    OnCommand="Btn_Comprar"
-                    Visible="true"
-                    Text='Finalizar compra'
-                    Style="margin-left: -100px;" />
+            <div class="text-center">
+                <asp:Button ID="btnPagar" runat="server" CssClass="btn btn-primary btn-lg" Text="Finalizar compra" OnCommand="Btn_Comprar" Style="margin-left: -100px;"/>
             </div>
         </div>
     </div>

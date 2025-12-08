@@ -84,33 +84,29 @@ namespace Negocio
             }
         }
 
-        public decimal ObtenerTotal(int idCompra)
+        public decimal CalcularTotalCompra(int idCliente)
         {
-            datos = new AccesoDatos();
             decimal total = 0;
-
+            datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT SUM(Subtotal) FROM LibrosPorCompra WHERE IDCompra = @IDCompra");
-                datos.SetearParametro("@IDCompra", idCompra);
-
-                object resultado = datos.EjectuarScalar();
-
+                datos.Consultar("SELECT SUM(L.Precio * C.Cantidad) FROM Carrito C INNER JOIN Libros L ON C.IDLibro = L.IDLibro WHERE C.IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                var resultado = datos.EjectuarScalar();
                 if (resultado != null && resultado != DBNull.Value)
                 {
-                    total = (decimal)resultado;
+                    total = Convert.ToDecimal(resultado);
                 }
             }
-            catch (Exception er)
+            catch (Exception ex)
             {
-                throw er;
+                throw ex;
             }
             finally
             {
                 datos.Cerrar();
             }
-
             return total;
         }
 

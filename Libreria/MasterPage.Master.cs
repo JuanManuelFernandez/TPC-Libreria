@@ -29,12 +29,16 @@ namespace Libreria
                     // Admin
                     default:
                         UserName = "Admin";
+                        btnDeseados.Visible = false;
+                        btnCarrito.Visible = false;
+                        btnContacto.Visible = false;
                         break;
                     // Cliente
                     case TipoUsuario.Cliente:
                         UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
                         break;
                 }
+                
             }
         }
 

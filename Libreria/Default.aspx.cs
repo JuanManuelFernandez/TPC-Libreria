@@ -134,6 +134,10 @@ namespace Libreria
                 {
                     throw ex;
                 }
+                finally
+                {
+                    Response.Redirect(Request.RawUrl + "#libro" + idLibro);
+                }
             }
             else
             {
@@ -185,6 +189,10 @@ namespace Libreria
                 {
                     throw ex;
                 }
+                finally
+                {
+                    Response.Redirect(Request.RawUrl + "#libro" + idLibro);
+                }
             }
             else
             {
@@ -208,6 +216,7 @@ namespace Libreria
             }
             finally
             {
+                Response.Redirect(Request.RawUrl + "#libro" + idLibro);
                 datos.Cerrar();
             }
         }
@@ -228,6 +237,7 @@ namespace Libreria
             }
             finally
             {
+                Response.Redirect(Request.RawUrl + "#libro" + idLibro);
                 datos.Cerrar();
             }
         }
@@ -246,7 +256,7 @@ namespace Libreria
             Usuario usuario = (Usuario)Session["usuario"];
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if(usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+                if (usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
                 {
                     LinkButton btnAgregarCarrito = (LinkButton)e.Item.FindControl("btnAgregarCarrito");
                     LinkButton btnAgregarLista = (LinkButton)e.Item.FindControl("btnAgregarLista");
@@ -265,6 +275,7 @@ namespace Libreria
                     btnModificar.Visible = false;
                     
                 }
+                
                 
             }
         }

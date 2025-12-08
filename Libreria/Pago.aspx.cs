@@ -9,6 +9,7 @@ namespace Libreria
         private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 Usuario usuario = (Usuario)Session["usuario"];
@@ -32,7 +33,7 @@ namespace Libreria
                         if (cliente != null)
                         {
                             int idCliente = cliente.IdCliente;
-                            decimal total = dataCompras.ObtenerTotal(idCliente);
+                            decimal total = dataCompras.CalcularTotalCompra(idCliente);
                             LblTotal.Text = "Monto a pagar: " + total.ToString("C"); // C para que se muestre como moneda.
                         }
                     }
@@ -46,6 +47,18 @@ namespace Libreria
 
         protected void Btn_Comprar(object sender, EventArgs e)
         {
+            int mes, year;
+            if(int.TryParse(TxtMes.Text, out mes) && int.TryParse(TxtYear.Text, out year))
+            {
+                var fechaActual = DateTime.Now;
+
+                if(year < fechaActual.Year || (year == fechaActual.Year && mes < fechaActual.Month))
+                {
+                    LblCaducidad.Text = "La fecha de caducidad no puede ser menor a la fecha actual.";
+                    LblCaducidad.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+            }
             Usuario usuario = (Usuario)Session["usuario"];
             var dataCli = new AccesoClientes();
             Cliente cliente = dataCli.BuscarPorIdUsuario(usuario.IdUsuario);
@@ -55,7 +68,7 @@ namespace Libreria
             var dataStocks = new AccesoStocks();
             var dataCarritos = new AccesoCarritos();
 
-            decimal TotalCompra = dataCompras.ObtenerTotal(idCliente);
+            decimal TotalCompra = dataCompras.CalcularTotalCompra(idCliente);
 
             Compra nuevaCompra = new Compra
             {
