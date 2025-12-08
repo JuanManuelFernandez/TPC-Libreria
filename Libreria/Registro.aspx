@@ -60,6 +60,9 @@
                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" />
             <%--<div class="invalid-tooltip">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra y un número.</div>--%>
         </div>
+        <div>
+            <asp:Label ID="LblError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+        </div>
 
         <%--(?=.*[A-Za-z]): Al menos una letra (mayúscula o minúscula).--%>
         <%--(?=.*\d): Al menos un dígito (0-9).--%>

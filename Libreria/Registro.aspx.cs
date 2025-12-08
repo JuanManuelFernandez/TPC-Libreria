@@ -13,6 +13,35 @@ namespace Libreria
         {
             if (Session["usuario"] == null)
             {
+                var accesoUsuario = new AccesoUsuario();
+                var accesoCliente = new AccesoClientes();
+
+                //Mail
+                var mailExistente = accesoUsuario.Listar().Find(x => x.Mail == MailTxt.Text);
+                //DNI
+                var dniExistente = accesoCliente.Listar().Find(x => x.Dni == DNITxt.Text);
+                //Telefono
+                var telefonoExistente = accesoCliente.Listar().Find(x => x.Telefono == TelefonoTxt.Text);
+
+                if(mailExistente != null)
+                {
+                    LblError.Text = "El mail ingresado ya esta registrado.";
+                    LblError.Visible = true;
+                    return;
+                }
+                if(dniExistente != null)
+                {
+                    LblError.Text = "El DNI ingresado ya esta registado.";
+                    LblError.Visible = true;
+                    return;
+                }
+                if(telefonoExistente != null)
+                {
+                    LblError.Text = "El numero de telefono ingresado ya esta registado.";
+                    LblError.Visible = true;
+                    return;
+                }
+
                 CargarUsuario();
                 CargarCliente();
 
