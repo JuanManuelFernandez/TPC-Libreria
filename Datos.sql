@@ -184,3 +184,5 @@ SELECT * FROM Stocks;
 SELECT * FROM Compras;
 SELECT * FROM LibrosPorCompra;
 SELECT * FROM Devoluciones;
+
+SELECT * FROM Opiniones;
