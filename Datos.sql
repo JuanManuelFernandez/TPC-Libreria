@@ -46,10 +46,10 @@ GO
 
 -- Usuarios
 INSERT INTO Usuarios (Mail, Clave, TipoUsuario) VALUES
-('cliente1@example.com', 'clave1111!', 1),
-('cliente2@example.com', 'clave2222!', 1),
-('cliente3@example.com', 'clave3333!', 1),
-('test.libreria.8um4x@silomails.com', 'clave4444!', 1),
+('cliente1@example.com', 'Clave1111!', 1),
+('cliente2@example.com', 'Clave2222!', 1),
+('cliente3@example.com', 'Clave3333!', 1),
+('test.libreria.8um4x@silomails.com', 'Clave4444!', 1),
 ('admin@example.com', 'adminpass', 2);
 GO
 
