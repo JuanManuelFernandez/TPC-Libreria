@@ -94,11 +94,12 @@ namespace Libreria
                     usuario.Clave = nuevaClave;
                     datosUsr.Modificar(usuario);
 
-                    // Limpiar sesión de recuperación
+                    // Limpiar sesión de recuperación y usuario
                     Session.Remove("MailRecuperacion");
                     Session.Remove("TokenRecuperacion");
                     Session.Remove("TokenExpiracion");
                     Session.Remove("MailEnviado");
+                    Session.Remove("usuario");
 
                     // Mostrar mensaje de éxito
                     MostrarMensaje("¡Contraseña cambiada exitosamente! Serás redirigido al inicio de sesión.", true);
