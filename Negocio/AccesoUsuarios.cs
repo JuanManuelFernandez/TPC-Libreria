@@ -110,7 +110,7 @@ namespace Negocio
             }
             return usuarios;
         }
-        public void AgregarUsuario(Usuario nuevo)
+        public void Agregar(Usuario nuevo)
         {
             datos = new AccesoDatos();
             try
@@ -263,7 +263,8 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Mail = '" + mail + "'");
+                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Mail = @mail AND Eliminado = 0");
+                datos.SetearParametro("@mail", mail);
                 datos.Leer();
                 return datos.Lector.Read();
             }

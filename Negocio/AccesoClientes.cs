@@ -55,7 +55,7 @@ namespace Negocio
             }
             return clientes;
         }
-        public void AgregarCliente(Cliente nuevo)
+        public void Agregar(Cliente nuevo)
         {
             datos = new AccesoDatos();
             var auxiliar = new AccesoUsuario();
