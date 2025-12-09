@@ -72,6 +72,7 @@
     <Content Include="Cuenta.aspx" />
     <Content Include="Datos.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DetalleLibro.aspx" />
     <Content Include="EditarLibro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LibroAgregado.aspx" />
@@ -134,6 +135,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleLibro.aspx.cs">
+      <DependentUpon>DetalleLibro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleLibro.aspx.designer.cs">
+      <DependentUpon>DetalleLibro.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditarLibro.aspx.cs">
       <DependentUpon>EditarLibro.aspx</DependentUpon>

@@ -38,11 +38,16 @@
             <ItemTemplate>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" id='libro<%# Eval("IDLibro") %>'>
                     <div class="card h-100 shadow-sm">
-                        <!-- Contenedor de imagen con altura fija -->
                         <div class="book-image-container">
-                            <img src='assets/portadas/<%# Eval("IDLibro") %>.jpg'
-                                alt='<%# Eval("Titulo") %>'
-                                onerror="this.src='assets/portadas/default.png';" />
+                            <asp:HyperLink ID="lnkDetalle" runat="server"
+                                NavigateUrl='<%# "DetalleLibro.aspx?id=" + Eval("IDLibro") %>' 
+                                CssClass="d-block">
+                                <div class="book-image-container">
+                                    <img src='assets/portadas/<%# Eval("IDLibro") %>.jpg'
+                                         alt='<%# Eval("Titulo") %>'
+                                         onerror="this.src='assets/portadas/default.png';" />
+                                </div>
+                            </asp:HyperLink>
                         </div>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><%# Eval("Titulo") %></h5>
@@ -92,7 +97,7 @@
                                 Text="Debes iniciar sesión."
                                 Visible="false"
                                 ForeColor="Red"
-                                CssClass="text-center w-100 mt-2 small" />
+                                CssClass="text-center w-100 mt-2 small"/>
                         </div>
                     </div>
                 </div>
