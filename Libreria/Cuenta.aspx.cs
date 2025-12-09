@@ -6,11 +6,6 @@ namespace Libreria
 {
     public partial class Cuenta : System.Web.UI.Page
     {
-        public string UserName { get; set; }
-        public string UserSurname { get; set; }
-        public string UserMail { get; set; }
-        public string UserPhone { get; set; }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,19 +18,20 @@ namespace Libreria
                     switch (user.TipoUsuario)
                     {
                         case TipoUsuario.Admin:
-                            UserName = "Admin";
-                            UserMail = user.Mail;
-                            UserPhone = "N/A";
+                            TxtNombre.Text = "Admin";
+                            TxtApellido.Text = "";
+                            TxtMail.Text = user.Mail;
+                            TxtTelefono.Text = "N/A";
                             btnEliminarCuenta.Visible = false;
                             break;
 
                         case TipoUsuario.Cliente:
-                            UserName = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Nombre;
-                            UserSurname = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Apellido;
-                            UserMail = user.Mail;
-                            UserPhone = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario).Telefono;
-                            break;
-                        default:
+                            var cli = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+
+                            TxtNombre.Text = cli.Nombre;
+                            TxtApellido.Text = cli.Apellido;
+                            TxtMail.Text = user.Mail;
+                            TxtTelefono.Text = cli.Telefono;
                             break;
                     }
                 }
@@ -45,6 +41,7 @@ namespace Libreria
                 }
             }
         }
+
 
         // Muestra mensaje de la confirmacion de eliminacion
         protected void BtnEliminarCuenta_Click(object sender, EventArgs e)

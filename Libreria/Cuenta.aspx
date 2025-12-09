@@ -38,19 +38,37 @@
             <!-- Datos personales -->
             <asp:Panel ID="datosPersonales" runat="server" CssClass="col-md-8">
                 <h1>Mi cuenta</h1>
+
                 <div class="info-box">
                     <h4 class="section-title">Datos Personales</h4>
-                    <p><strong>Nombre:</strong> <%= UserName %></p>
-                    <p><strong>Apellido:</strong> <%= UserSurname %></p>
-                    <p><strong>Mail:</strong> <%= UserMail %></p>
-                    <p><strong>Teléfono:</strong> <%= UserPhone %></p>
-                    <a href="Datos.aspx" class="btn btn-link">Editar</a>
 
-                    <asp:Button ID="btnEliminarCuenta" runat="server" CssClass="btn btn-link" Text="Eliminar cuenta" OnClick="BtnEliminarCuenta_Click"
+                    <asp:Label ID="LblNombre" runat="server" Text="Nombre:" CssClass="fw-bold"></asp:Label>
+                    <asp:Label ID="TxtNombre" runat="server" CssClass="d-block mb-2"></asp:Label>
+
+                    <asp:Label ID="LblApellido" runat="server" Text="Apellido:" CssClass="fw-bold"></asp:Label>
+                    <asp:Label ID="TxtApellido" runat="server" CssClass="d-block mb-2"></asp:Label>
+
+                    <asp:Label ID="LblMail" runat="server" Text="Mail:" CssClass="fw-bold"></asp:Label>
+                    <asp:Label ID="TxtMail" runat="server" CssClass="d-block mb-2"></asp:Label>
+
+                    <asp:Label ID="LblTelefono" runat="server" Text="Teléfono:" CssClass="fw-bold"></asp:Label>
+                    <asp:Label ID="TxtTelefono" runat="server" CssClass="d-block mb-3"></asp:Label>
+
+                    <asp:HyperLink ID="linkEditar" runat="server" NavigateUrl="Datos.aspx" CssClass="btn btn-link">
+                        Editar
+                    </asp:HyperLink>
+
+                    <asp:Button ID="btnEliminarCuenta"
+                        runat="server"
+                        CssClass="btn btn-link"
+                        Text="Eliminar cuenta"
+                        OnClick="BtnEliminarCuenta_Click"
                         Style="color: red; background-color: transparent; border: none;" />
 
                 </div>
             </asp:Panel>
+
+
 
             <!-- Mensaje de confirmacion -->
             <asp:Panel ID="confirmacion" runat="server" CssClass="col-md-8" Visible="false">
