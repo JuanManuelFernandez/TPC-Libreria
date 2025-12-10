@@ -74,5 +74,16 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(columna, dato);
         }
+        public object EjecutarScalar()
+        {
+            try
+            {
+                return comando.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

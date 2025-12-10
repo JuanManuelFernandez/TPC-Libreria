@@ -19,6 +19,7 @@ namespace Libreria
         protected void Btn_Agregar(object sender, EventArgs e)
         {
             datos = new AccesoDatos();
+            int idLibro = 0;
 
             try
             {
@@ -36,6 +37,10 @@ namespace Libreria
                 datos.SetearParametro("@Stock", TxtStock.Text);
 
                 datos.EjecutarNonQuery();
+
+                datos.Consultar("SELECT MAX(IDLibro) FROM Libros");
+                idLibro = Convert.ToInt32(datos.EjecutarScalar());
+
             }
             catch (Exception ex)
             {
@@ -49,9 +54,8 @@ namespace Libreria
                 string destino = "~/assets/portadas";
                 string ruta = Server.MapPath(destino);
 
-                string nombreBase = Path.GetFileNameWithoutExtension(FilePortada.FileName);
-                string nombreArchivo = nombreBase + extension;
-                string rutaCompleta = Path.Combine(ruta, nombreArchivo);
+                string nombrePortada = idLibro + extension;
+                string rutaCompleta = Path.Combine(ruta, nombrePortada);
 
                 try
                 {
@@ -64,10 +68,6 @@ namespace Libreria
 
                 try
                 {
-                    //Cambiar esta parte por una idLibro autoincremental o sacarla de un campo txt
-                    int idLibro = ;
-
-                    string nombrePortada = idLibro + extension;
 
                     datos.Conectar();
                     datos.Consultar("INSERT INTO Portadas (IDLibro, Imagen) VALUES (@IDLibro, @Imagen)");
