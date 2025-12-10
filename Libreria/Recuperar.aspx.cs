@@ -41,7 +41,7 @@ namespace Libreria
             return token.ToString();
         }
 
-        private string GenerarEmailHTML(string nombreCliente, string token, bool esReenvio = false)
+        private string GenerarEmail(string nombreCliente, string token, bool esReenvio = false)
         {
             string tituloAccion = esReenvio ? "Has solicitado un nuevo código de verificación" : "Recibimos una solicitud para restablecer tu contraseña";
 
@@ -88,7 +88,7 @@ namespace Libreria
                 Session["TokenExpiracion"] = DateTime.Now.AddMinutes(5);
 
                 // Generar contenido del mail
-                string contenidoHTML = GenerarEmailHTML(cliente.Nombre, nuevoToken, esReenvio);
+                string contenidoHTML = GenerarEmail(cliente.Nombre, nuevoToken, esReenvio);
                 string asunto = esReenvio ? "Nuevo código de verificación" : "Cambio de contraseña";
 
                 // Enviar mail

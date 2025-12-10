@@ -15,7 +15,7 @@ namespace Negocio
             datos = new AccesoDatos();
 
             datos.Conectar();
-            datos.Consultar("SELECT IDCarrito, IDCliente, IDLibro FROM Carritos");
+            datos.Consultar("SELECT IDCarrito, IDCliente FROM Carritos");
             datos.Leer();
 
             try
@@ -26,7 +26,6 @@ namespace Negocio
                     {
                         IdCarrito = datos.Lector["IDCarrito"] != DBNull.Value ? (int)datos.Lector["IDCarrito"] : 0,
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
-                        IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0
                     };
 
                     carritos.Add(aux);
@@ -50,7 +49,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Carritos (IDCarrito, IDCliente, IDLibro) VALUES (@IDCarrito, @IDCliente, @IDLibro)");
+                datos.Consultar("INSERT INTO Carritos (IDCarrito, IDCliente) VALUES (@IDCarrito, @IDCliente)");
                 datos.SetearParametro("@IDCarrito", aux.Listar()[aux.Listar().Count - 1].IdCarrito);
 
                 datos.EjecutarNonQuery();
@@ -64,26 +63,39 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public void Vaciar(int idCliente)
+        public Carrito BuscarPorIdCliente(int idCliente)
         {
             datos = new AccesoDatos();
+            Carrito aux = null;
+
             try
             {
                 datos.Conectar();
-                datos.Consultar("DELETE FROM Carrito WHERE IDCliente = @IDCliente");
+                datos.Consultar("SELECT IDCarrito, IDCliente FROM Carritos WHERE IDCliente = @IDCliente");
                 datos.SetearParametro("@IDCliente", idCliente);
-                datos.EjecutarNonQuery();
+                datos.Leer();
+
+                if (datos.Lector.Read())
+                {
+                    aux = new Carrito
+                    {
+                        IdCarrito = datos.Lector["IDCarrito"] != DBNull.Value ? (int)datos.Lector["IDCarrito"] : 0,
+                        IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
+                    };
+                }
             }
-            catch (Exception ex)
+            catch (Exception er)
             {
-                throw ex;
+                throw er;
             }
             finally
             {
                 datos.Cerrar();
             }
+
+            return aux;
         }
-        public Carrito BuscarPorIdCarrito(int id)
+        public Carrito BuscarPorIdCarrito(int idCarrito)
         {
             datos = new AccesoDatos();
             Carrito aux;
@@ -91,7 +103,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDCarrito, IDCliente, IDLibro FROM Carritos WHERE IDCarrito = " + id);
+                datos.Consultar("SELECT IDCarrito, IDCliente FROM Carritos WHERE IDCarrito = " + idCarrito);
                 datos.Leer();
                 datos.Lector.Read();
 
@@ -99,7 +111,6 @@ namespace Negocio
                 {
                     IdCarrito = datos.Lector["IDCarrito"] != DBNull.Value ? (int)datos.Lector["IDCarrito"] : 0,
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
-                    IdLibro = datos.Lector["IDLibro"] != DBNull.Value ? (int)datos.Lector["IDLibro"] : 0
                 };
             }
             catch (Exception er)
@@ -111,6 +122,25 @@ namespace Negocio
                 datos.Cerrar();
             }
             return aux;
+        }
+        public void Vaciar(int idCarrito)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("DELETE FROM LibrosPorCarrito WHERE IDCarrito = @IDCarrito");
+                datos.SetearParametro("@IDCarrito", idCarrito);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
         }
     }
 }

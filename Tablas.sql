@@ -80,19 +80,20 @@ CREATE TABLE Deseados (
 )
 GO
 
-CREATE TABLE Carrito (
+CREATE TABLE Carritos (
 	IDCarrito INT PRIMARY KEY IDENTITY (1,1) NOT NULL, 
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
-	IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
-	Cantidad INT NOT NULL DEFAULT 1
 )
 GO
 
-CREATE TABLE Stocks (
-	IDStock INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
-	IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
-	Cantidad INT NOT NULL
-)
+CREATE TABLE LibrosPorCarrito (
+    IDLibrosPorCarrito INT PRIMARY KEY IDENTITY(1,1),
+    IDCarrito INT NOT NULL FOREIGN KEY REFERENCES Carritos(IDCarrito),
+    IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
+    Cantidad INT NOT NULL DEFAULT 1,
+    PrecioUnitario MONEY NOT NULL,
+	Subtotal AS (Cantidad * PrecioUnitario) PERSISTED
+);
 GO
 
 CREATE TABLE Compras (
@@ -118,15 +119,5 @@ CREATE TABLE LibrosPorCompra (
 	PrecioUnitario MONEY NOT NULL,
 	Subtotal AS (Cantidad * PrecioUnitario) PERSISTED,
 	CONSTRAINT CHK_Cantidad CHECK (Cantidad > 0)
-)
-GO
-
-CREATE TABLE Devoluciones (
-	IDDevolucion INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
-	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
-	IDCompra INT NOT NULL FOREIGN KEY REFERENCES Compras(IDCompra),
-	IDLibro INT NOT NULL FOREIGN KEY REFERENCES Libros(IDLibro),
-	Descripcion NVARCHAR(300) NOT NULL,
-	FechaDevolucion DATETIME NOT NULL
 )
 GO

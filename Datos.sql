@@ -104,32 +104,26 @@ INSERT INTO Deseados (IDCliente, IDLibro) VALUES
 (3, 8),
 (3, 9);
 
--- Carrito
-INSERT INTO Carrito (IDCliente, IDLibro) VALUES
-(1, 6),
-(1, 2),
-(1, 3),
-(2, 4),
-(2, 5),
-(2, 6),
-(3, 7),
-(3, 8),
-(3, 9);
+-- Carritos
+INSERT INTO Carritos (IDCliente) VALUES
+(1),
+(2),
+(3);
 GO
 
--- Stocks
-INSERT INTO Stocks (IDLibro, Cantidad) VALUES
---(1, 20),
-(2, 30),
-(3, 10),
-(4, 15),
-(5, 5),
-(6, 9),
-(7, 8),
-(8, 20),
-(9, 13),
-(10, 7);
+-- Libros x Carrito
+INSERT INTO LibrosPorCarrito (IDCarrito, IDLibro, Cantidad, PrecioUnitario) VALUES
+(1, 6, 1, 22000),
+(1, 2, 1, 15000),
+(1, 3, 1, 14000),
+(2, 4, 1, 24000),
+(2, 5, 1, 20000),
+(2, 6, 1, 22000),
+(3, 7, 1, 22000),
+(3, 8, 1, 25000),
+(3, 9, 1, 15000);
 GO
+
 
 -- Compras
 INSERT INTO Compras (FechaCompra, IDCliente, Mail, Nombre, Apellido, DFacturacion, Localidad, Codigo, Telefono, Total) VALUES
@@ -157,19 +151,6 @@ INSERT INTO LibrosPorCompra (IDCompra, IDLibro, Cantidad, PrecioUnitario) VALUES
 (9, 9, 1, 15000);
 GO
 
--- Devoluciones
-INSERT INTO Devoluciones (IDCliente, IDCompra, IDLibro, Descripcion, FechaDevolucion) VALUES
-(1, 1, 1, 'Libro en mal estado', '2023-10-05'),
-(1, 2, 2, 'No era lo que esperaba', '2023-10-06'),
-(1, 3, 3, 'Cambio de opinion', '2023-10-07'),
-(2, 4, 4, 'Daños en la cubierta', '2023-11-10'),
-(2, 5, 5, 'Páginas faltantes', '2023-11-11'),
-(2, 6, 6, 'Error en el envío', '2023-11-12'),
-(3, 7, 7, 'No era el formato esperado', '2023-11-13'),
-(3, 8, 8, 'Retraso en entrega', '2023-11-14'),
-(3, 9, 9, 'Contenido distinto', '2023-11-15');
-GO
-
 -- Consultas de prueba
 SELECT * FROM Libros;
 SELECT * FROM Portadas;
@@ -183,7 +164,6 @@ SELECT * FROM Deseados;
 SELECT * FROM Stocks;
 SELECT * FROM Compras;
 SELECT * FROM LibrosPorCompra;
-SELECT * FROM Devoluciones;
 
 SELECT * FROM Opiniones;
 SELECT * FROM Autores;

@@ -88,15 +88,89 @@ namespace Negocio
         {
             decimal total = 0;
             datos = new AccesoDatos();
+
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT SUM(L.Precio * C.Cantidad) FROM Carrito C INNER JOIN Libros L ON C.IDLibro = L.IDLibro WHERE C.IDCliente = @IDCliente");
+
+                datos.Consultar(@"
+                    SELECT SUM(LPC.Cantidad * LPC.PrecioUnitario)
+                    FROM LibrosPorCarrito LPC
+                    INNER JOIN Carritos C ON LPC.IDCarrito = C.IDCarrito
+                    WHERE C.IDCliente = @IDCliente
+                ");
+
                 datos.SetearParametro("@IDCliente", idCliente);
+
                 var resultado = datos.EjectuarScalar();
+
                 if (resultado != null && resultado != DBNull.Value)
-                {
                     total = Convert.ToDecimal(resultado);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+
+            return total;
+        }
+
+        public void ActualizarStock(int idCliente)
+        {
+            datos = new AccesoDatos();
+
+            try
+            {
+                datos.Conectar();
+
+                // 1. Obtener IDCarrito del cliente
+                datos.Consultar("SELECT IDCarrito FROM Carritos WHERE IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.Leer();
+
+                int idCarrito = 0;
+
+                if (datos.Lector.Read())
+                    idCarrito = (int)datos.Lector["IDCarrito"];
+
+                datos.Cerrar();
+
+                // 2. Obtener los libros dentro del carrito
+                datos.Conectar();
+                datos.Consultar(@"SELECT IDLibro, Cantidad 
+                          FROM LibrosPorCarrito 
+                          WHERE IDCarrito = @IDCarrito");
+                datos.SetearParametro("@IDCarrito", idCarrito);
+                datos.Leer();
+
+                List<(int IdLibro, int Cantidad)> items = new List<(int, int)>();
+
+                while (datos.Lector.Read())
+                {
+                    int idLibro = (int)datos.Lector["IDLibro"];
+                    int cantidad = (int)datos.Lector["Cantidad"];
+
+                    items.Add((idLibro, cantidad));
+                }
+
+                datos.Cerrar();
+
+                // 3. Actualizar stock de cada libro
+                foreach (var item in items)
+                {
+                    datos.Conectar();
+                    datos.Consultar(@"UPDATE Libros
+                              SET Stock = Stock - @Cantidad
+                              WHERE IDLibro = @IDLibro");
+                    datos.SetearParametro("@Cantidad", item.Cantidad);
+                    datos.SetearParametro("@IDLibro", item.IdLibro);
+
+                    datos.EjecutarNonQuery();
+                    datos.Cerrar();
                 }
             }
             catch (Exception ex)
@@ -107,7 +181,6 @@ namespace Negocio
             {
                 datos.Cerrar();
             }
-            return total;
         }
 
         public Compra BuscarPorIdCompra(int id)

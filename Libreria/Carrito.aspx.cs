@@ -12,6 +12,7 @@ namespace Libreria
     public partial class Carrito : System.Web.UI.Page
     {
         private AccesoDatos datos = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -20,46 +21,56 @@ namespace Libreria
             }
             else
             {
-                //LblAviso.Visible = false;
                 dynamic usuario = Session["usuario"];
-
                 var dataCli = new AccesoClientes();
-                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente; //usuario.IdUsuario ;
+                int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 CargarLibros(idCliente);
             }
         }
+
         private void CargarLibros(int idCliente)
         {
             var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
             string connString = connSettings.ConnectionString;
             DataTable dtLibros = new DataTable();
-
             List<int> IdsLibros = new List<int>();
 
-            string queryIds = "SELECT IDLibro FROM Carrito WHERE IDCliente = @IDCliente";
+            int idCarrito = 0;
 
             using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmdIds = new SqlCommand(queryIds, conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT IDCarrito FROM Carritos WHERE IDCliente = @IDCliente", conn))
             {
-                cmdIds.Parameters.AddWithValue("@IDCliente", idCliente);
+                cmd.Parameters.AddWithValue("@IDCliente", idCliente);
 
-                try
-                {
-                    conn.Open();
-                    using (SqlDataReader reader = cmdIds.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            IdsLibros.Add(reader.GetInt32(0));
-                        }
-                    }
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                conn.Open();
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                    idCarrito = (int)result;
+                conn.Close();
             }
+
+            if (idCarrito == 0)
+            {
+                rptLibros.Visible = false;
+                pnlNoLibros.Visible = true;
+                btnIrApagar.Visible = false;
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlCommand cmd = new SqlCommand("SELECT IDLibro FROM LibrosPorCarrito WHERE IDCarrito = @IDCarrito", conn))
+            {
+                cmd.Parameters.AddWithValue("@IDCarrito", idCarrito);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        IdsLibros.Add(reader.GetInt32(0));
+                }
+                conn.Close();
+            }
+
             if (IdsLibros.Count == 0)
             {
                 rptLibros.Visible = false;
@@ -75,54 +86,45 @@ namespace Libreria
             using (SqlCommand cmdLibros = new SqlCommand(queryLibros, conn))
             {
                 for (int i = 0; i < IdsLibros.Count; i++)
-                {
                     cmdLibros.Parameters.AddWithValue(parametros[i], IdsLibros[i]);
-                }
 
-                try
-                {
-                    conn.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmdLibros);
-                    adapter.Fill(dtLibros);
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmdLibros);
+                adapter.Fill(dtLibros);
 
-                    rptLibros.DataSource = dtLibros;
-                    rptLibros.DataBind();
+                rptLibros.DataSource = dtLibros;
+                rptLibros.DataBind();
+                conn.Close();
 
-                    if (dtLibros.Rows.Count == 0)
-                    {
-                        rptLibros.Visible = false;
-                    }
-                    else
-                    {
-                        rptLibros.Visible = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                rptLibros.Visible = dtLibros.Rows.Count > 0;
             }
         }
+
         protected void Btn_Eliminar(object sender, CommandEventArgs e)
         {
             datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
             dynamic usuario = Session["usuario"];
-
             var dataCli = new AccesoClientes();
             int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
+
             int idLibro = Convert.ToInt32(e.CommandArgument);
+            int idCarrito = 0;
 
             try
             {
                 datos.Conectar();
-                datos.Consultar("DELETE FROM Carrito WHERE IDCliente = @idCliente AND IDLibro = @idLibro");
-                datos.SetearParametro("@idCliente", idCliente);
-                datos.SetearParametro("@idLibro", idLibro);
+                datos.Consultar("SELECT IDCarrito FROM Carritos WHERE IDCliente = @IDCliente");
+                datos.SetearParametro("@IDCliente", idCliente);
+                datos.Leer();
+                if (datos.Lector.Read())
+                    idCarrito = (int)datos.Lector["IDCarrito"];
+                datos.Cerrar();
 
+                datos.Conectar();
+                datos.Consultar("DELETE FROM LibrosPorCarrito WHERE IDCarrito = @IDCarrito AND IDLibro = @IDLibro");
+                datos.SetearParametro("@IDCarrito", idCarrito);
+                datos.SetearParametro("@IDLibro", idLibro);
                 datos.EjecutarNonQuery();
-
-                CargarLibros(idCliente);
             }
             catch (Exception ex)
             {
@@ -132,7 +134,10 @@ namespace Libreria
             {
                 datos.Cerrar();
             }
+
+            CargarLibros(idCliente);
         }
+
         protected void Btn_IrApagar(object sender, CommandEventArgs e)
         {
             Response.Redirect("Pago.aspx");

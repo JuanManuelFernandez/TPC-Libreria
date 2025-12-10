@@ -1,8 +1,15 @@
 ﻿<%@ Page Title="Pagos" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Pago.aspx.cs" Inherits="Libreria.Pago" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <style>
+        .alert-custom {
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+
     <div class="container d-flex justify-content-center">
         <div class="w-50">
             <h2 class="text-center">Agregar método de pago</h2>
@@ -118,14 +125,21 @@
                     pattern="^\d{10,11}$" />
             </div>
 
-            <!-- Total -->
+            <!-- Total a pagar -->
             <div class="text-center mt-2">
                 <asp:Label ID="LblTotal" runat="server" Text="Label" CssClass="text-success" Style="margin-left: -100px;"></asp:Label>
             </div>
 
+            <!-- Mensaje de éxito -->
+            <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert alert-success alert-custom">
+                <asp:Label ID="lblMensaje" runat="server" />
+            </asp:Panel>
+
+            <!-- Boton de pago -->
             <div class="text-center">
-                <asp:Button ID="btnPagar" runat="server" CssClass="btn btn-primary btn-lg" Text="Finalizar compra" OnCommand="Btn_Comprar" Style="margin-left: -100px;"/>
+                <asp:Button ID="btnPagar" runat="server" CssClass="btn btn-primary btn-lg" Text="Finalizar compra" OnCommand="Btn_Comprar" Style="margin-left: -100px;" />
             </div>
+
         </div>
     </div>
 </asp:Content>
