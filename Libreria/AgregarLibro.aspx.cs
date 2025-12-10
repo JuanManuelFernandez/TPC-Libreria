@@ -103,5 +103,17 @@ namespace Libreria
             TxtPaginas.Text = "";
             TxtStock.Text = "";
         }
+        protected void Btn_AgregarAutor(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarAutor.aspx");
+        }
+        protected void Btn_AgregarGenero(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarGenero.aspx");
+        }
+        protected void Btn_AgregarEditorial(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarEditorial.aspx");
+        }
     }
 }

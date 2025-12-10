@@ -8,79 +8,81 @@
         <h1>Agregar libro</h1>
     </div>
 
-    <%--Agregar libro--%>
-
-    <%--IDAutor--%>
+    <%-- IDAutor --%>
     <div class="text-center mt-1">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtIDAutor" runat="server" placeholder="ID de autor" CssClass="form-control form-control-lg"></asp:TextBox>
+        <div class="col-md-2 mx-auto d-flex justify-content-center">
+            <asp:TextBox ID="TxtIDAutor" runat="server" placeholder="ID de autor" CssClass="form-control form-control-lg me-2"></asp:TextBox>
+            <asp:Button ID="BtnAgregarAutor" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarAutor"/>
         </div>
     </div>
 
-    <%--Genero--%>
+    <%-- Genero --%>
     <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtIDGenero" runat="server" placeholder="ID de genero" CssClass="form-control form-control-lg"></asp:TextBox>
+        <div class="col-md-2 mx-auto d-flex justify-content-center">
+            <asp:TextBox ID="TxtIDGenero" runat="server" placeholder="ID de genero" CssClass="form-control form-control-lg me-2"></asp:TextBox>
+            <asp:Button ID="BtnAgregarGenero" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarGenero"/>
         </div>
     </div>
 
-    <%--IDEditorial--%>
+    <%-- IDEditorial --%>
     <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtIDEditorial" runat="server" placeholder="ID de editorial" CssClass="form-control form-control-lg"></asp:TextBox>
+        <div class="col-md-2 mx-auto d-flex justify-content-center">
+            <asp:TextBox ID="TxtIDEditorial" runat="server" placeholder="ID de editorial" CssClass="form-control form-control-lg me-2"></asp:TextBox>
+            <asp:Button ID="BtnAgregarEditorial" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarEditorial"/>
         </div>
     </div>
 
-    <%--Titulo--%>
+    <%-- Titulo --%>
     <div class="text-center mt-3">
         <div class="col-md-3 mx-auto">
             <asp:TextBox ID="TxtTitulo" runat="server" placeholder="Titulo del libro" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Descripción--%>
+    <%-- Descripción --%>
     <div class="text-center mt-3">
         <div class="col-md-3 mx-auto">
             <asp:TextBox ID="TxtDescrip" runat="server" placeholder="Descripción" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Fecha--%>
+    <%-- Fecha --%>
     <div class="text-center mt-3">
         <div class="col-md-1 mx-auto">
             <asp:TextBox ID="TxtFecha" runat="server" placeholder="Año-Mes-Dia" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Precio--%>
+    <%-- Precio --%>
     <div class="text-center mt-3">
         <div class="col-md-1 mx-auto">
             <asp:TextBox ID="TxtPrecio" runat="server" placeholder="Precio" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Paginas--%>
+    <%-- Paginas --%>
     <div class="text-center mt-3">
         <div class="col-md-1 mx-auto">
             <asp:TextBox ID="TxtPaginas" runat="server" placeholder="Páginas" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Stock--%>
+    <%-- Stock --%>
     <div class="text-center mt-3">
         <div class="col-md-1 mx-auto">
             <asp:TextBox ID="TxtStock" runat="server" placeholder="Disponibles" CssClass="form-control form-control-lg"></asp:TextBox>
         </div>
     </div>
 
-    <%--Portada--%>
+    <%-- Portada --%>
     <div class="text-center mt-3">
         <asp:FileUpload ID="FilePortada" runat="server" />
     </div>
     <div class="text-center mt-3">
         <asp:Label ID="LblError" runat="server" Text="Label" Visible="false"></asp:Label>
     </div>
-    <%--Boton agregar--%>
+
+    <%-- Boton agregar libro --%>
     <div class="text-center mt-3">
         <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" OnCommand="Btn_Agregar" />
     </div>

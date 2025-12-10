@@ -24,6 +24,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtIDAutor;
 
         /// <summary>
+        /// Control BtnAgregarAutor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAgregarAutor;
+
+        /// <summary>
         /// Control TxtIDGenero.
         /// </summary>
         /// <remarks>
@@ -33,6 +42,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtIDGenero;
 
         /// <summary>
+        /// Control BtnAgregarGenero.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAgregarGenero;
+
+        /// <summary>
         /// Control TxtIDEditorial.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace Libreria
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtIDEditorial;
+
+        /// <summary>
+        /// Control BtnAgregarEditorial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAgregarEditorial;
 
         /// <summary>
         /// Control TxtTitulo.
