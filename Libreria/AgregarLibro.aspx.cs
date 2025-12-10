@@ -65,7 +65,7 @@ namespace Libreria
                 try
                 {
                     //Cambiar esta parte por una idLibro autoincremental o sacarla de un campo txt
-                    int idLibro = 17;
+                    int idLibro = ;
 
                     string nombrePortada = idLibro + extension;
 

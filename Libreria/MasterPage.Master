@@ -54,7 +54,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background: url('assets/Fondo.png') no-repeat center center fixed; background-size: cover; background-color: #f0f0f0;">
     <form id="form1" runat="server">
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
