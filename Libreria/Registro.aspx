@@ -174,6 +174,11 @@
 
         <p>Ingresa el código que recibiste vía mail a continuación</p>
 
+        <!-- Mensaje de éxito -->
+        <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert alert-success alert-custom">
+            <asp:Label ID="lblMensaje" runat="server" />
+        </asp:Panel>
+
         <!-- Campo de ingreso del código -->
         <div class="mb-3">
             <asp:TextBox ID="txtCodigoVerificacion" runat="server"
@@ -203,11 +208,6 @@
             <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary btn-sm w-100"
                 Text="Cancelar registro" OnClick="BtnCancelar_Click" CausesValidation="false" />
         </div>
-
-        <!-- Mensaje de éxito -->
-        <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert alert-success alert-custom">
-            <asp:Label ID="lblMensaje" runat="server" />
-        </asp:Panel>
 
     </div>
 

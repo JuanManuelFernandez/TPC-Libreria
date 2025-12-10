@@ -259,13 +259,22 @@ namespace Libreria
                 // Iniciar sesión automáticamente
                 Session["usuario"] = usuarioCreado;
 
-                // Limpiar sesiones de registro
-                LimpiarSesion();
+                // Flag para mostrar mensaje de éxito
+                Session["RegistroExitoso"] = true;
 
-                // Mostrar mensaje de éxito
+                // Quito datos del registro de la sesion
+                Session.Remove("RegistroClave");
+                Session.Remove("TokenRegistro");
+
+                // Muestro mensaje de éxito
                 pnlMensaje.Visible = true;
-                pnlMensaje.CssClass = "alert alert-success alert-custom";
-                lblMensaje.Text = "¡Cuentta creada exitosamente! Serás redirigido al la pagina principal.";
+                lblMensaje.Text = "¡Cuenta creada exitosamente! Serás redirigido a la página principal.";
+
+                // Oculto lo demas
+                txtCodigoVerificacion.Visible = false;
+                btnVerificarCodigo.Visible = false;
+                btnReenviarCodigo.Visible = false;
+                btnCancelar.Visible = false;
 
                 // Redirigir después de 3 segundos
                 Response.AddHeader("REFRESH", "3;URL=Default.aspx");
