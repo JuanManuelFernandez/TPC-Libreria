@@ -77,7 +77,9 @@
     <div class="text-center mt-3">
         <asp:FileUpload ID="FilePortada" runat="server" />
     </div>
-
+    <div class="text-center mt-3">
+        <asp:Label ID="LblError" runat="server" Text="Label" Visible="false"></asp:Label>
+    </div>
     <%--Boton agregar--%>
     <div class="text-center mt-3">
         <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" OnCommand="Btn_Agregar" />

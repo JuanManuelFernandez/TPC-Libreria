@@ -186,3 +186,4 @@ SELECT * FROM LibrosPorCompra;
 SELECT * FROM Devoluciones;
 
 SELECT * FROM Opiniones;
+SELECT * FROM Autores;
