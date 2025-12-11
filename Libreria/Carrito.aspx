@@ -44,9 +44,38 @@
                             <p class="card-text"><%# Eval("Descripcion") %></p>
                             <p class="card-text fw-bold text-success mb-3"><%# Eval("Precio", "{0:C}") %></p>
                         </div>
-                        <div class="mt-auto">
-                            <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-danger w-100" CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Eliminar" Text='<i class="bi bi-cart-plus me-2"></i>ELIMINAR' />
+
+                        <div class="row mb-2 m-2">
+                            <!-- Botón a la izquierda -->
+                            <div class="col-4 text-start">
+                                <asp:LinkButton ID="btnRestar" runat="server"
+                                    CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Eliminar">
+                                    <img src="assets/resta.png" alt="-" style="height:20px;" />
+                                </asp:LinkButton>
+                            </div>
+
+
+                            <!-- Contador en el centro -->
+                            <div class="col-4 text-center">
+                                <span class="badge bg-primary">x<%# Eval("Cantidad") %></span>
+                            </div>
+
+                            <!-- Botón a la derecha -->
+                            <div class="col-4 text-end">
+                                <asp:LinkButton ID="btnSumar" runat="server"
+                                    CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Sumar">
+                                    <img src="assets/suma.png" alt="+" style="height:20px;" />
+                                </asp:LinkButton>
+                            </div>
                         </div>
+
+                        <!-- Botón eliminar debajo -->
+                        <div class="mt-auto">
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger w-100"
+                                CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Eliminar"
+                                Text='<i class="bi bi-cart-plus me-2"></i>ELIMINAR' />
+                        </div>
+
                     </div>
                 </div>
             </ItemTemplate>
@@ -54,6 +83,10 @@
                 </div>
             </FooterTemplate>
         </asp:Repeater>
+
+        <div class="text-center">
+            <asp:Label ID="LblMensaje" runat="server" Text="Label" Visible="false"></asp:Label>
+        </div>
 
         <div class="mt-2 text-center">
             <asp:LinkButton ID="btnIrApagar" runat="server" CssClass="btn btn-primary" OnCommand="Btn_IrApagar" Visible="true" Text='Ir a pagar' />

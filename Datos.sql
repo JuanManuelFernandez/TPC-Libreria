@@ -158,7 +158,8 @@ SELECT * FROM Portadas;
 SELECT * FROM Clientes;
 SELECT * FROM Usuarios;
 
-SELECT * FROM Carrito;
+SELECT * FROM Carritos;
+SELECT * FROM LibrosPorCarrito;
 SELECT * FROM Deseados;
 
 SELECT * FROM Stocks;
