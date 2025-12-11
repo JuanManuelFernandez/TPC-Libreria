@@ -1,9 +1,7 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web.UI.WebControls;
 
@@ -11,7 +9,6 @@ namespace Libreria
 {
     public partial class Deseados : System.Web.UI.Page
     {
-        private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -20,141 +17,78 @@ namespace Libreria
             }
             else
             {
-                //LblAviso.Visible = false;
                 dynamic usuario = Session["usuario"];
-
                 var dataCli = new AccesoClientes();
                 int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 CargarLibros(idCliente);
             }
         }
+
         private void CargarLibros(int idCliente)
         {
-            var connSettings = ConfigurationManager.ConnectionStrings["TPCLibreriaUTN"];
-            string connString = connSettings.ConnectionString;
-            DataTable dtLibros = new DataTable();
+            var dataDeseados = new AccesoDeseados();
+            var dataLibros = new AccesoLibros();
 
-            List<int> IdsLibros = new List<int>();
+            var listaDeseados = dataDeseados.Listar()
+                .Where(x => x.IdCliente == idCliente)
+                .ToList();
 
-            string queryIds = "SELECT IDLibro FROM Deseados WHERE IDCliente = @IDCliente";
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmdIds = new SqlCommand(queryIds, conn))
-            {
-                cmdIds.Parameters.AddWithValue("@IDCliente", idCliente);
-
-                try
-                {
-                    conn.Open();
-                    using (SqlDataReader reader = cmdIds.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            IdsLibros.Add(reader.GetInt32(0));
-                        }
-                    }
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            if (IdsLibros.Count == 0)
+            if (listaDeseados.Count == 0)
             {
                 rptLibros.Visible = false;
                 pnlNoLibros.Visible = true;
                 return;
             }
 
-            string[] parametros = IdsLibros.Select((id, index) => "@id" + index).ToArray();
-            string queryLibros = $"SELECT * FROM Libros WHERE IDLibro IN ({string.Join(",", parametros)}) ORDER BY IDLibro";
+            var libros = listaDeseados
+                .Select(d => dataLibros.BuscarPorIdLibro(d.IdLibro))
+                .ToList();
 
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmdLibros = new SqlCommand(queryLibros, conn))
-            {
-                for (int i = 0; i < IdsLibros.Count; i++)
-                {
-                    cmdLibros.Parameters.AddWithValue(parametros[i], IdsLibros[i]);
-                }
+            rptLibros.DataSource = libros;
+            rptLibros.DataBind();
 
-                try
-                {
-                    conn.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmdLibros);
-                    adapter.Fill(dtLibros);
-
-                    rptLibros.DataSource = dtLibros;
-                    rptLibros.DataBind();
-
-                    if (dtLibros.Rows.Count == 0)
-                    {
-                        rptLibros.Visible = false;
-                        pnlNoLibros.Visible = true;
-                    }
-                    else
-                    {
-                        rptLibros.Visible = true;
-                        pnlNoLibros.Visible = false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
+            rptLibros.Visible = true;
+            pnlNoLibros.Visible = false;
         }
+
         private void AgregarAlCarrito(int idCliente, int idLibro)
         {
-            datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
+            var dataCarritos = new AccesoCarritos();
+            var dataLibrosPorCarrito = new AccesoLibrosPorCarrito();
+            var dataLibros = new AccesoLibros();
 
-            try
+            var carrito = dataCarritos.BuscarPorIdCliente(idCliente);
+            if (carrito == null)
             {
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Carrito (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.SetearParametro("@IDLibro", idLibro);
-
-                datos.EjecutarNonQuery();
-
+                carrito = new Dominio.Carrito { IdCliente = idCliente };
+                dataCarritos.Agregar(carrito);
+                carrito = dataCarritos.BuscarPorIdCliente(idCliente);
             }
-            catch (Exception ex)
+
+            var libro = dataLibros.BuscarPorIdLibro(idLibro);
+
+            var item = new LibroPorCarrito
             {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
-            CargarLibros(idCliente);
+                IdCarrito = carrito.IdCarrito,
+                IdLibro = idLibro,
+                Cantidad = 1,
+                PrecioUnitario = (decimal)libro.Precio
+            };
 
+            dataLibrosPorCarrito.Agregar(item);
         }
+
         private void BorrarDeDeseados(int idCliente, int idLibro)
-       {
-            datos = new AccesoDatos();
-            var auxiliar = new AccesoUsuario();
-            dynamic usuario = Session["usuario"];
+        {
+            var dataDeseados = new AccesoDeseados();
+            var lista = dataDeseados.Listar()
+                .Where(x => x.IdCliente == idCliente && x.IdLibro == idLibro)
+                .ToList();
 
-            try
-            {
-                datos.Conectar();
-                datos.Consultar("DELETE FROM Deseados WHERE IDCliente = @idCliente AND IDLibro = @idLibro");
-                datos.SetearParametro("@idCliente", idCliente);
-                datos.SetearParametro("@idLibro", idLibro);
-
-                datos.EjecutarNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
-            }
+            foreach (var d in lista)
+                dataDeseados.Eliminar(d.IdDeseado);
         }
+
         protected void Btn_AgregarCarrito(object sender, CommandEventArgs e)
         {
             if (Session["usuario"] != null)
@@ -165,18 +99,12 @@ namespace Libreria
                 int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
-                try
-                {
-                    AgregarAlCarrito(idCliente, idLibro);
-                    BorrarDeDeseados(idCliente, idLibro);
-                    CargarLibros(idCliente);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                AgregarAlCarrito(idCliente, idLibro);
+                BorrarDeDeseados(idCliente, idLibro);
+                CargarLibros(idCliente);
             }
         }
+
         protected void Btn_Eliminar(object sender, CommandEventArgs e)
         {
             if (Session["usuario"] != null)
@@ -187,15 +115,8 @@ namespace Libreria
                 int idCliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == usuario.IdUsuario).IdCliente;
                 int idLibro = Convert.ToInt32(e.CommandArgument);
 
-                try
-                {
-                    BorrarDeDeseados(idCliente, idLibro);
-                    CargarLibros(idCliente);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                BorrarDeDeseados(idCliente, idLibro);
+                CargarLibros(idCliente);
             }
         }
     }

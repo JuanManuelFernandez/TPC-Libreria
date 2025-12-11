@@ -52,8 +52,8 @@ namespace Libreria
             var dataLibros = new AccesoLibros();
 
             sb.Append(@"
-<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto;'>
-    <h2 style='color:#111;'>¡Gracias por tu compra!</h2>");
+                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto;'>
+                <h2 style='color:#111;'>¡Gracias por tu compra!</h2>");
 
             sb.Append($"<p>Hola {nombreCliente},</p>");
             sb.Append("<p>Tu compra se registró correctamente. Aquí tenés el detalle de lo adquirido:</p>");
@@ -70,14 +70,14 @@ namespace Libreria
                 total += subtotal;
 
                 sb.Append($@"
-    <tr>
-        <td style='padding: 8px 0;'>
-            <strong>{libro.Titulo}</strong> × {item.Cantidad}
-        </td>
-        <td style='text-align:right; padding: 8px 0;'>
-            ${item.PrecioUnitario:N2} cada uno
-        </td>
-    </tr>");
+                <tr>
+                    <td style='padding: 8px 0;'>
+                        <strong>{libro.Titulo}</strong> × {item.Cantidad}
+                    </td>
+                    <td style='text-align:right; padding: 8px 0;'>
+                        ${item.PrecioUnitario:N2} cada uno
+                    </td>
+                </tr>");
             }
 
             sb.Append($@"
@@ -99,8 +99,7 @@ namespace Libreria
         protected void Btn_Comprar(object sender, EventArgs e)
         {
             // Verificacion de fecha de caducidad de tarjeta
-            int mes, year;
-            if (int.TryParse(TxtMes.Text, out mes) && int.TryParse(TxtYear.Text, out year))
+            if (int.TryParse(TxtMes.Text, out int mes) && int.TryParse(TxtYear.Text, out int year))
             {
                 var fechaActual = DateTime.Now;
 
@@ -126,7 +125,7 @@ namespace Libreria
             var carrito = dataCarritos.BuscarPorIdCliente(idCliente);
 
             // Obtener items del carrito
-            List<LibroPorCarrito> items = dataLibrosCarrito.ListarPorCarrito(carrito.IdCarrito);
+            List<LibroPorCarrito> items = dataLibrosCarrito.ListarPorIdCarrito(carrito.IdCarrito);
 
             // Calcular total
             decimal TotalCompra = items.Sum(x => x.PrecioUnitario * x.Cantidad);

@@ -42,16 +42,16 @@ namespace Negocio
             }
             return deseados;
         }
-        public void AgregarDeseado(Deseado nuevo)
+        public void Agregar(Deseado nuevo)
         {
             datos = new AccesoDatos();
-            var aux = new AccesoDeseados();
 
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Deseados (IDDeseado, IDCliente, IDLibro) VALUES (@IDDeseado, @IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDDeseado", aux.Listar()[aux.Listar().Count - 1].IdDeseado);
+                datos.Consultar("INSERT INTO Deseados (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
+                datos.SetearParametro("@IDCliente", nuevo.IdCliente);
+                datos.SetearParametro("@IDLibro", nuevo.IdLibro);
 
                 datos.EjecutarNonQuery();
             }
@@ -64,7 +64,27 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
-        public Deseado BuscarPorIdDeseado(int id)
+        public void Eliminar(int idDeseado)
+        {
+            datos = new AccesoDatos();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("DELETE FROM Deseados WHERE IDDeseado = @ID");
+                datos.SetearParametro("@ID", idDeseado);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public Deseado BuscarPorIdDeseado(int idDeseado)
         {
             datos = new AccesoDatos();
             Deseado aux;
@@ -72,7 +92,7 @@ namespace Negocio
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDDeseado, IDCliente, IDLibro FROM Deseados WHERE IDDeseado = " + id);
+                datos.Consultar("SELECT IDDeseado, IDCliente, IDLibro FROM Deseados WHERE IDDeseado = " + idDeseado);
                 datos.Leer();
                 datos.Lector.Read();
 

@@ -564,7 +564,7 @@ namespace Libreria
 
                 try
                 {
-                    AgregarAlCarrito(idCliente, idLibro);
+                    AgregarCarrito(idCliente, idLibro);
                     // Mostrar mensaje de éxito o redireccionar
                 }
                 catch (Exception ex)
@@ -597,7 +597,7 @@ namespace Libreria
 
                 try
                 {
-                    AgregarLista(idCliente, idLibro);
+                    AgregarDeseado(idCliente, idLibro);
                     // Mostrar mensaje de éxito
                 }
                 catch (Exception ex)
@@ -613,47 +613,56 @@ namespace Libreria
             }
         }
 
-        private void AgregarAlCarrito(int idCliente, int idLibro)
+        private void AgregarCarrito(int idCliente, int idLibro)
         {
-            datos = new AccesoDatos();
+            var datosCarritos = new AccesoCarritos();
+            var datosLPC = new AccesoLibrosPorCarrito();
+            var datosLibros = new AccesoLibros();
+
+            Dominio.Carrito carrito = datosCarritos.BuscarPorIdCliente(idCliente);
+
+            if (carrito == null)
+            {
+                int nuevoId = datosCarritos.CrearCarrito(idCliente);
+                carrito = datosCarritos.BuscarPorIdCliente(idCliente);
+            }
+
+            Libro libro = datosLibros.BuscarPorIdLibro(idLibro);
+
+            var nuevoItem = new Dominio.LibroPorCarrito
+            {
+                IdCarrito = carrito.IdCarrito,
+                IdLibro = idLibro,
+                Cantidad = 1,
+                PrecioUnitario = (decimal)libro.Precio
+            };
 
             try
             {
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Carrito (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.SetearParametro("@IDLibro", idLibro);
-                datos.EjecutarNonQuery();
+                datosLPC.Agregar(nuevoItem);
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
             }
         }
 
-        protected void AgregarLista(int idCliente, int idLibro)
+        protected void AgregarDeseado(int idCliente, int idLibro)
         {
-            datos = new AccesoDatos();
+            AccesoDeseados datosDeseados = new AccesoDeseados();
+            Deseado nuevoDeseado = new Deseado
+            {
+                IdCliente = idCliente,
+                IdLibro = idLibro
+            };
 
             try
             {
-                datos.Conectar();
-                datos.Consultar("INSERT INTO Deseados (IDCliente, IDLibro) VALUES (@IDCliente, @IDLibro)");
-                datos.SetearParametro("@IDCliente", idCliente);
-                datos.SetearParametro("@IDLibro", idLibro);
-                datos.EjecutarNonQuery();
+                datosDeseados.Agregar(nuevoDeseado);
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                datos.Cerrar();
             }
         }
     }

@@ -8,7 +8,6 @@ namespace Negocio
     {
         private List<Carrito> carritos = null;
         private AccesoDatos datos = null;
-
         public List<Carrito> Listar()
         {
             carritos = new List<Carrito>();
@@ -63,6 +62,31 @@ namespace Negocio
                 datos.Cerrar();
             }
         }
+        public int CrearCarrito(int idCliente)
+        {
+            datos = new AccesoDatos();
+            int nuevoId = 0;
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Carritos (IDCliente) OUTPUT INSERTED.IDCarrito VALUES (@IDCliente)");
+                datos.SetearParametro("@IDCliente", idCliente);
+
+                nuevoId = (int)datos.EjectuarScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+
+            return nuevoId;
+        }
+
         public Carrito BuscarPorIdCliente(int idCliente)
         {
             datos = new AccesoDatos();
