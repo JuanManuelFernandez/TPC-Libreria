@@ -26,4 +26,8 @@
     <div class="text-center mt-2">
         <asp:Label ID="LblMensaje" runat="server" Text="Label" Visible="false"></asp:Label>
     </div>
+
+    <div class="text-center mt-2">
+        <asp:Button ID="BtnVolver" runat="server" CssClass="btn btn-primary" Text="Volver" OnCommand="Btn_Volver"/>
+    </div>
 </asp:Content>

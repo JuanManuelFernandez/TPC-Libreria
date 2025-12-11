@@ -105,5 +105,9 @@ namespace Libreria
                 LblMensaje.ForeColor = System.Drawing.Color.Red;
             }
         }
+        protected void Btn_Volver(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarLibro.aspx");
+        }
     }
 }

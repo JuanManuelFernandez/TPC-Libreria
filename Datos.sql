@@ -167,3 +167,5 @@ SELECT * FROM LibrosPorCompra;
 
 SELECT * FROM Opiniones;
 SELECT * FROM Autores;
+SELECT * FROM Generos;
+SELECT * FROM Editoriales;

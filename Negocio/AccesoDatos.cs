@@ -91,5 +91,15 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public object EjecutarScalarLibros()
+        {
+            comando.Connection = conexion;
+            return comando.ExecuteScalar();
+        }
+        public void EjecutarNonQueryLibro()
+        {
+            comando.Connection = conexion;
+            comando.ExecuteNonQuery();
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace Libreria
                         datos.EjecutarNonQuery();
 
                         datos.Consultar("SELECT MAX(IDLibro) FROM Libros");
-                        idLibro = Convert.ToInt32(datos.EjecutarScalar());
+                        idLibro = Convert.ToInt32(datos.EjecutarScalarLibros());
 
                         string destino = "~/assets/portadas";
                         string ruta = Server.MapPath(destino);
@@ -55,12 +55,11 @@ namespace Libreria
 
                         FilePortada.SaveAs(rutaCompleta);
 
-                        datos.Conectar();
                         datos.Consultar("INSERT INTO Portadas (IDLibro, Imagen) VALUES (@IDLibro, @Imagen)");
                         datos.SetearParametro("@IDLibro", idLibro);
                         datos.SetearParametro("@Imagen", nombrePortada);
 
-                        datos.EjecutarNonQuery();
+                        datos.EjecutarNonQueryLibro();
 
                         LimpiarCampos();
                         Response.Redirect("LibroAgregado.aspx");
