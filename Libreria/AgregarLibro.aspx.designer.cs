@@ -24,6 +24,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.DropDownList DdlAutor;
 
         /// <summary>
+        /// valAutor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valAutor;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace Libreria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlGenero;
+
+        /// <summary>
+        /// valGenero control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valGenero;
 
         /// <summary>
         /// Button2 control.
@@ -60,6 +78,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.DropDownList DdlEditorial;
 
         /// <summary>
+        /// valEditorial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valEditorial;
+
+        /// <summary>
         /// Button3 control.
         /// </summary>
         /// <remarks>
@@ -78,6 +105,24 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtTitulo;
 
         /// <summary>
+        /// valTituloReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valTituloReq;
+
+        /// <summary>
+        /// valTituloLen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valTituloLen;
+
+        /// <summary>
         /// TxtDescrip control.
         /// </summary>
         /// <remarks>
@@ -85,6 +130,24 @@ namespace Libreria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtDescrip;
+
+        /// <summary>
+        /// valDescripReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valDescripReq;
+
+        /// <summary>
+        /// valDescripLen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valDescripLen;
 
         /// <summary>
         /// TxtFecha control.
@@ -96,6 +159,24 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtFecha;
 
         /// <summary>
+        /// valFechaReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valFechaReq;
+
+        /// <summary>
+        /// valFechaFmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valFechaFmt;
+
+        /// <summary>
         /// TxtPrecio control.
         /// </summary>
         /// <remarks>
@@ -103,6 +184,24 @@ namespace Libreria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtPrecio;
+
+        /// <summary>
+        /// valPrecioReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valPrecioReq;
+
+        /// <summary>
+        /// valPrecioNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valPrecioNum;
 
         /// <summary>
         /// TxtPaginas control.
@@ -114,6 +213,24 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtPaginas;
 
         /// <summary>
+        /// valPagReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valPagReq;
+
+        /// <summary>
+        /// valPagNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valPagNum;
+
+        /// <summary>
         /// TxtStock control.
         /// </summary>
         /// <remarks>
@@ -123,6 +240,24 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.TextBox TxtStock;
 
         /// <summary>
+        /// valStockReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valStockReq;
+
+        /// <summary>
+        /// valStockNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valStockNum;
+
+        /// <summary>
         /// FilePortada control.
         /// </summary>
         /// <remarks>
@@ -130,6 +265,15 @@ namespace Libreria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FilePortada;
+
+        /// <summary>
+        /// valPortada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valPortada;
 
         /// <summary>
         /// LblError control.
