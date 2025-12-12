@@ -35,7 +35,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container my-5">
+
         <!-- Barra de navegación -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

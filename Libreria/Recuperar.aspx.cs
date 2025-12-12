@@ -22,7 +22,30 @@ namespace Libreria
         {
             if (!IsPostBack)
             {
-                LimpiarSesion();
+                var dataCli = new AccesoClientes();
+                Usuario user = (Usuario)Session["usuario"];
+                if (user != null)
+                {
+                    switch (user.TipoUsuario)
+                    {
+                        case TipoUsuario.Admin:
+                            txtMail.Text = user.Mail;
+                            break;
+
+                        case TipoUsuario.Cliente:
+                            txtMail.Text = user.Mail;
+                            txtMail.Enabled = false;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    LimpiarSesion();
+                }
+                if(user == null)
+                {
+                    Response.Redirect("Default.aspx");
+                }
             }
         }
 

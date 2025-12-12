@@ -12,23 +12,29 @@
             overflow: hidden;
         }
 
-        .cart-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
+            .cart-image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                padding: 10px;
+            }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container my-5">
+        <!-- Barra de navegacion -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mi Carrito</li>
+            </ol>
+        </nav>
+
         <h2 class="text-center mb-4">Tu carrito de compras</h2>
 
         <asp:Repeater ID="rptLibros" runat="server">
-            <HeaderTemplate>
-                <div class="row justify-content-center">
-            </HeaderTemplate>
+
             <ItemTemplate>
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="card h-100 shadow-sm">
@@ -46,7 +52,7 @@
                         </div>
 
                         <div class="row mb-2 m-2">
-                            <!-- Botón a la izquierda -->
+                            <!-- Botón de resta -->
                             <div class="col-4 text-start">
                                 <asp:LinkButton ID="btnRestar" runat="server"
                                     CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Eliminar">
@@ -54,13 +60,12 @@
                                 </asp:LinkButton>
                             </div>
 
-
-                            <!-- Contador en el centro -->
+                            <!-- Contador -->
                             <div class="col-4 text-center">
                                 <span class="badge bg-primary">x<%# Eval("Cantidad") %></span>
                             </div>
 
-                            <!-- Botón a la derecha -->
+                            <!-- Botón de suma -->
                             <div class="col-4 text-end">
                                 <asp:LinkButton ID="btnSumar" runat="server"
                                     CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Sumar">
@@ -69,7 +74,7 @@
                             </div>
                         </div>
 
-                        <!-- Botón eliminar debajo -->
+                        <!-- Botón eliminar -->
                         <div class="mt-auto">
                             <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger w-100"
                                 CommandArgument='<%# Eval("IDLibro") %>' OnCommand="Btn_Eliminar"
@@ -79,9 +84,7 @@
                     </div>
                 </div>
             </ItemTemplate>
-            <FooterTemplate>
-                </div>
-            </FooterTemplate>
+
         </asp:Repeater>
 
         <div class="text-center">
@@ -91,9 +94,11 @@
         <div class="mt-2 text-center">
             <asp:LinkButton ID="btnIrApagar" runat="server" CssClass="btn btn-primary" OnCommand="Btn_IrApagar" Visible="true" Text='Ir a pagar' />
         </div>
+
         <!-- Mensaje si no hay libros -->
         <asp:Panel ID="pnlNoLibros" runat="server" CssClass="text-center" Visible="false">
             <p>Todavía no has agregado libros a tu carrito.</p>
         </asp:Panel>
+
     </div>
 </asp:Content>

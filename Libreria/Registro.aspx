@@ -79,107 +79,114 @@
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="d-flex align-items-center justify-content-center">
-        <div class="text-center mb-4">
+    <div class="container my-5">
 
-            <!-- Panel de Registro (visible inicialmente) -->
-            <asp:Panel ID="pnlRegistro" runat="server" Visible="true">
-                <h2 class="mb-4">Crear cuenta</h2>
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registro</li>
+            </ol>
+        </nav>
 
-                <%--Nombre--%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="NombreTxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="Nombre"
-                        required="required"
-                        pattern="^[A-Za-zÀ-ÿ\s]{2,50}$" />
-                </div>
+        <!-- Formulario centrado -->
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="text-center mb-4">
 
-                <%-- Apellido --%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="ApellidoTxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="Apellido"
-                        required="required"
-                        pattern="^[A-Za-zÀ-ÿ\s]{2,50}$" />
-                </div>
+                <!-- Panel de Registro -->
+                <asp:Panel ID="pnlRegistro" runat="server" Visible="true">
+                    <h2 class="mb-4">Crear cuenta</h2>
 
-                <%-- DNI --%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="DNITxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="DNI"
-                        required="required"
-                        pattern="^\d{8}$" />
-                </div>
-
-                <%-- Email --%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="MailTxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="Email"
-                        TextMode="Email"
-                        required="required"
-                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
-                </div>
-
-                <%-- Teléfono --%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="TelefonoTxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="Teléfono"
-                        required="required"
-                        pattern="^\d{10,11}$" />
-                </div>
-
-                <%-- Contraseña --%>
-                <div class="mb-3 position-relative">
-                    <asp:TextBox ID="ClaveTxt" runat="server" CssClass="form-control form-control-lg"
-                        placeholder="Contraseña"
-                        TextMode="Password"
-                        required="required" />
-
-                    <div class="password-requirements">
-                        <small>La contraseña debe tener:</small>
-                        <ul>
-                            <li id="req-length" class="requirement-unmet">Al menos 8 caracteres</li>
-                            <li id="req-upper" class="requirement-unmet">Al menos una letra mayúscula</li>
-                            <li id="req-lower" class="requirement-unmet">Al menos una letra minúscula</li>
-                            <li id="req-number" class="requirement-unmet">Al menos un número</li>
-                        </ul>
+                    <!-- Nombre -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="NombreTxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Nombre"
+                            required="required"
+                            pattern="^[A-Za-zÁ-Úá-ú\s]{2,50}$" />
                     </div>
-                </div>
 
-                <div>
-                    <asp:Label ID="LblError" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
-                </div>
+                    <!-- Apellido -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="ApellidoTxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Apellido"
+                            required="required"
+                            pattern="^[A-Za-zÁ-Úá-ú\s]{2,50}$" />
+                    </div>
 
-                <asp:Button ID="BtnEnviarCodigo" runat="server" CssClass="btn btn-primary btn-lg w-100"
-                    Text="Continuar" OnClick="BtnEnviarCodigo_Click" />
-            </asp:Panel>
+                    <!-- DNI -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="DNITxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="DNI"
+                            required="required"
+                            pattern="^\d{8}$" />
+                    </div>
 
+                    <!-- Email -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="MailTxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Email"
+                            TextMode="Email"
+                            required="required"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="TelefonoTxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Teléfono"
+                            required="required"
+                            pattern="^\d{10,11}$" />
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="mb-3 position-relative">
+                        <asp:TextBox ID="ClaveTxt" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Contraseña"
+                            TextMode="Password"
+                            required="required" />
+
+                        <div class="password-requirements">
+                            <small>La contraseña debe tener:</small>
+                            <ul>
+                                <li id="req-length" class="requirement-unmet">Al menos 8 caracteres</li>
+                                <li id="req-upper" class="requirement-unmet">Al menos una letra mayúscula</li>
+                                <li id="req-lower" class="requirement-unmet">Al menos una letra minúscula</li>
+                                <li id="req-number" class="requirement-unmet">Al menos un número</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <asp:Label ID="LblError" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
+                    </div>
+
+                    <asp:Button ID="BtnEnviarCodigo" runat="server" CssClass="btn btn-primary btn-lg w-100"
+                        Text="Continuar" OnClick="BtnEnviarCodigo_Click" />
+                </asp:Panel>
+
+            </div>
         </div>
+
     </div>
 
-    <!-- Panel de Verificación (visible después de enviar código) -->
-    <% 
-        if (CodigoEnviado)
-        {
-    %>
+    <!-- Panel de Verificación -->
+    <% if (CodigoEnviado) { %>
+
     <div class="verification-container">
-        <!-- Icono del sobre -->
         <div class="verification-logo">📧</div>
 
-        <!-- Título -->
         <h2 class="verification-header">Te enviamos un código a:</h2>
 
-        <!-- Mail -->
         <p class="verification-email"><%= Session["RegistroEmail"] %></p>
 
         <p>Ingresa el código que recibiste vía mail a continuación</p>
 
-        <!-- Mensaje de éxito -->
         <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert alert-success alert-custom">
             <asp:Label ID="lblMensaje" runat="server" />
         </asp:Panel>
 
-        <!-- Campo de ingreso del código -->
         <div class="mb-3">
             <asp:TextBox ID="txtCodigoVerificacion" runat="server"
                 CssClass="form-control text-center"
@@ -194,10 +201,8 @@
         <asp:Button ID="btnVerificarCodigo" runat="server" CssClass="btn btn-success w-100 mb-3"
             Text="Verificar y crear cuenta" OnClick="BtnVerificarCodigo_Click" />
 
-        <!-- Tiempo de expiración con temporizador -->
         <p class="verification-time" id="timerDisplay">El código expira en <span id="countdown">05:00</span></p>
 
-        <!-- Botón de reenvío (oculto hasta expirado el timer inicialmente) -->
         <div id="resendContainer" style="display: none;">
             <asp:LinkButton ID="btnReenviarCodigo" runat="server" CssClass="resend-link" OnClick="BtnReenviarCodigo_Click">
                 <i class="bi bi-arrow-clockwise"></i> Enviar código nuevamente
@@ -208,7 +213,6 @@
             <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary btn-sm w-100"
                 Text="Cancelar registro" OnClick="BtnCancelar_Click" CausesValidation="false" />
         </div>
-
     </div>
 
     <script>

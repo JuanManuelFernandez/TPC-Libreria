@@ -25,7 +25,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container my-5">
+
         <!-- Barra de navegacion -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -64,17 +65,25 @@
                         Text="Eliminar cuenta"
                         OnClick="BtnEliminarCuenta_Click"
                         Style="color: red; background-color: transparent; border: none;" />
-
                 </div>
             </asp:Panel>
 
+            <!-- Mensaje de confirmación -->
+            <asp:Panel ID="confirmacion" runat="server" Visible="false">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+                    <div class="text-center">
 
+                        <h1 class="mb-4">¿Estás seguro de que quieres eliminar tu cuenta?</h1>
 
-            <!-- Mensaje de confirmacion -->
-            <asp:Panel ID="confirmacion" runat="server" CssClass="col-md-8" Visible="false">
-                <h1>¿Estás seguro de que quieres eliminar tu cuenta?</h1>
-                <asp:Button ID="btnSi" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BtnSi_Click" />
-                <asp:Button ID="btnNo" runat="server" Text="No" CssClass="btn btn-danger" OnClick="BtnNo_Click" />
+                        <div class="d-flex justify-content-center gap-3">
+                            <asp:Button ID="btnSi" runat="server" Text="Sí" CssClass="btn btn-success btn-lg px-4"
+                                OnClick="BtnSi_Click" />
+
+                            <asp:Button ID="btnNo" runat="server" Text="No" CssClass="btn btn-danger btn-lg px-4"
+                                OnClick="BtnNo_Click" />
+                        </div>
+                    </div>
+                </div>
             </asp:Panel>
 
             <!-- Carrito -->

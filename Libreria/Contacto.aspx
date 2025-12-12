@@ -2,31 +2,59 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container my-5">
 
-    <div class="d-flex align-items-center justify-content-center">
-        <div class="text-center mb-4"">
+        <!-- Barra de navegación -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="AgregarLibro.aspx">Agregar Libro</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contacto</li>
+            </ol>
+        </nav>
 
-        <%--[ Mail ]--%>
-        <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Email</label>
-        <asp:Label ID="lblMail" runat="server" Text="" CssClass="form-label fw-bold"></asp:Label>
-        <asp:TextBox ID="txtMail" runat="server" Placeholder="pepito@gmail.com" TextMode="Email" CssClass="form-control w-100" required="required" AutoPostBack="true" MaxLength="100"></asp:TextBox>
+        <!-- Centrado del formulario -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
 
-        <%--[ Tema ]--%>
-        <label class="form-label fs-5 fw-bold mb-3" for="ConsultaTxt">¿Cual es el motivo de su consulta?</label>
-        <asp:TextBox ID="txtTema" runat="server" Placeholder="Ej: No puedo logeuarme, no llega mi pedido..." TextMode="SingleLine" CssClass="form-control w-100" required="required" MaxLength="100"></asp:TextBox>
+                <%-- Mail --%>
+                <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Email</label>
+                <asp:TextBox ID="txtMail" runat="server"
+                    Placeholder="pepito@gmail.com"
+                    TextMode="Email"
+                    CssClass="form-control mb-3"
+                    required="required"
+                    MaxLength="100" />
 
-        <%--[ Descripcion ]--%>
-        <label class="form-label fs-5 fw-bold mb-3" for="ConsultaTxt">Explique detalladamente su consulta</label>
-        <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-100 mx-auto mb-2" Style="resize: none; height: 135px" MaxLength="500"></asp:TextBox>
+                <%-- Tema --%>
+                <label class="form-label fs-5 fw-bold mb-3">¿Cuál es el motivo de su consulta?</label>
+                <asp:TextBox ID="txtTema" runat="server"
+                    Placeholder="Ej: No puedo loguearme, no llega mi pedido..."
+                    CssClass="form-control mb-3"
+                    MaxLength="100" />
 
-        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnEnviar_Click" />
+                <%-- Descripción --%>
+                <label class="form-label fs-5 fw-bold mb-3">Explique detalladamente su consulta</label>
+                <asp:TextBox ID="txtDescripcion" runat="server"
+                    TextMode="MultiLine"
+                    CssClass="form-control mb-3"
+                    Style="resize: none; height: 135px;"
+                    MaxLength="500" />
 
-        <%--[ Error Label ]--%>
-        <asp:Label ID="lblErrorTema" runat="server" Text="" Visible="false" ForeColor="Red" />
-        <asp:Label ID="lblErrorDescripcion" runat="server" Text="" Visible="false" ForeColor="Red" />
+                <asp:Button ID="btnEnviar" runat="server"
+                    Text="Enviar"
+                    CssClass="btn btn-primary btn-lg mb-3"
+                    OnClick="BtnEnviar_Click" />
 
+                <%-- Errores --%>
+                <asp:Label ID="lblErrorTema" runat="server" ForeColor="Red" Visible="false" />
+                <asp:Label ID="lblErrorDescripcion" runat="server" ForeColor="Red" Visible="false" />
+
+            </div>
         </div>
+
     </div>
 
 </asp:Content>

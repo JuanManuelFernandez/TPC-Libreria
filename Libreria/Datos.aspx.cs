@@ -54,11 +54,11 @@ namespace Libreria
                 return; // Detener la ejecución si el mail ya existe
             }
 
-            // Modificar Usuario - usar el usuario de la sesión y lo actualizo
+            // Modificar Usuario
             user.Mail = txtMail.Text;
             datosUsr.Modificar(user);
 
-            // Modificar Cliente - solo si es un cliente
+            // Modificar Cliente
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 Cliente cliente = datosCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);

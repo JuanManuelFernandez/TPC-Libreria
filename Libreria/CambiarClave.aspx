@@ -60,66 +60,64 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container my-5">
+
         <!-- Barra de navegación -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="Cuenta.aspx">Mi Cuenta</a></li>
+                <li class="breadcrumb-item"><a href="Datos.aspx">Datos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Cambiar Contraseña</li>
             </ol>
         </nav>
 
-        <div class="row justify-content-center">
-            <!-- Cambio de contraseña -->
-            <div class="col-md-8">
-                <h1 class="section-header">Cambiar contraseña</h1>
+        <!-- Contenido alineado a la izquierda -->
+        <div class="col-md-8 p-0">
+            <h1 class="section-header">Cambiar contraseña</h1>
 
-                <!-- Mensaje de éxito/error -->
-                <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert-custom">
-                    <asp:Label ID="lblMensaje" runat="server" />
+            <!-- Mensaje -->
+            <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="alert-custom">
+                <asp:Label ID="lblMensaje" runat="server" />
+            </asp:Panel>
+
+            <div class="info-box">
+                <h4 class="section-title">Nueva contraseña</h4>
+                <p class="text-muted">Por favor, ingresa tu nueva contraseña</p>
+
+                <!-- Nueva contraseña -->
+                <asp:Panel ID="NuevaClavePanel" runat="server" CssClass="mb-3">
+                    <asp:Label ID="lblNuevaClave" runat="server" AssociatedControlID="txtNuevaClave" Text="Nueva contraseña" CssClass="form-label" />
+
+                    <asp:TextBox ID="txtNuevaClave" runat="server" TextMode="Password"
+                        CssClass="form-control" placeholder="Ingresa tu nueva contraseña" />
+
+                    <div class="password-requirements">
+                        <small>La contraseña debe tener:</small>
+                        <ul>
+                            <li id="req-length" class="requirement-unmet">Al menos 8 caracteres</li>
+                            <li id="req-upper" class="requirement-unmet">Al menos una letra mayúscula</li>
+                            <li id="req-lower" class="requirement-unmet">Al menos una letra minúscula</li>
+                            <li id="req-number" class="requirement-unmet">Al menos un número</li>
+                        </ul>
+                    </div>
                 </asp:Panel>
 
-                <div class="info-box">
-                    <h4 class="section-title">Nueva contraseña</h4>
-                    <p class="text-muted">Por favor, ingresa tu nueva contraseña</p>
+                <!-- Confirmar contraseña -->
+                <asp:Panel ID="ConfirmarClavePanel" runat="server" CssClass="mb-3">
+                    <asp:Label ID="lblConfirmarClave" runat="server" AssociatedControlID="txtConfirmarClave"
+                        Text="Confirmar contraseña" CssClass="form-label" />
 
-                    <!-- Nueva contraseña -->
-                    <asp:Panel ID="NuevaClavePanel" runat="server" CssClass="mb-3">
-                        <asp:Label ID="lblNuevaClave" runat="server" AssociatedControlID="txtNuevaClave" Text="Nueva contraseña" CssClass="form-label" />
+                    <asp:TextBox ID="txtConfirmarClave" runat="server" TextMode="Password"
+                        CssClass="form-control" placeholder="Confirma tu nueva contraseña" />
 
-                        <div class="password-toggle">
-                            <asp:TextBox ID="txtNuevaClave" runat="server" TextMode="Password" CssClass="form-control"
-                                placeholder="Ingresa tu nueva contraseña" />
-                        </div>
+                    <asp:Label ID="lblErrorConfirmacion" runat="server" Visible="false" ForeColor="Red"
+                        CssClass="small mt-1 d-block" />
+                </asp:Panel>
 
-                        <div class="password-requirements">
-                            <small>La contraseña debe tener:</small>
-                            <ul>
-                                <li id="req-length" class="requirement-unmet">Al menos 8 caracteres</li>
-                                <li id="req-upper" class="requirement-unmet">Al menos una letra mayúscula</li>
-                                <li id="req-lower" class="requirement-unmet">Al menos una letra minúscula</li>
-                                <li id="req-number" class="requirement-unmet">Al menos un número</li>
-                            </ul>
-                        </div>
-                    </asp:Panel>
-
-                    <!-- Confirmar contraseña -->
-                    <asp:Panel ID="ConfirmarClavePanel" runat="server" CssClass="mb-3">
-                        <asp:Label ID="lblConfirmarClave" runat="server" AssociatedControlID="txtConfirmarClave" Text="Confirmar contraseña" CssClass="form-label" />
-
-                        <div class="password-toggle">
-                            <asp:TextBox ID="txtConfirmarClave" runat="server" TextMode="Password" CssClass="form-control"
-                                placeholder="Confirma tu nueva contraseña" />
-                        </div>
-
-                        <asp:Label ID="lblErrorConfirmacion" runat="server" Visible="false" ForeColor="Red" CssClass="small mt-1 d-block" />
-                    </asp:Panel>
-
-                    <div class="d-flex gap-2">
-                        <asp:Button ID="btnCambiarClave" runat="server" CssClass="btn btn-primary" Text="Cambiar contraseña" OnClick="BtnCambiarClave_Click" />
-                        <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="BtnCancelar_Click" CausesValidation="false" />
-                    </div>
+                <div class="d-flex gap-2">
+                    <asp:Button ID="btnCambiarClave" runat="server" CssClass="btn btn-primary" Text="Cambiar contraseña" OnClick="BtnCambiarClave_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="BtnCancelar_Click" CausesValidation="false" />
                 </div>
             </div>
         </div>
