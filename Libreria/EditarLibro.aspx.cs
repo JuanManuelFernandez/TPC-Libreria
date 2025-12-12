@@ -24,9 +24,28 @@ namespace Libreria
 
                 if (datos.Lector.Read())
                 {
-                    TxtIDAutor.Text = datos.Lector["IDAutor"].ToString();
-                    TxtIDGenero.Text = datos.Lector["IDGenero"].ToString();
-                    TxtIDEditorial.Text = datos.Lector["IDEditorial"].ToString();
+                    // Autores
+                    datos.Conectar();
+                    datos.Consultar("SELECT IDAutor, (Nombre + ' ' + Apellido) AS NombreCompleto FROM Autores");
+                    DdlAutor.DataSource = datos.EjecutarReader();
+                    DdlAutor.DataTextField = "NombreCompleto";
+                    DdlAutor.DataValueField = "IDAutor";
+                    DdlAutor.DataBind();
+
+                    // Géneros
+                    datos.Consultar("SELECT IDGenero, Nombre FROM Generos");
+                    DdlGenero.DataSource = datos.EjecutarReader();
+                    DdlGenero.DataTextField = "Nombre";
+                    DdlGenero.DataValueField = "IDGenero";
+                    DdlGenero.DataBind();
+
+                    // Editoriales
+                    datos.Consultar("SELECT IDEditorial, Nombre FROM Editoriales");
+                    DdlEditorial.DataSource = datos.EjecutarReader();
+                    DdlEditorial.DataTextField = "Nombre";
+                    DdlEditorial.DataValueField = "IDEditorial";
+                    DdlEditorial.DataBind();
+
                     TxtTitulo.Text = datos.Lector["Titulo"].ToString();
                     TxtDescrip.Text = datos.Lector["Descripcion"].ToString();
                     TxtFecha.Text = TxtFecha.Text = Convert.ToDateTime(datos.Lector["FechaPublicacion"]).ToString("yyyy-MM-dd");
@@ -50,9 +69,9 @@ namespace Libreria
                 datos.Consultar(@"UPDATE Libros SET IDAutor = @IDAutor, IDGenero = @IDGenero, IDEditorial = @IDEditorial,
                                     Titulo = @Titulo, Descripcion = @Descripcion, FechaPublicacion = @FechaPublicacion, Precio = @Precio, Paginas = @Paginas, Stock = @Stock
                                     WHERE IDLibro = @IDLibro");
-                datos.SetearParametro("@IDAutor", TxtIDAutor.Text);
-                datos.SetearParametro("@IDGenero", TxtIDGenero.Text);
-                datos.SetearParametro("@IDEditorial", TxtIDEditorial.Text);
+                datos.SetearParametro("@IDAutor", DdlAutor.SelectedValue);
+                datos.SetearParametro("@IDGenero", DdlGenero.SelectedValue);
+                datos.SetearParametro("@IDEditorial", DdlEditorial.SelectedValue);
                 datos.SetearParametro("@Titulo", TxtTitulo.Text);
                 datos.SetearParametro("@Descripcion", TxtDescrip.Text);
                 datos.SetearParametro("@FechaPublicacion", TxtFecha.Text);

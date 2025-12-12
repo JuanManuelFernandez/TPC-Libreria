@@ -2,83 +2,75 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="text-center">
         <h1>Editar libro</h1>
     </div>
 
-    <%--IDAutor--%>
-    <div class="text-center mt-1">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblIDAutor" runat="server" Text="Id del autor"></asp:Label>
-            <asp:TextBox ID="TxtIDAutor" runat="server" placeholder="ID de autor" CssClass="form-control form-control-lg"></asp:TextBox>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <%-- Autor --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblAutor" runat="server" Text="Autor"></asp:Label>
+                    <asp:DropDownList ID="DdlAutor" runat="server" CssClass="form-select form-select-lg"></asp:DropDownList>
+                </div>
+
+                <%-- Género --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblGenero" runat="server" Text="Género"></asp:Label>
+                    <asp:DropDownList ID="DdlGenero" runat="server" CssClass="form-select form-select-lg"></asp:DropDownList>
+                </div>
+
+                <%-- Editorial --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblEditorial" runat="server" Text="Editorial"></asp:Label>
+                    <asp:DropDownList ID="DdlEditorial" runat="server" CssClass="form-select form-select-lg"></asp:DropDownList>
+                </div>
+
+                <%-- Título --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblTitulo" runat="server" Text="Título"></asp:Label>
+                    <asp:TextBox ID="TxtTitulo" runat="server" CssClass="form-control form-control-lg" placeholder="Título del libro"></asp:TextBox>
+                </div>
+
+                <%-- Descripción --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblDescrip" runat="server" Text="Descripción"></asp:Label>
+                    <asp:TextBox ID="TxtDescrip" runat="server" CssClass="form-control form-control-lg" placeholder="Descripción"></asp:TextBox>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <%-- Fecha --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblFecha" runat="server" Text="Fecha de publicación"></asp:Label>
+                    <asp:TextBox ID="TxtFecha" runat="server" CssClass="form-control form-control-lg" placeholder="Año-Mes-Día"></asp:TextBox>
+                </div>
+
+                <%-- Precio --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblPrecio" runat="server" Text="Precio"></asp:Label>
+                    <asp:TextBox ID="TxtPrecio" runat="server" CssClass="form-control form-control-lg" placeholder="Precio"></asp:TextBox>
+                </div>
+
+                <%-- Páginas --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblPaginas" runat="server" Text="Número de páginas"></asp:Label>
+                    <asp:TextBox ID="TxtPaginas" runat="server" CssClass="form-control form-control-lg" placeholder="Páginas"></asp:TextBox>
+                </div>
+
+                <%-- Stock --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblStock" runat="server" Text="Stock disponible"></asp:Label>
+                    <asp:TextBox ID="TxtStock" runat="server" CssClass="form-control form-control-lg" placeholder="Disponibles"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <asp:Button ID="Btn_Guardar" runat="server" Text="Guardar cambios" CssClass="btn btn-primary" OnCommand="Btn_GuardarCambios"/>
         </div>
     </div>
 
-    <%--Genero--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblIDGenero" runat="server" Text="Id del genero"></asp:Label>
-            <asp:TextBox ID="TxtIDGenero" runat="server" placeholder="ID de genero" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--IDEditorial--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblIDEditorial" runat="server" Text="Id de la editorial"></asp:Label>
-            <asp:TextBox ID="TxtIDEditorial" runat="server" placeholder="ID de editorial" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Titulo--%>
-    <div class="text-center mt-3">
-        <div class="col-md-3 mx-auto"> 
-            <asp:Label ID="LblTitulo" runat="server" Text="Titulo"></asp:Label>
-            <asp:TextBox ID="TxtTitulo" runat="server" placeholder="Titulo del libro" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Descripción--%>
-    <div class="text-center mt-3">
-        <div class="col-md-3 mx-auto">
-            <asp:Label ID="LblDescrip" runat="server" Text="Descripción"></asp:Label>
-            <asp:TextBox ID="TxtDescrip" runat="server" placeholder="Descripción" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Fecha--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblFecha" runat="server" Text="Fecha de publicación"></asp:Label>
-            <asp:TextBox ID="TxtFecha" runat="server" placeholder="Año-Mes-Dia" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Precio--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblPrecio" runat="server" Text="Precio"></asp:Label>
-            <asp:TextBox ID="TxtPrecio" runat="server" placeholder="Precio" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Paginas--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblPaginas" runat="server" Text="Numero de páginas"></asp:Label>
-            <asp:TextBox ID="TxtPaginas" runat="server" placeholder="Páginas" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%--Stock--%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:Label ID="LblStock" runat="server" Text="Stock disponible"></asp:Label>
-            <asp:TextBox ID="TxtStock" runat="server" placeholder="Disponibles" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <div class="text-center mt-2">
-        <asp:Button ID="Btn_Guardar" runat="server" Text="Guardar cambios" CssClass="btn btn-primary" OnCommand="Btn_GuardarCambios"/>
-    </div>
 </asp:Content>

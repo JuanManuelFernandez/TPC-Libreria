@@ -162,7 +162,6 @@ SELECT * FROM Carritos;
 SELECT * FROM LibrosPorCarrito;
 SELECT * FROM Deseados;
 
-SELECT * FROM Stocks;
 SELECT * FROM Compras;
 SELECT * FROM LibrosPorCompra;
 

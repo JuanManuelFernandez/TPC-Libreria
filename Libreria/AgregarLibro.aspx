@@ -8,83 +8,79 @@
         <h1>Agregar libro</h1>
     </div>
 
-    <%-- IDAutor --%>
-    <div class="text-center mt-1">
-        <div class="col-md-2 mx-auto d-flex justify-content-center">
-            <asp:TextBox ID="TxtIDAutor" runat="server" placeholder="ID de autor" CssClass="form-control form-control-lg me-2"></asp:TextBox>
-            <asp:Button ID="BtnAgregarAutor" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarAutor"/>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Columna izquierda -->
+            <div class="col-md-6">
+                <%-- Autor --%>
+                <div class="mb-3 d-flex">
+                    <asp:DropDownList ID="DdlAutor" runat="server" CssClass="form-select form-select-lg me-2"></asp:DropDownList>
+                    <asp:Button ID="Button1" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg w-25" OnCommand="Btn_AgregarAutor"/>
+                </div>
+
+                <%-- Género --%>
+                <div class="mb-3 d-flex">
+                    <asp:DropDownList ID="DdlGenero" runat="server" CssClass="form-select form-select-lg me-2"></asp:DropDownList>
+                    <asp:Button ID="Button2" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg w-25" OnCommand="Btn_AgregarGenero"/>
+                </div>
+
+                <%-- Editorial --%>
+                <div class="mb-3 d-flex">
+                    <asp:DropDownList ID="DdlEditorial" runat="server" CssClass="form-select form-select-lg me-2"></asp:DropDownList>
+                    <asp:Button ID="Button3" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg w-25" OnCommand="Btn_AgregarEditorial"/>
+                </div>
+
+                <%-- Título --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtTitulo" runat="server" placeholder="Título del libro" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+
+                <%-- Descripción --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtDescrip" runat="server" placeholder="Descripción" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="col-md-6">
+                <%-- Fecha --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtFecha" runat="server" placeholder="Año-Mes-Día" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+
+                <%-- Precio --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtPrecio" runat="server" placeholder="Precio" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+
+                <%-- Páginas --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtPaginas" runat="server" placeholder="Páginas" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+
+                <%-- Stock --%>
+                <div class="mb-3">
+                    <asp:TextBox ID="TxtStock" runat="server" placeholder="Disponibles" CssClass="form-control form-control-lg"></asp:TextBox>
+                </div>
+
+                <%-- Portada --%>
+                <div class="mb-3">
+                    <asp:FileUpload ID="FilePortada" runat="server" CssClass="form-control form-control-lg"/>
+                </div>
+
+                <%-- Error label --%>
+                <div class="mb-3">
+                    <asp:Label ID="LblError" runat="server" Text="Label" Visible="false" CssClass="text-danger"></asp:Label>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <%-- Genero --%>
-    <div class="text-center mt-3">
-        <div class="col-md-2 mx-auto d-flex justify-content-center">
-            <asp:TextBox ID="TxtIDGenero" runat="server" placeholder="ID de genero" CssClass="form-control form-control-lg me-2"></asp:TextBox>
-            <asp:Button ID="BtnAgregarGenero" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarGenero"/>
+        <!-- Botón agregar libro -->
+        <div class="row mt-4">
+            <div class="col-md-6 mx-auto">
+                <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary btn-lg w-100" OnCommand="Btn_Agregar"/>
+            </div>
         </div>
-    </div>
-
-    <%-- IDEditorial --%>
-    <div class="text-center mt-3">
-        <div class="col-md-2 mx-auto d-flex justify-content-center">
-            <asp:TextBox ID="TxtIDEditorial" runat="server" placeholder="ID de editorial" CssClass="form-control form-control-lg me-2"></asp:TextBox>
-            <asp:Button ID="BtnAgregarEditorial" runat="server" Text="Agregar" CssClass="btn btn-success" OnCommand="Btn_AgregarEditorial"/>
-        </div>
-    </div>
-
-    <%-- Titulo --%>
-    <div class="text-center mt-3">
-        <div class="col-md-3 mx-auto">
-            <asp:TextBox ID="TxtTitulo" runat="server" placeholder="Titulo del libro" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Descripción --%>
-    <div class="text-center mt-3">
-        <div class="col-md-3 mx-auto">
-            <asp:TextBox ID="TxtDescrip" runat="server" placeholder="Descripción" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Fecha --%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtFecha" runat="server" placeholder="Año-Mes-Dia" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Precio --%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtPrecio" runat="server" placeholder="Precio" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Paginas --%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtPaginas" runat="server" placeholder="Páginas" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Stock --%>
-    <div class="text-center mt-3">
-        <div class="col-md-1 mx-auto">
-            <asp:TextBox ID="TxtStock" runat="server" placeholder="Disponibles" CssClass="form-control form-control-lg"></asp:TextBox>
-        </div>
-    </div>
-
-    <%-- Portada --%>
-    <div class="text-center mt-3">
-        <asp:FileUpload ID="FilePortada" runat="server" />
-    </div>
-    <div class="text-center mt-3">
-        <asp:Label ID="LblError" runat="server" Text="Label" Visible="false"></asp:Label>
-    </div>
-
-    <%-- Boton agregar libro --%>
-    <div class="text-center mt-3">
-        <asp:Button ID="Btn_Cargar" runat="server" Text="Agregar libro" CssClass="btn btn-primary" OnCommand="Btn_Agregar" />
     </div>
 
 </asp:Content>

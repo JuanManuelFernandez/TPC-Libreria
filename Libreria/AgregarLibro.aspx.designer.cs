@@ -15,58 +15,58 @@ namespace Libreria
     {
 
         /// <summary>
-        /// Control TxtIDAutor.
+        /// Control DdlAutor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDAutor;
+        protected global::System.Web.UI.WebControls.DropDownList DdlAutor;
 
         /// <summary>
-        /// Control BtnAgregarAutor.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAgregarAutor;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control TxtIDGenero.
+        /// Control DdlGenero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDGenero;
+        protected global::System.Web.UI.WebControls.DropDownList DdlGenero;
 
         /// <summary>
-        /// Control BtnAgregarGenero.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAgregarGenero;
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// Control TxtIDEditorial.
+        /// Control DdlEditorial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDEditorial;
+        protected global::System.Web.UI.WebControls.DropDownList DdlEditorial;
 
         /// <summary>
-        /// Control BtnAgregarEditorial.
+        /// Control Button3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAgregarEditorial;
+        protected global::System.Web.UI.WebControls.Button Button3;
 
         /// <summary>
         /// Control TxtTitulo.

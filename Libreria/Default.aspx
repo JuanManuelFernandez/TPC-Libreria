@@ -65,10 +65,12 @@
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnAgregarLista" runat="server"
-                                    CssClass="btn btn-primary w-100"
+                                    CssClass="btn btn-primary w-100 d-flex align-items-center justify-content-center"
                                     CommandArgument='<%# Eval("IDLibro") %>'
-                                    OnCommand="Btn_AgregarLista"
-                                    Text='LISTA DE DESEADOS' />
+                                    OnCommand="Btn_AgregarLista">
+                                    <img src="assets/heart.png" style="width:20px;height:20px;margin-right:8px;" alt="LISTA DE DESEADOS" />
+                                    AGREGAR
+                                </asp:LinkButton>
                             </div>
                             <div class="mt-2">
                                 <asp:LinkButton ID="btnEliminarLibro" runat="server"

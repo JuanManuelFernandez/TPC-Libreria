@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Negocio
@@ -19,6 +20,7 @@ namespace Negocio
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
+            comando.Connection = conexion;
         }
         public void Leer()
         {
@@ -100,6 +102,15 @@ namespace Negocio
         {
             comando.Connection = conexion;
             comando.ExecuteNonQuery();
+        }
+        public DataTable EjecutarReader()
+        {
+            DataTable dt = new DataTable();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(comando))
+            {
+                adapter.Fill(dt);
+            }
+            return dt;
         }
     }
 }

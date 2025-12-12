@@ -15,58 +15,58 @@ namespace Libreria
     {
 
         /// <summary>
-        /// Control LblIDAutor.
+        /// Control LblAutor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblIDAutor;
+        protected global::System.Web.UI.WebControls.Label LblAutor;
 
         /// <summary>
-        /// Control TxtIDAutor.
+        /// Control DdlAutor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDAutor;
+        protected global::System.Web.UI.WebControls.DropDownList DdlAutor;
 
         /// <summary>
-        /// Control LblIDGenero.
+        /// Control LblGenero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblIDGenero;
+        protected global::System.Web.UI.WebControls.Label LblGenero;
 
         /// <summary>
-        /// Control TxtIDGenero.
+        /// Control DdlGenero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDGenero;
+        protected global::System.Web.UI.WebControls.DropDownList DdlGenero;
 
         /// <summary>
-        /// Control LblIDEditorial.
+        /// Control LblEditorial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblIDEditorial;
+        protected global::System.Web.UI.WebControls.Label LblEditorial;
 
         /// <summary>
-        /// Control TxtIDEditorial.
+        /// Control DdlEditorial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtIDEditorial;
+        protected global::System.Web.UI.WebControls.DropDownList DdlEditorial;
 
         /// <summary>
         /// Control LblTitulo.

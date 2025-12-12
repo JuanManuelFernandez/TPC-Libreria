@@ -14,7 +14,34 @@ namespace Libreria
         private AccesoDatos datos = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                AccesoDatos datos = new AccesoDatos();
 
+                // Autores
+                datos.Conectar();
+                datos.Consultar("SELECT IDAutor, (Nombre + ' ' + Apellido) AS NombreCompleto FROM Autores");
+                DdlAutor.DataSource = datos.EjecutarReader();
+                DdlAutor.DataTextField = "NombreCompleto";
+                DdlAutor.DataValueField = "IDAutor";
+                DdlAutor.DataBind();
+
+                // Géneros
+                datos.Consultar("SELECT IDGenero, Nombre FROM Generos");
+                DdlGenero.DataSource = datos.EjecutarReader();
+                DdlGenero.DataTextField = "Nombre";
+                DdlGenero.DataValueField = "IDGenero";
+                DdlGenero.DataBind();
+
+                // Editoriales
+                datos.Consultar("SELECT IDEditorial, Nombre FROM Editoriales");
+                DdlEditorial.DataSource = datos.EjecutarReader();
+                DdlEditorial.DataTextField = "Nombre";
+                DdlEditorial.DataValueField = "IDEditorial";
+                DdlEditorial.DataBind();
+
+                datos.Cerrar();
+            }
         }
         protected void Btn_Agregar(object sender, EventArgs e)
         {
@@ -32,9 +59,9 @@ namespace Libreria
                         datos.Conectar();
                         datos.Consultar("INSERT INTO Libros (IDAutor, IDGenero, IDEditorial, Titulo, Descripcion, FechaPublicacion, Precio, Paginas, Stock) " +
                                         "VALUES (@IDAutor, @IDGenero, @IDEditorial, @Titulo, @Descripcion, @FechaPublicacion, @Precio, @Paginas, @Stock)");
-                        datos.SetearParametro("@IDAutor", TxtIDAutor.Text);
-                        datos.SetearParametro("@IDGenero", TxtIDGenero.Text);
-                        datos.SetearParametro("@IDEditorial", TxtIDEditorial.Text);
+                        datos.SetearParametro("@IDAutor", DdlAutor.SelectedValue);
+                        datos.SetearParametro("@IDGenero", DdlGenero.SelectedValue);
+                        datos.SetearParametro("@IDEditorial", DdlEditorial.SelectedValue);
                         datos.SetearParametro("@Titulo", TxtTitulo.Text);
                         datos.SetearParametro("@Descripcion", TxtDescrip.Text);
                         datos.SetearParametro("@FechaPublicacion", TxtFecha.Text);
@@ -92,9 +119,9 @@ namespace Libreria
         }
         protected void LimpiarCampos()
         {
-            TxtIDAutor.Text = "";
-            TxtIDGenero.Text = "";
-            TxtIDEditorial.Text = "";
+            DdlAutor.ClearSelection();
+            DdlGenero.ClearSelection();
+            DdlEditorial.ClearSelection();
             TxtTitulo.Text = "";
             TxtDescrip.Text = "";
             TxtFecha.Text = "";
