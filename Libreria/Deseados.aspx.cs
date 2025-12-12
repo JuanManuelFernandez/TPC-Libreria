@@ -53,21 +53,21 @@ namespace Libreria
 
         private void AgregarAlCarrito(int idCliente, int idLibro)
         {
-            var dataCarritos = new AccesoCarritos();
-            var dataLibrosPorCarrito = new AccesoLibrosPorCarrito();
-            var dataLibros = new AccesoLibros();
+            var datosCarritos = new AccesoCarritos();
+            var datosLPC = new AccesoLibrosPorCarrito();
+            var datosLibros = new AccesoLibros();
 
-            var carrito = dataCarritos.BuscarPorIdCliente(idCliente);
+            Dominio.Carrito carrito = datosCarritos.BuscarPorIdCliente(idCliente);
+
             if (carrito == null)
             {
-                carrito = new Dominio.Carrito { IdCliente = idCliente };
-                dataCarritos.Agregar(carrito);
-                carrito = dataCarritos.BuscarPorIdCliente(idCliente);
+                int nuevoId = datosCarritos.CrearCarrito(idCliente);
+                carrito = datosCarritos.BuscarPorIdCliente(idCliente);
             }
 
-            var libro = dataLibros.BuscarPorIdLibro(idLibro);
+            Libro libro = datosLibros.BuscarPorIdLibro(idLibro);
 
-            var item = new LibroPorCarrito
+            var nuevoItem = new Dominio.LibroPorCarrito
             {
                 IdCarrito = carrito.IdCarrito,
                 IdLibro = idLibro,
@@ -75,7 +75,14 @@ namespace Libreria
                 PrecioUnitario = (decimal)libro.Precio
             };
 
-            dataLibrosPorCarrito.Agregar(item);
+            try
+            {
+                datosLPC.Agregar(nuevoItem);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private void BorrarDeDeseados(int idCliente, int idLibro)

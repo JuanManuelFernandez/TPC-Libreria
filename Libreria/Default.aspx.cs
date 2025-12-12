@@ -279,8 +279,6 @@ namespace Libreria
                     btnModificar.Visible = false;
                     
                 }
-                
-                
             }
         }
     }

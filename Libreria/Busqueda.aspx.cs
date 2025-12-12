@@ -665,5 +665,20 @@ namespace Libreria
                 throw ex;
             }
         }
+        protected void Ocultar_Botones(object sender, RepeaterItemEventArgs e)
+        {
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (usuario != null && usuario.TipoUsuario == TipoUsuario.Admin)
+                {
+                    LinkButton btnAgregarCarrito = (LinkButton)e.Item.FindControl("btnAgregarCarrito");
+                    LinkButton btnAgregarLista = (LinkButton)e.Item.FindControl("btnAgregarLista");
+
+                    btnAgregarCarrito.Visible = false;
+                    btnAgregarLista.Visible = false;
+                }
+            }
+        }
     }
 }

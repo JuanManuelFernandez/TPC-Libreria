@@ -97,7 +97,6 @@
                         <ul>
                             <li id="req-length" class="requirement-unmet">Al menos 8 caracteres</li>
                             <li id="req-upper" class="requirement-unmet">Al menos una letra mayúscula</li>
-                            <li id="req-lower" class="requirement-unmet">Al menos una letra minúscula</li>
                             <li id="req-number" class="requirement-unmet">Al menos un número</li>
                         </ul>
                     </div>
@@ -150,16 +149,6 @@
                     } else {
                         reqUpper.classList.remove('requirement-met');
                         reqUpper.classList.add('requirement-unmet');
-                    }
-
-                    // Verificar minúscula
-                    const reqLower = document.getElementById('req-lower');
-                    if (/[a-z]/.test(password)) {
-                        reqLower.classList.remove('requirement-unmet');
-                        reqLower.classList.add('requirement-met');
-                    } else {
-                        reqLower.classList.remove('requirement-met');
-                        reqLower.classList.add('requirement-unmet');
                     }
 
                     // Verificar número

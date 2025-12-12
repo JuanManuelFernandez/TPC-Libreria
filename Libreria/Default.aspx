@@ -77,7 +77,7 @@
                                     CssClass="btn btn-danger w-100"
                                     CommandArgument='<%# Eval("IDLibro")%>'
                                     OnCommand="Btn_EliminarLibro"
-                                    Text="Eliminar"
+                                    Text="Ocultar"
                                     Visible='<%# Convert.ToBoolean(Eval("Disponible")) %>' />
 
                             </div>

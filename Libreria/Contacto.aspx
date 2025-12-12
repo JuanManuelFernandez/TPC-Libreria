@@ -22,7 +22,7 @@
                 <%-- Mail --%>
                 <label class="form-label fs-5 fw-bold mb-3" for="MailTxt">Ingrese su Email</label>
                 <asp:TextBox ID="txtMail" runat="server"
-                    Placeholder="pepito@gmail.com"
+                    Placeholder="tumail@gmail.com"
                     TextMode="Email"
                     CssClass="form-control mb-3"
                     required="required"

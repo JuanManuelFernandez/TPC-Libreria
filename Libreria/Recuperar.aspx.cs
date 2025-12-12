@@ -42,10 +42,6 @@ namespace Libreria
 
                     LimpiarSesion();
                 }
-                if(user == null)
-                {
-                    Response.Redirect("Default.aspx");
-                }
             }
         }
 

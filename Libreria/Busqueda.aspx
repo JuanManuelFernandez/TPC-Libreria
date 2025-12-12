@@ -213,7 +213,7 @@
 
                 <asp:Label ID="lblMensaje" runat="server" CssClass="alert" Visible="false" />
 
-                <asp:Repeater ID="rptLibros" runat="server">
+                <asp:Repeater ID="rptLibros" runat="server" OnItemDataBound="Ocultar_Botones">
                     <HeaderTemplate>
                         <div class="row">
                     </HeaderTemplate>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Dominio;
+using Negocio;
 
 namespace Libreria
 {
@@ -7,6 +8,16 @@ namespace Libreria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["usuario"] != null)
+                {
+                    var dataCli = new AccesoClientes();
+                    Usuario user = (Usuario)Session["usuario"];
+                    
+                    txtMail.Text = user.Mail;
+                }
+            }
 
         }
 
@@ -28,7 +39,13 @@ namespace Libreria
                 return;
             }
 
-            emailService.ArmarMail(txtMail.Text, "Consulta: " + txtTema.Text, txtDescripcion.Text);
+            emailService.ArmarMail(
+                txtMail.Text,
+                "¡Consulta recibida!",
+                "Tu consulta:<br><br>" +
+                txtDescripcion.Text + "<br>" +
+                "Obtendrás respuesta de nuestro equipo en la brevedad."
+            );
             try
             {
                 emailService.EnviarEmail();
