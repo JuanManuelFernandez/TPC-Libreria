@@ -158,5 +158,9 @@ namespace Libreria
             Session.Clear();
             Response.Redirect("Default.aspx");
         }
+        protected void BtnMisCompras_click(object sender, EventArgs e)
+        {
+            Response.Redirect("MisCompras.aspx");
+        }
     }
 }

@@ -87,6 +87,15 @@ namespace Libreria
         protected global::System.Web.UI.WebControls.LinkButton btnDeseados;
 
         /// <summary>
+        /// Control btnMisCompras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnMisCompras;
+
+        /// <summary>
         /// Control btnCarrito.
         /// </summary>
         /// <remarks>

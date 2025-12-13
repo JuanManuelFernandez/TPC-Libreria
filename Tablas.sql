@@ -107,7 +107,8 @@ CREATE TABLE Compras (
 	Localidad NVARCHAR(50) NOT NULL,
 	Codigo NVARCHAR(10) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL,
-	Total MONEY NOT NULL
+	Total MONEY NOT NULL,
+	Estado NVARCHAR(50) NOT NULL DEFAULT 'Pedido en preparación'
 )
 GO
 

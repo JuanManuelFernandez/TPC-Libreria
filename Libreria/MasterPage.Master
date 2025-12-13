@@ -149,6 +149,11 @@
                             <img src="assets/heart.png" style="width: 30px; height: 30px;" />
                             </asp:LinkButton>
 
+                            <asp:LinkButton ID="btnMisCompras" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center" 
+                                OnClick="BtnMisCompras_click">
+                                <img src="assets/lista.png" style="width: 30px; height: 30px;"/>
+                            </asp:LinkButton>
+
                             <asp:LinkButton ID="btnCarrito" runat="server" CssClass="btn btn-lg d-flex justify-content-center align-items-center"
                                 OnClick="BtnCarrito_click">
                             <img src="assets/cart.png" style="width: 30px; height: 30px;" />

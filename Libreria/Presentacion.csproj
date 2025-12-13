@@ -75,12 +75,14 @@
     <Content Include="Cuenta.aspx" />
     <Content Include="Datos.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DetalleCompra.aspx" />
     <Content Include="DetalleLibro.aspx" />
     <Content Include="EditarLibro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LibroAgregado.aspx" />
     <Content Include="LibroModificado.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MisCompras.aspx" />
     <Content Include="Pago.aspx" />
     <Content Include="PagoCompletado.aspx" />
     <Content Include="Recuperar.aspx" />
@@ -160,6 +162,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetalleCompra.aspx.cs">
+      <DependentUpon>DetalleCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleCompra.aspx.designer.cs">
+      <DependentUpon>DetalleCompra.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetalleLibro.aspx.cs">
       <DependentUpon>DetalleLibro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -204,6 +213,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MisCompras.aspx.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisCompras.aspx.designer.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pago.aspx.cs">
       <DependentUpon>Pago.aspx</DependentUpon>
