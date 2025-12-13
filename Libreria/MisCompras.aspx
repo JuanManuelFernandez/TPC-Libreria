@@ -3,7 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container my-5">
-        <h1 class="text-center mb-4">Mis compras</h1>
+        <h1 class="text-center mb-4">
+            <asp:Label ID="lblTitulo" runat="server"/>
+        </h1>
 
         <div class="text-center">
              <asp:Label ID="LblMensaje" runat="server" Text="Label" Visible = "false"></asp:Label>

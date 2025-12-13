@@ -20,6 +20,14 @@ namespace Libreria
             {
                 Response.Redirect("Login.aspx");
             }
+            if(usuario.TipoUsuario == TipoUsuario.Admin)
+            {
+                lblTitulo.Text = "Compras de usuarios";
+            }
+            else
+            {
+                lblTitulo.Text = "Mis compras";
+            }
             if (!IsPostBack)
             {
                 AccesoClientes cliente = new AccesoClientes();
